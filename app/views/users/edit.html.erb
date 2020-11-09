@@ -1,0 +1,38 @@
+<p>変更したい項目を入力してください</p>
+<p>（パスワードを変更する場合は「パスワード確認」の項目も入力してください）</p>
+<br><br>
+<div class="row">
+  <div class="col-sm-6 offset-sm-3">
+
+    <%= form_with(model: @user, local: true) do |f| %>
+      <%= render 'layouts/error_messages', model: f.object %>
+      
+      <div class="form-group">
+        <%= f.label :name, 'ユーザ名' %>
+        <%= f.text_field :name, class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :email, 'Email' %>
+        <%= f.email_field :email, class: 'form-control' %>
+      </div>
+      
+      <div class="form-group">
+        <%= f.label :image, 'トップ画像' %>
+        <%= f.file_field :image, class: 'form-control' %>
+      </div>
+      
+      <div>
+        <%= f.label :password, 'パスワード' %>
+        <%= f.password_field :password, class: 'form-control' %>
+      </div>
+      
+      <div>
+        <%= f.label :password_confirmation, 'パスワード確認' %>
+        <%= f.password_field :password_confirmation, class: 'form-control' %>
+      </div>
+
+      <%= f.submit '変更', class: 'btn btn-primary btn-block way_edit_submit' %>
+    <% end %>
+  </div>
+</div>

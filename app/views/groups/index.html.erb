@@ -1,0 +1,56 @@
+
+<% if logged_in? %>
+    <body id="page-top">
+        <div class="head-wrap">
+            <h2 class="head">
+                グループ<span class="head-point">－Groups－</span>
+                <%= link_to new_group_path, class:"icons float-right" do %>
+                    <span><i class="far fa-plus-square"></i></span>
+                <% end %>
+            </h2>
+        </div>
+        <!-- Portfolio-->
+        <div id="portfolio">
+            <div class="container-fluid p-0">
+                <div class="row no-gutters">
+                    <% @groups.uniq.each do |group| %>
+                        <div class="col-lg-4 col-sm-6">
+                            <%= link_to group_path(group), class: "portfolio-box m-1" do %>
+                                <% if group.image.present? %>
+                                    <%= image_tag group.image.url, class: "img-fluid" %>
+                                <% else %>                   
+                                    <img class = "img-fluid" src= "/assets/group_default.png">
+                                <% end %>
+                                <div class="portfolio-box-caption">
+                                    <div class="project-updated_at"><time><%= group.updated_at.strftime("%Y-%m-%d %H:%M") %></time>更新</div>
+                                    <div class="project-name"><h2><%= group.name %></h2></div>
+                                </div>
+                            <% end %>
+                        </div>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    </body>
+    
+
+<% else %>
+    <div class="col-lg-12 text-center">
+        <!-- Masthead-->
+        <header class="masthead">
+            <div class="container h-100">
+                <div class="row h-100 align-items-center justify-content-center text-center">
+                    <div class="col-lg-10 align-self-end">
+                        <h1 class="text-uppercase text-white font-weight-bold">大切な人との思い出を残そう。</h1>
+                        <hr class="divider my-4">
+                    </div>
+                    <div class="col-lg-8 align-self-baseline">
+                        <p class="text-white-75 font-weight-light mb-5"></p>
+                        <%= link_to "登録", new_user_path, class: "btn btn-primary btn-xl js-scroll-trigger" %>
+                        <%= link_to "ログイン", login_path, class: "btn btn-primary btn-xl js-scroll-trigger" %>
+                    </div>
+                </div>
+            </div>
+        </header>
+    </div>
+<% end %>

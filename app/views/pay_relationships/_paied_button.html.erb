@@ -1,0 +1,15 @@
+<div style="display:inline-block" class="follow_button float-right" >
+  <% if user.need_pay?(pay_record) %>
+      <%= form_with(model: user.pay_relationships.find_by(pay_record_id: pay_record.id), local: true, method: :delete) do |f| %>
+        <%= hidden_field_tag :pay_record_id, pay_record.id %>
+        <%= hidden_field_tag :user_id, user.id %>
+        <%= f.submit user.name, class: 'btn btn-danger m-1' %>
+      <% end %>
+  <% else %>
+      <%= form_with(model: user.pay_relationships.build, local: true) do |f| %>
+        <%= hidden_field_tag :pay_record_id, pay_record.id %>
+        <%= hidden_field_tag :user_id, user.id %>
+        <%= f.submit user.name, class: 'btn btn-muted m-1' %>
+      <% end %>
+  <% end %>  
+</div>

@@ -1,0 +1,206 @@
+/*creative*/
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+}
+
+#portfolio .container-fluid{
+  max-width: 1920px;
+}
+#portfolio .container-fluid .portfolio-box{
+  position: relative;
+  display: block;
+}
+#portfolio .container-fluid .portfolio-box .portfolio-box-caption{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  bottom: 0;
+  text-align: center;
+  opacity: 0;
+  overflow:hidden;
+  background: #000;
+  transition: opacity 0.25s ease;
+  text-align: center;
+}
+#portfolio .container-fluid .portfolio-box .portfolio-box-caption .project-updated_at {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+#portfolio .container-fluid .portfolio-box .portfolio-box-caption .project-name {
+  font-size: 1.2rem;
+  color:white;
+}
+#portfolio .container-fluid .portfolio-box .portfolio-box-caption .project-date {
+  font-size: 1.2rem;
+  color:white;
+}
+#portfolio .container-fluid .portfolio-box:hover .portfolio-box-caption {
+  opacity: 0.5 !important;
+}
+#portfolio .container-fluid .portfolio-box:hover .portfolio-box-caption .project-name, .container-fluid .portfolio-box:hover .portfolio-box-caption .project-updated_at {
+  opacity: 1 !important;
+}
+/*creative*/
+
+
+/*laundary-master*/
+h1,h2,h3,h4,h5,h6{font-family:"游ゴシック",sans-serif;margin-top:0px;font-style:normal;font-weight:500;text-transform:normal}p{font-family:"Muli",sans-serif;font-size:16px;line-height:30px;margin-bottom:15px;font-weight:normal}
+.img{max-width:100%;-webkit-transition:.3s;-moz-transition:.3s;-o-transition:.3s;transition:.3s}
+a,.button{-webkit-transition:.3s;-moz-transition:.3s;-o-transition:.3s;transition:.3s}
+a:focus,.button:focus{text-decoration:none;outline:none}
+a:hover{color:#808080}
+a:focus,a:hover,.portfolio-cat a:hover,.footer -menu li a:hover{text-decoration:none}
+button:focus,input:focus,input:focus,textarea,textarea:focus{outline:0}
+input:focus::-moz-placeholder{opacity:0;-webkit-transition:.4s;-o-transition:.4s;transition:.4s}
+h1 a,h2 a,h3 a,h4 a,h5 a,h6 a{color:inherit}
+ul{margin:0px;padding:0px}
+li{list-style:none}
+hr{border-bottom:1px solid #eceff8;border-top:0 none;margin:30px 0;padding:0}
+@media only screen and (min-width: 768px) and (max-width: 991px){.header-area{box-shadow:0 10px 15px rgba(25,25,25,0.1)}}
+@media only screen and (min-width: 576px) and (max-width: 767px){.header-area{box-shadow:0 10px 15px rgba(25,25,25,0.1)}}
+@media (max-width: 575px){.header-area{box-shadow:0 10px 15px rgba(25,25,25,0.1)}}
+.main-header .main-menu ul li{display:inline-block;position:relative;z-index:1}
+.main-header .main-menu ul li a{font-family:"Muli",sans-serif;color:#808080;font-weight:700;padding:33px 21px;display:block;font-size:16px;text-transform:capitalize;-webkit-transition:.3s;-moz-transition:.3s;-o-transition:.3s;transition:.3s}
+.main-header .main-menu ul li:hover>a{color:#000000}
+.main-header .main-menu ul li:last-child a{padding-right:0}
+.main-header .main-menu ul ul.submenu{position:absolute;width:170px;background:#808080;left:0;top:90%;visibility:hidden;opacity:0;box-shadow:0 0 10px 3px rgba(0,0,0,0.05);padding:17px 0;-webkit-transition:.3s;-moz-transition:.3s;-o-transition:.3s;transition:.3s}
+.main-header .main-menu ul ul.submenu>li{margin-left:7px;display:block}
+.main-header .main-menu ul ul.submenu>li>a{padding:6px 10px !important;font-size:15px;color:#fdfdfd}
+.main-header .main-menu ul ul.submenu>li>a:hover{background:none;padding-left:13px !important}
+.main-header .main-menu ul>li:hover>ul.submenu{visibility:visible;opacity:1;top:100%}
+
+@media (min-width: 1200px) and (max-width: 1500px) {
+}
+
+/* Normal desktop :992px. */
+@media (min-width: 992px) and (max-width: 1200px) {
+}
+
+/* Tablet desktop :768px. */
+@media (min-width: 768px) and (max-width: 991px) {
+}
+
+/* small mobile :320px. */
+@media (max-width: 767px) {
+}
+ 
+/* Large Mobile :480px. */
+/*@media only screen and (min-width: 480px) and (max-width: 767px) {*/
+/*.container {width:450px}*/
+/*}*/
+/*laundary-master*/
+
+.vertical-middle {
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.head {
+    margin:  30px;          
+    position:  relative;    /* 位置調整 */
+    font-weight:  normal;   /* 文字の太さ調整 */
+    margin-bottom: 30px;    /* 周りの余白指定 */
+    font-size:  40px;       /* 文字サイズ指定 */
+    border-bottom:  solid;  /* 線指定 */
+    text-align: center;
+}
+.head-point {
+    font-size: 15px;        /* 文字サイズ指定 */
+    margin-left:  10px;     /* 周りの余白指定 */
+}
+
+.icons {
+  font-size:30px !important;
+  margin:0 5px;
+  color:#000000;
+}
+
+#text-button {
+  display: block;
+  cursor: pointer;
+  width: 80px;
+  height: 30px;
+  text-align: center;
+  border: 1px solid #232323;
+  border-radius:30px;
+}
+
+.no_image {
+  width: 100%;
+  text-align: center;
+}
+
+.to_table {
+  margin:0;
+  display:table;
+  width:100%;
+  height:50px;
+}
+.inline {
+  display:inline-block; /* ブロックレベル要素をインライン要素化 */
+}
+.vertical-middle {
+  display:table-cell;
+  vertical-align: middle; /* 上下中央に寄せる */ 
+}
+
+.left {
+  text-align: left;
+}
+.center {
+  text-align: center;
+}
+.right {
+  text-align: right;
+}
+
+.header-area {
+  margin:0;
+  padding:0;
+  background-color: Menu
+}
+
+.body {
+  padding-top:200px;
+}
+
+.not_joined {
+  margin:0;
+  width:1000px;
+  height:200px;
+  border:1px solid;
+  border-color: #A9A9A9;
+  border-radius:10px;
+  color:#A9A9A9;
+  display:table;
+  text-align:center;
+}
+
+.logo {
+  width:200px;
+}
+
+.nav-user {
+  width:1000px;
+}
+
+.navbar-toggler-icon {
+  color:#000;
+}
+
+.group-status {
+  border:1px solid;
+}
+
+.event-status {
+  padding-bottom:20px;
+}
+.event-status-name {
+  font-size:30px;
+}

@@ -1,0 +1,15 @@
+<% users.each do |user| %>
+  <div class ="">
+      <dix class="row user_row mt-2 mb-2">
+          <div class="col-1 user-picture">
+              <%= link_to profile_picture(user, 40), user_path(user.id) %>
+          </div>
+          <div class="col-9 user-name">
+              <p><%= link_to user.name, user_path(user.id), class: "text-dark" %></p>
+          </div>
+          <div class="col-2 user-followbtn">
+              <%= render 'relationships/follow_button', user: user %>
+          </div>
+      </dix>
+  </div>
+<% end %>

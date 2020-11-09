@@ -1,0 +1,27 @@
+<div style="display:inline-block" class="follow_button float-right" >
+    <% if group.invited_users.include?(current_user) %>  
+        <% if group.request_users.include?(current_user) %>
+            <%= form_with(model: current_user.group_users.find_by(group_id: group.id), local: true, method: :delete) do |f| %>
+              <%= hidden_field_tag :group_id, group.id %>
+              <%= f.submit '退会する', class: 'btn btn-danger' %>
+            <% end %>
+        <% else %>
+            <%= form_with(model: current_user.group_users.build, local: true) do |f| %>
+              <%= hidden_field_tag :group_id, group.id %>
+              <%= f.submit 'メンバーになる', class: 'btn btn-secondary' %>
+            <% end %>
+        <% end %>  
+    <% else %>
+        <% if group.request_users.include?(current_user) %>
+            <%= form_with(model: current_user.group_users.find_by(group_id: group.id), local: true, method: :delete) do |f| %>
+              <%= hidden_field_tag :group_id, group.id %>
+              <%= f.submit 'メンバー申請中', class: 'btn btn-light' %>
+            <% end %>
+        <% else %>
+            <%= form_with(model: current_user.group_users.build, local: true) do |f| %>
+              <%= hidden_field_tag :group_id, group.id %>
+              <%= f.submit 'メンバー申請する', class: 'btn btn-info' %>
+            <% end %>
+        <% end %>  
+    <% end %>
+</div>

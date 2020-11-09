@@ -1,0 +1,15 @@
+  <div class="user-summary">
+      <p>
+          <%= link_to image_tag(current_user.image.thumb.url, class: "image-circle"), user_path(current_user.id) if current_user.image.present? %>
+          <strong><%= current_user.name %></strong>
+      </p>
+  </div>
+  <div class="side-bar">
+    <div class="header">
+        <div>
+          <%= link_to edit_user_path(current_user) do %>
+            <i class="fas fa-cog fa-2x icon"></i>
+          <% end %>
+        </div>
+    </div>
+  </div>

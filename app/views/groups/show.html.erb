@@ -1,0 +1,167 @@
+<% if @group.request_users.include?(current_user) && @group.invited_users.include?(current_user) %>
+  <div class="conrainer group_show">
+    <div>
+      <%= link_to groups_path(current_user), class: "icons float-left" do %>
+        <span><i class="fas fa-arrow-left"></i></span>
+      <% end %>
+    </div>
+      <div class="row">
+          <div class="col-md-4 center">
+              <span><%= default_group_picture(@group, 200) %></span>
+          </div>
+          <div class="col-md-8 center">
+              <div class="row">
+                  <div class="col-md-9 group-status vartical-middle">
+                      <h1 class="mt-2"><strong><%= @group.name %></strong></h1>
+                      <h3>キー：<%= @group.key %></h3>
+                      <div class="row mt-4">
+                          <div class="col-4 float-center">
+                              <div class="profile-status"><h5><%= @group.events.uniq.count %>events</h5></div>
+                          </div>
+                          <div class="col-4">
+                              <div class="profile-status"><h5><%= link_to @joined_users.uniq.count, group_users_group_path(users: @group.request_users) %> members</h5></div>
+                          </div>
+                          <div class="col-4">
+                              <div class="profile-status"><h5><%= link_to @only_request_users.uniq.count, request_users_group_path(@group) %> requests</h5></div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-md-3">
+                    <%= link_to edit_group_path(@group), class: "icons float-right" do %>
+                      <span><i class="fas fa-cogs"></i></span>
+                    <% end %>
+                    <%= link_to "/groups/#{@group.id}/events/new", class:"icons float-right" do %>
+                      <span><i class="far fa-plus-square"></i></span>
+                    <% end %>
+                    <%= link_to @event, method: :delete, data: { confirm: "削除してよろしいですか?" }, class:"icons float-right" do %>
+                      <span><i class="fas fa-trash-alt"></i></span>
+                    <% end %>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div>
+      </div>    
+  </div>
+  
+  <div class="head-wrap">
+      <h2 class="head">
+          イベントマップ<span class="head-point">－Event Maps－</span>
+      </h2>
+  </div>
+
+  <%= form_with url: group_path(@group), method: :get, local: true do |f| %>
+    <div class='form-group mb-5'>
+      <%= f.date_field :from, value: params[:from] %> 
+      ~
+      <%= f.date_field :to, value: params[:to] %> 
+      <%= f.submit 'フィルタ', class: 'btn btn-secondary' %> 
+    </div>
+  <% end %>
+  
+  <!--地図表示-->
+  <div class="row">
+    <div class="col-md-7">
+        <div id="map", class="mx-auto", style='height: 450px; width: 450px;'>
+        </div>
+        <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&callback=initMap" async></script>   
+        
+        <script>
+              let map;
+              let marker = []; // マーカーを複数表示させたいので、配列化
+              let infoWindow = []; // 吹き出しを複数表示させたいので、配列化
+              let markerData = gon.sort_group_maps; // コントローラーで定義したインスタンス変数を変数に代入
+            
+              function initMap() {
+                geocoder = new google.maps.Geocoder()
+            
+                map = new google.maps.Map(document.getElementById('map'), {
+                  center: { lat: 35.6585, lng: 139.7486 }, // 東京タワーを中心に表示させている
+                  zoom: 1,
+                });
+            
+                // 繰り返し処理でマーカーと吹き出しを複数表示させる
+                for (var i = 0; i < markerData.length; i++) {
+                  var id = markerData[i]['id'];
+            
+                  // 各地点の緯度経度を算出
+                  markerLatLng = new google.maps.LatLng({
+                    lat: markerData[i]['latitude'],
+                    lng: markerData[i]['longitude']
+                  });
+            
+                  // 各地点のマーカーを作成
+                  marker[i] = new google.maps.Marker({
+                    position: markerLatLng,
+                    map: map
+                  });
+            
+                  // 各地点の吹き出しを作成
+                  <% @events.each do |event| %>
+                    <% if event.map_id.present? %>
+                      var contentStr = '<a href="/groups/<%= @group.id %>/events/<%= event.id %>"><%= event.name %></a>';
+                      if (id === <%= event.map_id %>) {
+                        infoWindow[i] = new google.maps.InfoWindow({
+                          content: contentStr
+                        });
+                      }
+                    <% end %>
+                  <% end %>
+                  
+            
+                  // マーカーにクリックイベントを追加
+                  markerEvent(i);
+                }
+              }
+    
+              // マーカーをクリックしたら吹き出しを表示
+              function markerEvent(i) {
+                marker[i].addListener('click', function () {
+                  infoWindow[i].open(map, marker[i]);
+                });
+              }
+        </script>
+    </div>
+    <div class="col-md-5">
+      <%= render "groups/events", events: @sort_events %>
+    </div>
+  </div>
+
+  <div class="head-wrap">
+      <h2 class="head">
+          イベント<span class="head-point">－Events－</span>
+      </h2>
+  </div>
+  <body id="page-top">
+    <div id="portfolio">
+        <div class="container-fluid p-0">
+            <div class="row no-gutters">
+                <% @events.each do |event| %>
+                    <div class="col-lg-4 col-sm-6">
+                        <div class="ml-2 mb-2">
+                          <%= link_to group_event_path(@group, event), class: "portfolio-box" do %>
+                              <div class ="portfolio-box">
+                                <% if event.image.present? %>
+                                  <%= image_tag event.image.url, class: "img-fluid" %>
+                                <% else %>                   
+                                  <img class = "img-fluid" src= "/assets/event_default.png">
+                                <% end %>
+                              </div>
+                              <div class="portfolio-box-caption">
+                                  <div class="project-date"><h2><%= event.event_date %></h2></div>
+                                  <div class="project-name"><h1><%= event.name %></h1></div>
+                              </div>
+                          <% end %>
+                        </div>
+                    </div>
+                <% end %>
+            </div>
+        </div>
+    </div>
+  </body>
+  </div>
+<% else %>
+  <div class="not_joined">
+    <h1 class="vertical-middle">このグループのメンバーではありません</h1>
+  </div>
+<% end %>

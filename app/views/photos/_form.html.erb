@@ -1,0 +1,13 @@
+<%= form_with(model: photo, url: "/groups/#{@group.id}/events/#{@event.id}/photos", local: true) do |f| %>
+
+   <%= f.hidden_field :group_id, {value: @group.id} %> 
+   <%= f.hidden_field :event_id, {value: @event.id} %> 
+    
+    <div class="form-group">
+        <%= f.label :images %>
+        <%= f.file_field :images, class: "form-control", multiple: true %>        
+    </div>
+
+    <%= f.submit "post", class: "btn btn-primary" %>
+
+<% end %>

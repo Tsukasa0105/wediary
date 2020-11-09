@@ -1,0 +1,18 @@
+<h2>リクエスト一覧</h2>
+<% @request_users.each do |user| %>
+  <% unless @group.invited_users.include?(user) %>
+    <div class ="">
+        <dix class="row user_row mt-2 mb-2">
+            <div class="col-1 user-picture">
+                <%= link_to profile_picture(user, 40), user_path(user.id) %>
+            </div>
+            <div class="col-9 user-name">
+                <p><%= link_to user.name, user_path(user.id), class: "text-dark" %></p>
+            </div>
+            <div class="col-2 user-followbtn">
+                <%= render 'group_user_permissions/permit_button', group: @group, user: user %>
+            </div>
+        </dix>
+    </div>
+  <% end %>
+<% end %>

@@ -1,0 +1,15 @@
+<div class="head-wrap">
+    <h2 class="head">
+        グループ検索<span class="head-point">－Search Groups－</span>
+    </h2>
+</div>
+
+<%= form_with url: search_groups_path, method: :get, local: true do |f| %>
+  <div class='form-group mb-5'>
+    <%= f.text_field :key, class: 'form-control', :placeholder =>"グループのキーを入力" %> 
+  </div>
+  <%= f.submit '検索', class: 'btn btn-secondary btn-block' %> 
+<% end %>
+
+<br><br>
+<%= render 'groups', groups: @groups %>
