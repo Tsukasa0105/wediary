@@ -53,4 +53,4 @@ production:
   pool: 5
   database: instagram-clone_production
   username: instagram-clone
-  password: <%= ENV['INSTAGRAM-CLONE_DATABASE_PASSWORD'] %>
+  password: <%= ENV['WEDIARY_DATABASE_PASSWORD'] %>

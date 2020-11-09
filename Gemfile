@@ -79,3 +79,5 @@ gem 'geocoder'
 gem 'dotenv-rails'
 
 gem 'gon'
+
+gem 'rails_12factor', group: :production
