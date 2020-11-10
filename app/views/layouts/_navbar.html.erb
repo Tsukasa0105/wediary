@@ -1,13 +1,10 @@
 <% if logged_in? %>
     <div class="header-area">
-        <div class="navbar navbar-expand-md main-header">
-            <div class="col-md-2 logo">
+        <div class="navbar navbar-expand-lg navbar-light bg-light main-header">
+            <div class="col-lg-2 logo">
                 <a href="/"class="vertical-middle"><img src="/assets/logo.png" width=150px></a>
             </div>
-            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="ナビゲーションの切替">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="menu-wrapper align-items-center col-md-6">
+            <div class="menu-wrapper align-items-center col-lg-7">
                 <% if logged_in? %>
                 <div class="main-menu collapse navbar-collapse", id="navigation">
                     <nav> 
@@ -37,11 +34,12 @@
                 </div>
                 <% end %>
             </div>
-            <div class="col-md-4 right">
-                <span class="ml-5"><%= link_to profile_picture(current_user, 40), edit_user_path(current_user.id) %></apan>
-                <span class="ml-1"><%= link_to current_user.name, edit_user_path(current_user.id), class: "text-dark" %></span>
-                <span class="ml-2"><%= link_to 'ログアウト', logout_path, method: :delete, class: "btn btn-danger float-right" %></span>
-            </div>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="ナビゲーションの切替">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <span class=""><%= link_to profile_picture(current_user, 40), edit_user_path(current_user.id) %></apan>
+            <span class="ml-1"><%= link_to current_user.name, edit_user_path(current_user.id), class: "text-dark" %></span>
+            <span class="ml-2"><%= link_to 'ログアウト', logout_path, method: :delete, class: "btn btn-danger float-right" %></span>
         </div>
     </div>
 <% else %>
