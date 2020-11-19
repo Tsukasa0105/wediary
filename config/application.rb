@@ -17,3 +17,15 @@ module Wediary
     # the framework and any gems in your application.
   end
 end
+
+config.generators do |g|
+      # 色々な記述があるので、一番下に追記する
+      g.test_framework :rspec,
+                       fixtures: true,
+                       view_specs: false,
+                       helper_specs: false,
+                       routing_specs: false,
+                       controller_specs: true,
+                       request_specs: false
+      g.fixture_replacement :factory_bot, dir: "spec/factories"
+    end
