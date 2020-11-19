@@ -83,3 +83,9 @@ gem 'gon'
 gem 'rails_12factor', group: :production
 
 gem 'rspec_junit_formatter'
+
+group :development, :test do
+  gem 'rspec-rails'
+  gem 'factory_bot_rails'
+  gem 'rails-controller-testing'
+end
