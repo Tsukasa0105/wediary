@@ -1,0 +1,73 @@
+# CircleCIのバージョンのことで、「2」、「2.0」、「2.1」のうちのどれかを指定します。
+version: 2.1
+# jobsは、実行処理の単位です。
+jobs:
+  # Workflows（複数のjobsを自動化するもの）を使わない場合は、buildと言う名前のジョブを用意する必要があります。
+  build:
+    # dockerのイメージを作成します。CircleCIは様々なDockerイメージを提供しています。
+    docker:
+      # Rubyのイメージを作成します。
+      - image: circleci/ruby:2.5.3-node-browsers
+        environment:
+          # CircleCIは仮想環境を構築するので、そのときに使うデータベースを指定します。
+          - RAILS_ENV: 'test'
+          # のちに作成するCircleCI用の「database.yml.ci」で使用する環境変数です。環境変数の使用は、必須ではありません。
+          - MYSQL_HOST: 127.0.0.1
+          - MYSQL_USERNAME: 'root'
+          - MYSQL_PASSWORD: ''
+          - MYSQL_PORT: 3306
+      # Mysqlのイメージを作成します。
+      - image: circleci/mysql:5.5.62
+        environment:
+          - MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
+          - MYSQL_ROOT_HOST: '%'
+    # working_directoryでstepsを実行するディレクトリを指定します。repoは、リポジトリのことです。
+    working_directory: ~/repo
+    # stepsは、ユーザーが自由に指定できるrunコマンドとCircleCIが用意したコマンドがあります。各runディレクティブは、宣言された順に実行されます。
+    steps:
+      - checkout
+      # CircleCIから指定したkeyのキャッシュを読み込みます。
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "Gemfile.lock" }}
+            # checksumが変わった時はこちら↓が使われます。
+            - v1-dependencies-
+      # bundle installを実行します。
+      - run:
+          name: install dependencies
+          command: |
+            bundle install --jobs=4 --retry=3 --path vendor/bundle
+      # bundle installのデータをキャッシュします。
+      - save_cache:
+          paths:
+          - ./vendor/bundle
+          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+      # database.ymlとdatabase.yml.ci（後述します）を入れ替える記述です。
+      - run: mv config/database.yml.ci config/database.yml
+      - run: bundle exec rake db:create
+      - run: bundle exec rake db:schema:load
+      # ここでようやくRuboCopを走らせます。
+      - run:
+          name: RuboCop
+          command: bundle exec rubocop
+      # つづいてRSpecを走らせます。
+      - run:
+          name: RSpec
+          # 最初のパイプ | は、複数行のシェルコマンドがあることを示します。 
+          command: |
+            mkdir /tmp/test-results
+            TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | \
+              circleci tests split --split-by=timings)"
+           # ここでRspecJunitFormatterというgemをインストールしていないとエラーになります。
+            bundle exec rspec \
+              --format progress \
+              --format RspecJunitFormatter \
+              --out /tmp/test-results/rspec.xml \
+              --format progress \
+              $TEST_FILES
+      # CircleCiのWEB上に、テスト結果を表示するための記述です。テスト結果が配置されているディレクトリを指定します。
+      - store_test_results:
+          path: /tmp/test-results
+      - store_artifacts:
+          path: /tmp/test-results
+          destination: test-results

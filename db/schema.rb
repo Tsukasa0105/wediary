@@ -12,31 +12,22 @@
 
 ActiveRecord::Schema.define(version: 2020_11_03_073308) do
 
-  create_table "addresses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "event_id"
-    t.bigint "map_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["event_id"], name: "index_addresses_on_event_id"
-    t.index ["map_id"], name: "index_addresses_on_map_id"
-  end
-
-  create_table "events", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "events", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "group_id"
+    t.string "image"
     t.string "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
     t.date "event_date"
     t.bigint "map_id"
-    t.string "image"
     t.index ["group_id"], name: "index_events_on_group_id"
     t.index ["map_id"], name: "index_events_on_map_id"
     t.index ["user_id"], name: "index_events_on_user_id"
   end
 
-  create_table "group_user_permissions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "group_user_permissions", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "group_id"
     t.datetime "created_at", null: false
@@ -45,7 +36,7 @@ ActiveRecord::Schema.define(version: 2020_11_03_073308) do
     t.index ["user_id"], name: "index_group_user_permissions_on_user_id"
   end
 
-  create_table "group_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "group_users", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.bigint "group_id"
     t.bigint "user_id"
     t.datetime "created_at", null: false
@@ -54,7 +45,7 @@ ActiveRecord::Schema.define(version: 2020_11_03_073308) do
     t.index ["user_id"], name: "index_group_users_on_user_id"
   end
 
-  create_table "groups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "groups", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -63,7 +54,7 @@ ActiveRecord::Schema.define(version: 2020_11_03_073308) do
     t.index ["name"], name: "index_groups_on_name", unique: true
   end
 
-  create_table "initial_pay_relationships", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "initial_pay_relationships", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.bigint "initial_user_id"
     t.bigint "pay_record_id"
     t.datetime "created_at", null: false
@@ -72,7 +63,7 @@ ActiveRecord::Schema.define(version: 2020_11_03_073308) do
     t.index ["pay_record_id"], name: "index_initial_pay_relationships_on_pay_record_id"
   end
 
-  create_table "maps", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "maps", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.text "address"
     t.float "latitude"
     t.float "longitude"
@@ -84,7 +75,7 @@ ActiveRecord::Schema.define(version: 2020_11_03_073308) do
     t.index ["user_id"], name: "index_maps_on_user_id"
   end
 
-  create_table "pay_records", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "pay_records", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "name"
     t.integer "amount"
     t.datetime "created_at", null: false
@@ -95,7 +86,7 @@ ActiveRecord::Schema.define(version: 2020_11_03_073308) do
     t.index ["paied_user_id"], name: "index_pay_records_on_paied_user_id"
   end
 
-  create_table "pay_relationships", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "pay_relationships", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "pay_record_id"
     t.datetime "created_at", null: false
@@ -104,7 +95,7 @@ ActiveRecord::Schema.define(version: 2020_11_03_073308) do
     t.index ["user_id"], name: "index_pay_relationships_on_user_id"
   end
 
-  create_table "photos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "photos", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.bigint "group_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -114,7 +105,7 @@ ActiveRecord::Schema.define(version: 2020_11_03_073308) do
     t.index ["group_id"], name: "index_photos_on_group_id"
   end
 
-  create_table "relationships", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "relationships", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "follow_id"
     t.datetime "created_at", null: false
@@ -124,7 +115,7 @@ ActiveRecord::Schema.define(version: 2020_11_03_073308) do
     t.index ["user_id"], name: "index_relationships_on_user_id"
   end
 
-  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "name"
     t.string "email"
     t.string "password_digest"
@@ -133,8 +124,6 @@ ActiveRecord::Schema.define(version: 2020_11_03_073308) do
     t.string "image"
   end
 
-  add_foreign_key "addresses", "events"
-  add_foreign_key "addresses", "maps"
   add_foreign_key "events", "groups"
   add_foreign_key "events", "maps"
   add_foreign_key "events", "users"

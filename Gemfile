@@ -81,3 +81,5 @@ gem 'dotenv-rails'
 gem 'gon'
 
 gem 'rails_12factor', group: :production
+
+gem 'rspec_junit_formatter'

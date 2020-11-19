@@ -13,9 +13,8 @@ default: &default
   adapter: mysql2
   encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: root
-  password:
-  host: localhost
+  password: password
+  host: db
 
 development:
   <<: *default
@@ -51,6 +50,6 @@ production:
   adapter: postgresql
   encoding: unicode
   pool: 5
-  database: instagram-clone_production
-  username: instagram-clone
-  password: <%= ENV['WEDIARY_DATABASE_PASSWORD'] %>
+  database: <%= ENV['WEDIARY_DATABASE'] %>
+  username: <%= ENV['WEDIARY_USERNAME'] %>
+  password: <%= ENV['WEDIARY_PASSWORD'] %>
