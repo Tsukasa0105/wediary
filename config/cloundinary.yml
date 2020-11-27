@@ -1,0 +1,11 @@
+production:
+
+cloud_name: "maronboy"　/*cloudinaryサイトユーザー名上のalpha+数字の9桁*/
+
+api_key: ENV['CLOUDINARY_KEY']
+
+api_secret: ENV['CLOUDINARY_SECRET_KEY']
+
+secure: true
+
+cdn_subdomain: true
