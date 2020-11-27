@@ -1,6 +1,6 @@
 production:
 
-cloud_name: "maronboy"　/*cloudinaryサイトユーザー名上のalpha+数字の9桁*/
+cloud_name: htdetfgbw
 
 api_key: ENV['CLOUDINARY_KEY']
 
