@@ -16,7 +16,7 @@
                       <h3>キー：<%= @group.key %></h3>
                       <div class="row mt-4">
                           <div class="col-4 float-center">
-                              <div class="profile-status"><h5><%= @group.events.uniq.count %>events</h5></div>
+                              <div class="profile-status"><h5><%= @group.events.uniq.count %> events</h5></div>
                           </div>
                           <div class="col-4">
                               <div class="profile-status"><h5><%= link_to @joined_users.uniq.count, group_users_group_path(users: @group.request_users) %> members</h5></div>

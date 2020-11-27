@@ -52,6 +52,9 @@ class User < ApplicationRecord
     def total_followings 
         self.followings.count 
     end
+    def total_friends 
+        self.friends.count 
+    end
     
     # グループのメンバーか否か
     def member(group) 

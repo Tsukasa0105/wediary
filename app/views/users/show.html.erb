@@ -12,15 +12,16 @@
             </div>
             <%= link_to "設定", edit_user_path, class: "btn btn-secondary float-right" if current_user?(@user.id) %>
             <%= link_to 'ログアウト', logout_path, method: :delete, class: "btn btn-danger float-right" if current_user?(@user.id) %>
-            <div class="row profile-status">
-                <div class="col-4">
-                    <div class="profile-status"><%= 0 %>posts</div>
+
+            <div class="row mt-4">
+                <div class="col-4 float-center">
+                  <div class="profile-status"><h5><%= link_to @user.total_friends, friends_user_path(current_user) %> friends</h5></div>
                 </div>
                 <div class="col-4">
-                    <div class="profile-status"><%= @user.total_followers %> followers</div>
+                  <div class="profile-status"><h5><%= link_to @user.total_followers, followers_user_path(current_user) %> followers</h5></div>
                 </div>
                 <div class="col-4">
-                    <div class="profile-status"><%= @user.total_followings %> followings</div>
+                    <div class="profile-status"><h5><%= link_to @user.total_followings, followings_user_path(current_user) %> followings</h5></div>
                 </div>
             </div>
         </div>
@@ -28,4 +29,9 @@
     <div class="row profile-posts">
 
     </div>    
+</div>
+<div class="head-wrap">
+  <h2 class="head">
+      アクティビティ<span class="head-point">－Activities－</span>
+  </h2>
 </div>
