@@ -84,7 +84,7 @@ class GroupsController < ApplicationController
   private
   
   def group_params
-    params.require(:group).permit(:image, :name, :key, user_ids: [])
+    params.require(:group).permit(:image, :name, :key, invited_user_ids: [])
   end
   
   def set_group

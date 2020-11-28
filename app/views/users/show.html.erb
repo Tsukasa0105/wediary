@@ -24,6 +24,14 @@
                     <div class="profile-status"><h5><%= link_to @user.total_followings, followings_user_path(current_user) %> followings</h5></div>
                 </div>
             </div>
+            <div class="row mt-4">
+                <div class="col-4 float-center">
+                  <div class="profile-status"><h5><%= link_to @user.requested_groups.count, requested_groups_user_path(current_user) %> requested groups</h5></div>
+                </div>
+                <div class="col-4">
+                  <div class="profile-status"><h5><%= link_to @user.inviting_groups.count, inviting_groups_user_path(current_user) %> inviting groups</h5></div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="row profile-posts">

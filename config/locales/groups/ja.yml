@@ -1,0 +1,9 @@
+ja:
+  activerecord: 
+    models:
+      group: グループ
+    attributes:
+      group:
+        name: グループ名
+        key: キー
+        image: イメージ

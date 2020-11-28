@@ -12,4 +12,8 @@ class Group < ApplicationRecord
 
   
   mount_uploader :image, ImageUploader
+  
+  def joined_users
+    self.request_users & self.invited_users
+  end
 end

@@ -15,7 +15,7 @@
         <% if group.request_users.include?(current_user) %>
             <%= form_with(model: current_user.group_users.find_by(group_id: group.id), local: true, method: :delete) do |f| %>
               <%= hidden_field_tag :group_id, group.id %>
-              <%= f.submit 'メンバー申請中', class: 'btn btn-light' %>
+              <%= f.submit '申請取り消し', class: 'btn btn-light' %>
             <% end %>
         <% else %>
             <%= form_with(model: current_user.group_users.build, local: true) do |f| %>

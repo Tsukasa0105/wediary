@@ -19,12 +19,10 @@
   </div>
   
   <div class="form-group chat-group-form__field.clearfix">
-    <% if current_user.friends.present? %>
-      <div class="chat-group-form__field--left">
-        <%= f.label :user_ids, class: 'chat-group-form__label form-group' %>
-        <%= f.collection_check_boxes :user_ids, current_user.friends, :id, :name, class:"form-control" %>
-      </div>
-    <% end %>
+    <div class="chat-group-form__field--left">
+      <%= f.label :invited_user_ids, class: 'chat-group-form__label form-group' %>
+      <%= f.collection_check_boxes :invited_user_ids, current_user.friends << current_user, :id, :name, class:"form-control" %>
+    </div>
   </div>
   
   <div class="form-group chat-group-form__field.clearfix">

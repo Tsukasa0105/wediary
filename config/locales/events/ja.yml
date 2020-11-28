@@ -1,0 +1,10 @@
+ja:
+  activerecord: 
+    models:
+      event: イベント
+    attributes:
+      event:
+        name: イベント名
+        group_id: 関連グループ
+        image: トップ写真
+        content: 内容

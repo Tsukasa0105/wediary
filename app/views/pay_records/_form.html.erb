@@ -7,7 +7,7 @@
     </div>
     <div class="chat-group-form__field--left">
       <%= f.label :paied_user_id, class: 'chat-group-form__label' %>
-      <%= f.collection_select :paied_user_id, event.group.users.uniq, :id, :name %>
+      <%= f.collection_select :paied_user_id, event.group.joined_users.uniq, :id, :name %>
     </div>
     <div class="chat-group-form__field--right">
       <%= f.label :amount, class: 'chat-group-form__label' %>
@@ -15,11 +15,11 @@
     </div>
     <div class="chat-group-form__field--left">
       <%= f.label :user_ids, class: 'chat-group-form__label form-group' %>
-      <%= f.collection_check_boxes :user_ids, event.group.users.uniq, :id, :name, class:"form-control" %>
+      <%= f.collection_check_boxes :user_ids, event.group.joined_users.uniq, :id, :name, class:"form-control" %>
     </div>
     <div class="chat-group-form__field--left">
       <%= f.label :initial_user_ids, class: 'chat-group-form__label form-group' %>
-      <%= f.collection_check_boxes :initial_user_ids, event.group.users.uniq, :id, :name, class:"form-control" %>
+      <%= f.collection_check_boxes :initial_user_ids, event.group.joined_users.uniq, :id, :name, class:"form-control" %>
     </div>
   </div>
   <div class="form-group chat-group-form__field.clearfix">

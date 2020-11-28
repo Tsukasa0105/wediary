@@ -11,7 +11,7 @@
 #
 default: &default
   adapter: mysql2
-  encoding: utf8
+  encoding: utf8mb4
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   password: password
   host: db
@@ -48,7 +48,7 @@ test:
 #
 production:
   adapter: postgresql
-  encoding: unicode
+  encoding: utf8mb4
   pool: 5
   database: <%= ENV['WEDIARY_DATABASE'] %>
   username: <%= ENV['WEDIARY_USERNAME'] %>

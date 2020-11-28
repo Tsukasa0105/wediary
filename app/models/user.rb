@@ -9,8 +9,8 @@ class User < ApplicationRecord
     
     has_many :group_users, dependent: :destroy
     has_many :group_user_permissions, dependent: :destroy
-    has_many :request_groups, through: :group_users, source: :group
-    has_many :invited_groups, through: :group_user_permissions, source: :group
+    has_many :requested_groups, through: :group_users, source: :group
+    has_many :inviting_groups, through: :group_user_permissions, source: :group
     has_many :relationships, dependent: :destroy
     has_many :followings, through: :relationships, source: :follow
     has_many :reverses_of_relationship, class_name: 'Relationship', foreign_key: 'follow_id', dependent: :destroy
@@ -98,7 +98,15 @@ class User < ApplicationRecord
     end
     
     def joined_groups
-      self.request_groups & self.invited_groups
+      self.requested_groups & self.inviting_groups
+    end
+    
+    def only_requested_groups
+        self.requested_groups - self.inviting_groups
+    end
+    
+    def only_inviting_groups
+        self.inviting_groups - self.requested_groups
     end
     
     
