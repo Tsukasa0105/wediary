@@ -1,7 +1,7 @@
 <% if logged_in? %>
     <div class="header-area">
         <div class="navbar navbar-expand-lg navbar-light bg-light main-header">
-            <div class="col-lg-2 logo">
+            <div class="col-lg-2 logo collapse navbar-collapse">
                 <a href="/"class="vertical-middle"><img src="/assets/logo.png" width=150px></a>
             </div>
             <div class="menu-wrapper align-items-center col-lg-7">
@@ -39,16 +39,22 @@
             </button>
             <span class=""><%= link_to profile_picture(current_user, 40), edit_user_path(current_user.id) %></apan>
             <span class="ml-1"><%= link_to current_user.name, edit_user_path(current_user.id), class: "text-dark" %></span>
-            <span class="ml-2"><%= link_to 'ログアウト', logout_path, method: :delete, class: "btn btn-danger float-right" %></span>
+            <span class="ml-2">
+                <%= link_to  logout_path, method: :delete, class: "btn float-right" do %>
+                    <i class="fas fa-sign-out-alt"></i>
+                <% end %>
+            </span>
         </div>
     </div>
 <% else %>
     <div class="header-area">
-        <div class="main-header header-sticky">
-            <div class="header-left">
-            </div> 
-            <!-- Mobile Menu -->
-            <div class="col-12">
+        <div class="navbar navbar-expand-lg navbar-light bg-light main-header">
+            <div class="col-6">
+                <a href="/"class="vertical-middle"><img src="/assets/logo.png" width=150px></a>
+            </div>
+            <div class="col-6">
+                    <span class="float-right ml-2"><%= link_to "新しく始める", new_user_path, class: "btn btn-primary btn-xl js-scroll-trigger" %></span>
+                    <span class="float-right"><%= link_to "ログイン", login_path, class: "btn btn-primary btn-xl js-scroll-trigger" %></span>
             </div>
         </div>
     </div>

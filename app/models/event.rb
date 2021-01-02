@@ -5,6 +5,8 @@ class Event < ApplicationRecord
   has_many :photos, dependent: :destroy 
   has_many :pay_records, dependent: :destroy 
   
+  validates :name, presence: true
+  
   mount_uploader :image, ImageUploader
   
 end

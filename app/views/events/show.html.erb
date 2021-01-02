@@ -8,13 +8,13 @@
     <div class="center event-status">
         <%= default_event_picture(@event, 100) %>
         <% if @map.present? %>
-            <span class="event-status-name"><strong><%= @event.name %></strong></span><span class="head-point">－<%= @event.event_date %> @<%= @map.title %>－</span>
+            <span class="event-status-name"><strong><%= @event.name %></strong></span><span class="head-point">－<%= @event.start_time.strftime("%Y年%m月%d日") %> @<%= @map.title %>－</span>
         <% else %>
           <div>
             <%= @event.name %>
           </div>
           <div>
-            <span class="event-status-name"><strong><%= @event.name %></strong></span><span class="head-point">－<%= @event.event_date %>－</span>
+            <span class="event-status-name"><strong><%= @event.name %></strong></span><span class="head-point">－<%= @event.start_time.strftime("%Y年%m月%d日") %>－</span>
           </div>
         <% end %>
         <%= link_to edit_group_event_path(@group), class: "icons float-right" do %>

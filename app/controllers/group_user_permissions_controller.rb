@@ -2,7 +2,7 @@ class GroupUserPermissionsController < ApplicationController
   def create
     group = Group.find(params[:group_id]) 
     user = User.find(params[:user_id])
-    user.permit_member(group) 
+    group.permit_member(user) 
     flash[:success] = 'メンバー申請を承認しました' 
     redirect_to request_users_group_path(group)
   end
@@ -10,7 +10,7 @@ class GroupUserPermissionsController < ApplicationController
   def destroy
     group = Group.find(params[:group_id]) 
     user = User.find(params[:user_id])
-    user.unpermit_member(group) 
+    group.unpermit_member(user) 
     flash[:success] = 'メンバーを退会させました' 
     redirect_to request_users_group_path(group)
   end

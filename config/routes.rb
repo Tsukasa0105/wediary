@@ -25,6 +25,7 @@ Rails.application.routes.draw do
       get :friends
       get :requested_groups
       get :inviting_groups
+      get :join_groups
     end
   end
   

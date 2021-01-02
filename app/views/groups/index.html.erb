@@ -11,7 +11,7 @@
     <body id="page-top">
         
         <ul class="nav nav-tabs nav-justified mb-3">
-          <li class="nav-item"><a href="<%= groups_path(current_user) %>" class="nav-link active">所属 <span class="badge badge-secondary"><%= current_user.joined_groups.count %></span></a></li>
+          <li class="nav-item"><a href="<%= groups_path(current_user) %>" class="nav-link active">所属 <span class="badge badge-secondary"><%= current_user.join_groups.count %></span></a></li>
           <li class="nav-item"><a href="<%= requested_groups_user_path(current_user) %>" class="nav-link">申請中  <span class="badge badge-secondary"><%= current_user.only_requested_groups.count %></span></a></li>
           <li class="nav-item"><a href="<%= inviting_groups_user_path(current_user) %>" class="nav-link">招待中  <span class="badge badge-secondary"><%= current_user.only_inviting_groups.count %></span></a></li>
         </ul>
@@ -41,22 +41,58 @@
     
 
 <% else %>
-    <div class="col-lg-12 text-center">
-        <!-- Masthead-->
-        <header class="masthead">
-            <div class="container h-100">
-                <div class="row h-100 align-items-center justify-content-center text-center">
-                    <div class="col-lg-10 align-self-end">
-                        <h1 class="text-uppercase text-white font-weight-bold">大切な人との思い出を残そう。</h1>
-                        <hr class="divider my-4">
-                    </div>
-                    <div class="col-lg-8 align-self-baseline">
-                        <p class="text-white-75 font-weight-light mb-5"></p>
-                        <%= link_to "登録", new_user_path, class: "btn btn-primary btn-xl js-scroll-trigger" %>
-                        <%= link_to "ログイン", login_path, class: "btn btn-primary btn-xl js-scroll-trigger" %>
+        <div class="container background_top">
+            <div class="row catch_copies">
+                <div class="col-lg-10 fadein">
+                    <h1 class="font-weight-bold catch_copy_main">Wediaryで、<br>自分たちだけの旅の記録を。</h1>
+                    <hr class="divider my-4">
+                    <p class="text-white-75 font-weight-light mb-5"></p>
+                    <%= link_to "新しく始める", new_user_path, class: "btn btn-primary btn-xl js-scroll-trigger" %>
+                    <%= link_to "ログイン", login_path, class: "btn btn-primary btn-xl js-scroll-trigger" %>
+                </div>
+            </div>
+        </div>
+        <div></div>
+        <div class="container">
+            <div class="row catch_copies">
+                <div class="col-lg-5 fadein">
+                    <img src="assets/undraw_photo_sharing_1_85vy.png" width="400px">
+                </div>
+                <div class="col-lg-7 fadein">
+                    <h1 class="font-weight-bold catch_copy_right">グループ内で写真の共有</h1>
+                    <hr class="divider my-4">
+                    <div class="mt-5">
+                        <h4 class="right">お気に入りの写真を投稿し、<br>グループだけのアルバムを作れます。</h4>
                     </div>
                 </div>
             </div>
-        </header>
-    </div>
+        </div>
+        <div class="container">
+            <div class="row catch_copies">
+                <div class="col-lg-7 fadein">
+                    <h1 class="font-weight-bold catch_copy_left">地図、カレンダーと紐づけて<br>イベントの記録を管理</h1>
+                    <hr class="divider my-4">
+                    <div class="mt-5">
+                        <h4 class="left">「いつ」、「どこで」、「だれと」が紐づいており、<br>より詳細な記録が簡単に残せます。</h4>
+                    </div>
+                </div>
+                <div class="col-lg-5 fadein">
+                    <img src="assets/undraw_world_9iqb.png" width="400px">
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row catch_copies">
+                <div class="col-lg-5 fadein">
+                    <img src="assets/undraw_printing_invoices_5r4r.png" width="400px">
+                </div>
+                <div class="col-lg-7 fadein">
+                    <h1 class="font-weight-bold catch_copy_right">計画から精算記録まで<br>イベントの共有、記録</h1>
+                    <hr class="divider my-4">
+                    <div class="mt-5">
+                        <h4 class="right">ちょっと煩わしいアイデア集約や精算管理が、<br>このアプリ一つでできます。</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
 <% end %>

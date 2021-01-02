@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_03_073308) do
+ActiveRecord::Schema.define(version: 2020_12_27_005920) do
 
   create_table "events", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "user_id"
@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 2020_11_03_073308) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
-    t.date "event_date"
+    t.datetime "start_time"
     t.bigint "map_id"
     t.index ["group_id"], name: "index_events_on_group_id"
     t.index ["map_id"], name: "index_events_on_map_id"
@@ -28,12 +28,12 @@ ActiveRecord::Schema.define(version: 2020_11_03_073308) do
   end
 
   create_table "group_user_permissions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "group_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["group_id"], name: "index_group_user_permissions_on_group_id"
-    t.index ["user_id"], name: "index_group_user_permissions_on_user_id"
+    t.bigint "invited_user_id"
+    t.bigint "inviting_group_id"
+    t.index ["invited_user_id"], name: "index_group_user_permissions_on_invited_user_id"
+    t.index ["inviting_group_id"], name: "index_group_user_permissions_on_inviting_group_id"
   end
 
   create_table "group_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
@@ -116,9 +116,9 @@ ActiveRecord::Schema.define(version: 2020_11_03_073308) do
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
-    t.string "name", limit: 255
-    t.string "email", limit: 255
-    t.string "password_digest", limit: 255
+    t.string "name"
+    t.string "email"
+    t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "image"
@@ -127,8 +127,8 @@ ActiveRecord::Schema.define(version: 2020_11_03_073308) do
   add_foreign_key "events", "groups"
   add_foreign_key "events", "maps"
   add_foreign_key "events", "users"
-  add_foreign_key "group_user_permissions", "groups"
-  add_foreign_key "group_user_permissions", "users"
+  add_foreign_key "group_user_permissions", "groups", column: "inviting_group_id"
+  add_foreign_key "group_user_permissions", "users", column: "invited_user_id"
   add_foreign_key "group_users", "groups"
   add_foreign_key "group_users", "users"
   add_foreign_key "initial_pay_relationships", "pay_records"

@@ -2,7 +2,7 @@
   <div class ="">
       <div class="ml-3 mt-2 row">
           <div class="col-5 left">
-               ★<%= event.event_date %>@<%=  event.map.title %>
+               <%= event.start_time %>@<%=  event.map.title %>
           </div>
           <div class="col-7 left">
               <h4><%= link_to event.name, group_event_path(event.group.id, event.id), class: "text-dark" %></h4>

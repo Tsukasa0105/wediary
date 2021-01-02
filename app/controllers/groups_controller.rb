@@ -1,9 +1,10 @@
 class GroupsController < ApplicationController
   before_action :set_group, only: [:show, :edit, :update, :group_users] 
+  before_action :require_user_logged_in, only: [:index, :show, :new, :create, :update, :search, :destroy, :group_users, :request_users]
 
   def index 
     if logged_in?
-      @groups = current_user.joined_groups
+      @groups = current_user.join_groups
     end
   end
   
@@ -31,11 +32,12 @@ class GroupsController < ApplicationController
 
   def new
     @group = Group.new
-    @group.request_users << current_user
+    @group.group_user_permissions.build
   end
 
   def create
     @group = Group.new(group_params)
+    # binding.pry
     if @group.save
       flash[:success] = 'グループを作成しました'
       redirect_to root_path
@@ -84,7 +86,7 @@ class GroupsController < ApplicationController
   private
   
   def group_params
-    params.require(:group).permit(:image, :name, :key, invited_user_ids: [])
+    params.require(:group).permit(:image, :name, :key, {invited_user_ids: []})
   end
   
   def set_group

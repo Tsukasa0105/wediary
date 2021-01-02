@@ -8,9 +8,9 @@ class User < ApplicationRecord
     has_secure_password
     
     has_many :group_users, dependent: :destroy
-    has_many :group_user_permissions, dependent: :destroy
     has_many :requested_groups, through: :group_users, source: :group
-    has_many :inviting_groups, through: :group_user_permissions, source: :group
+    has_many :group_user_permissions, foreign_key: 'invited_user_id', dependent: :destroy
+    has_many :inviting_groups, through: :group_user_permissions, source: :inviting_group
     has_many :relationships, dependent: :destroy
     has_many :followings, through: :relationships, source: :follow
     has_many :reverses_of_relationship, class_name: 'Relationship', foreign_key: 'follow_id', dependent: :destroy
@@ -56,18 +56,17 @@ class User < ApplicationRecord
         self.friends.count 
     end
     
+    def only_followers
+        self.followers - self.followings
+    end
+    
+    def only_followings
+        self.followings - self.followers
+    end
+    
     # グループのメンバーか否か
     def member(group) 
         self.group_users.find_or_create_by(group_id: group.id) 
-    end 
-    
-    def unmember(group) 
-        group_user = self.group_users.find_by(group_id: group.id) 
-        group_user.destroy if group_user
-    end 
-    
-    def permit_member(group) 
-        self.group_user_permissions.find_or_create_by(group_id: group.id) 
     end 
     
     def unpermit_member(group) 
@@ -97,7 +96,7 @@ class User < ApplicationRecord
         self.initial_pay_relationships.find_or_create_by(pay_record_id: pay_record.id) 
     end
     
-    def joined_groups
+    def join_groups
       self.requested_groups & self.inviting_groups
     end
     

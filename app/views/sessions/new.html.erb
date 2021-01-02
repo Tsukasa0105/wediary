@@ -1,25 +1,29 @@
+<div class="login_image">
+    <span class="center"><img src="assets/undraw_Login_re_4vu2.png" width="400px"></span>
+</div>
 <div class="text-center">
-  <h1>Log in</h1>
+  <h1>ログイン</h1>
 </div>
 
 <div class="row">
   <div class="col-sm-6 offset-sm-3">
+    <div class="login_form mb-5">
+      <%= form_with(url: login_path, scope: :session, local: true) do |f| %>
+  
+        <div class="form-group">
+          <%= f.label :email, 'メールアドレス' %>
+          <%= f.email_field :email, class: 'form-control' %>
+        </div>
+  
+        <div class="form-group">
+          <%= f.label :password, 'パスワード' %>
+          <%= f.password_field :password, class: 'form-control' %>
+        </div>
+  
+        <%= f.submit 'Log in', class: 'btn btn-primary btn-block' %>
+      <% end %>
+    </div>
 
-    <%= form_with(url: login_path, scope: :session, local: true) do |f| %>
-
-      <div class="form-group">
-        <%= f.label :email, 'Email' %>
-        <%= f.email_field :email, class: 'form-control' %>
-      </div>
-
-      <div class="form-group">
-        <%= f.label :password, 'Password' %>
-        <%= f.password_field :password, class: 'form-control' %>
-      </div>
-
-      <%= f.submit 'Log in', class: 'btn btn-primary btn-block' %>
-    <% end %>
-
-    <p>New user? <%= link_to 'Sign up now!', signup_path %></p>
+    <p class="sign_up_link"><%= link_to '新規登録はコチラ', signup_path %></p>
   </div>
 </div>

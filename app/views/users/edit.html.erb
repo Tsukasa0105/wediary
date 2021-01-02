@@ -1,8 +1,11 @@
+<div class="login_image">
+    <span class="center"><img src="/assets/undraw_my_notifications_rjej.png" width="350px"></span>
+</div>
 <p>変更したい項目を入力してください</p>
 <p>（パスワードを変更する場合は「パスワード確認」の項目も入力してください）</p>
 <br><br>
 <div class="row">
-  <div class="col-sm-6 offset-sm-3">
+  <div class="col-sm-6 offset-sm-3 mb-5">
 
     <%= form_with(model: @user, local: true) do |f| %>
       <%= render 'layouts/error_messages', model: f.object %>
@@ -13,7 +16,7 @@
       </div>
 
       <div class="form-group">
-        <%= f.label :email, 'Email' %>
+        <%= f.label :email, 'メールアドレス' %>
         <%= f.email_field :email, class: 'form-control' %>
       </div>
       

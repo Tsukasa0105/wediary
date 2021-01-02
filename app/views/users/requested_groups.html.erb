@@ -11,7 +11,7 @@
     <body id="page-top">
         
         <ul class="nav nav-tabs nav-justified mb-3">
-          <li class="nav-item"><a href="<%= groups_path(current_user) %>" class="nav-link">所属 <span class="badge badge-secondary"><%= current_user.joined_groups.count %></span></a></li>
+          <li class="nav-item"><a href="<%= groups_path(current_user) %>" class="nav-link">所属 <span class="badge badge-secondary"><%= current_user.join_groups.count %></span></a></li>
           <li class="nav-item"><a href="<%= requested_groups_user_path(current_user) %>" class="nav-link active">申請中  <span class="badge badge-secondary"><%= current_user.only_requested_groups.count %></span></a></li>
           <li class="nav-item"><a href="<%= inviting_groups_user_path(current_user) %>" class="nav-link">招待中  <span class="badge badge-secondary"><%= current_user.only_inviting_groups.count %></span></a></li>
         </ul>

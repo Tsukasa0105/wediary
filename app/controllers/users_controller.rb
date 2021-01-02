@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :require_user_logged_in, only: [:index, :show, :edit, :followings, :followers, :like_hobbies, :like_ways, :satisfied_ways]
+  before_action :require_user_logged_in, only: [:index, :show, :edit, :search, :followings, :followers, :friends, :requested_groups, :inviting_groups, :join_groups]
   before_action :set_user, only: [:show]
   def index
     @users = User.order(id: :desc).page(params[:page]).per(20)
@@ -10,11 +10,6 @@ class UsersController < ApplicationController
   end
 
   def show
-    # @user = User.find(params[:id])
-    # @followings = @user.followings.limit(3)
-    # @followers = @user.followers.limit(3)
-    # @favorite_hobbies = @user.like_hobbies.limit(3)
-    # @favorite_ways = @user.like_ways.limit(3)
   end
 
   def create
@@ -81,6 +76,10 @@ class UsersController < ApplicationController
 
   def inviting_groups
     @groups = current_user.only_inviting_groups
+  end
+
+  def join_groups
+    @groups = current_user.join_groups
   end
   
   # def like_hobbies

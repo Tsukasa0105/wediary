@@ -10,7 +10,9 @@ class PayRecordsController < ApplicationController
         @pay_record = PayRecord.new(pay_record_params)
         @event = Event.find(params[:event_id])
         @group = @event.group
-        if @pay_record.save!
+        if @pay_record.save
+          @pay_record.initial_user_ids=@pay_record.user_ids
+          @pay_record.save
           redirect_to group_event_path(@group, @event)
           flash[:success] = '精算記録を作成しました'
         else

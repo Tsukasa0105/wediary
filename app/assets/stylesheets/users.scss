@@ -3,7 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 body{
-    background: #fafafa !important;
+    background: white !important;
 }
 
 .user-summary {
@@ -52,4 +52,10 @@ body{
 
 .user-name {
     margin-top:15px;
+}
+
+.profile_side {
+    margin:0 auto;
+    text-align: center;
+    padding-top:60px;
 }

@@ -21,7 +21,7 @@
   <div class="form-group chat-group-form__field.clearfix">
     <div class="chat-group-form__field--left">
       <%= f.label :invited_user_ids, class: 'chat-group-form__label form-group' %>
-      <%= f.collection_check_boxes :invited_user_ids, current_user.friends << current_user, :id, :name, class:"form-control" %>
+      <%= f.collection_check_boxes :invited_user_ids, current_user.friends << current_user, :id, :name, include_hidden: false, class:"form-control" %>
     </div>
   </div>
   
