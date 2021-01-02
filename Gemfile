@@ -84,11 +84,9 @@ gem 'rails_12factor', group: :production
 
 gem 'rspec_junit_formatter'
 
-group :development, :test do
-  gem 'rspec-rails'
-  gem 'factory_bot_rails'
-  gem 'rails-controller-testing'
-end
+gem 'rspec-rails'
+gem 'factory_bot_rails'
+gem 'rails-controller-testing'
 
 gem 'rails-i18n'
 
@@ -99,5 +97,3 @@ group :development,:test do
 end
 
 gem 'pry-rails'
-
-gem 'rspec_junit_formatter'
