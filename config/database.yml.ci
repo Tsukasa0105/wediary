@@ -1,0 +1,7 @@
+test:
+  adapter: mysql2
+  encoding: utf8mb4
+  pool: 5
+  username: 'root'
+  port: 3306
+  database: Wediary_test #database.ymlのテスト環境のデータベース名を参照
