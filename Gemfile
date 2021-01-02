@@ -99,3 +99,5 @@ group :development,:test do
 end
 
 gem 'pry-rails'
+
+gem 'rspec_junit_formatter'
