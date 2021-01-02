@@ -6,7 +6,7 @@ jobs:
     working_directory: ~/repo
     steps:
       - checkout
-      - run: mv config/database.yml.ci config/database.yml # ココらへんに追加
+      - run: mv config/database.yml.ci config/database.yml
       - run:
           name: Install Docker Compose
           command: |
