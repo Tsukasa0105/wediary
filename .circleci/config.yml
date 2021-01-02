@@ -1,12 +1,11 @@
 version: 2
 jobs:
   build:
-    machine:
-      image: circleci/classic:edge
-    working_directory: ~/repo
+    docker:
+      - image: circleci/classic:edge
+    working_directory: ~/Wediary
     steps:
       - checkout
-      - run: mv config/database.yml.ci config/database.yml
       - run:
           name: Install Docker Compose
           command: |
