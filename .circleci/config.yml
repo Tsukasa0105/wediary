@@ -11,5 +11,5 @@ jobs:
             gem update --system
             gem install bundler
       - run: bundle install
-      - run: bundle exec rails db:create db:migrate RAILS_ENV=test
-      - run: bundle exec rails test
+      - run: docker-compose run web bundle exec rails db:create db:migrate RAILS_ENV=test
+      - run: docker-compose run web bundle exec rspec
