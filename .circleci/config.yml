@@ -24,17 +24,6 @@ jobs:
       - run:
           name: d-c build
           command: docker-compose build
-      
-      - run:
-          name: docker-compose up
-          command: |
-            set -x
-            docker-compose up --build -d
-      - run:
-          name: docker-compose stop
-          command: |
-            set -x
-            docker-compose stop
             
       - run:
           name: docker-compose up
