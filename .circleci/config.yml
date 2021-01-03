@@ -4,4 +4,7 @@ jobs:
     docker:
       - image: circleci/ruby:2.6.1-node-browsers
     steps:
-      - run: echo "hello world"
+      - checkout
+      - run: bundle install
+      - run: bundle exec rails db:create db:migrate RAILS_ENV=test
+      - run: bundle exec rails test
