@@ -12,6 +12,7 @@ jobs:
             gem update --system
             gem install bundler
       - setup_remote_docker
+        version: 18.09.9-ce
       
       - run: docker-compose run web bundle install
       
