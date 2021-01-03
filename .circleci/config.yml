@@ -17,11 +17,11 @@ jobs:
       - run:
           name: d-c build
           command: docker-compose build
-      
-      - run:
-          name: Install Docker Compose
+            
+       - run:
+          name: Docker Compose のインストール
           command: |
-            curl -L https://github.com/docker/compose/releases/download/18.09/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
+            curl -L https://github.com/docker/compose/releases/download/1.19.0/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
             chmod +x ~/docker-compose
             sudo mv ~/docker-compose /usr/local/bin/docker-compose
             
