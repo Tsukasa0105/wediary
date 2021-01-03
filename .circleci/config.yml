@@ -11,8 +11,7 @@ jobs:
           command: |
             gem update --system
             gem install bundler
-      - setup_remote_docker:
-        version: 18.09.9-ce
+      - setup_remote_docker
       
       - run: docker-compose run web bundle install
       
@@ -26,6 +25,17 @@ jobs:
             curl -L https://github.com/docker/compose/releases/download/1.19.0/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
             chmod +x ~/docker-compose
             sudo mv ~/docker-compose /usr/local/bin/docker-compose
+            
+      - run:
+          name: docker-compose up
+          command: |
+            set -x
+            docker-compose up --build -d
+      - run:
+          name: docker-compose stop
+          command: |
+            set -x
+            docker-compose stop
             
       - run:
           name: docker-compose up
