@@ -1,41 +1,104 @@
-version: 2
+version: 2.0 # 必ず version キーからはじまる
+
+# 次に、jobs キーを追加します。 それぞれのジョブは、ビルド、テスト、デプロイのプロセス内の各段階を表しています。
+# このサンプルアプリケーションには 1つの build ジョブのみが必要なので、他のすべてのオプションはこのキーの下に
+# ネストします。
 jobs:
   build:
-    machine:
-      image: circleci/classic:edge
-    working_directory: ~/Wediary
-    steps:
-      - checkout
+    # これは無償版でも使える？
+    parallelism: 3 # このジョブのインスタンスを 3つ並列実行します
+    working_directory: ~/Wediary # ワーキングディレクトリの設定
+    docker: # Docker でステップを実行します
+      - image: circleci/ruby:2.5.3-stretch-node-browsers # ruby のイメージ
+        environment: # プライマリコンテナの環境変数
+          BUNDLE_PATH: vendor/bundle # bundler の path
+          BUNDLER_VERSION: 2.1.4 # bundler のバージョンを指定（指定しないとエラーになった）
+          BUNDLE_JOBS: 4
+          BUNDLE_RETRY: 3
+          RAILS_ENV: test
+          # DB_HOST: 127.0.0.1
+          # DB_USERNAME: 'root' # database.yml で環境変数で設定する
+          # DB_PASSWORD: 'root_password' # database.yml で環境変数で設定する
+      - image: circleci/mysql:5.7 # データベースイメージ
+        environment:
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: Wediary_Test_circleci
+    steps: # 実行可能コマンドの集合
+      - checkout # ソースコードを作業ディレクトリにチェックアウトする特別なステップ
+      # バンドルキャッシュを復元します
+      # 依存関係キャッシュについては https://circleci.com/docs/ja/2.0/caching/ をお読みください
+      - restore_cache:
+          keys:
+            - rails-bundle-{{ checksum "Gemfile.lock" }} # キャッシュからリストア
+            # 以下の文字列に一致するキャッシュのうち、最新のものを検索します
+            - rails-bundle-
       - run:
-          name: Install Docker Compose
+          name: setup bundler
           command: |
-            curl -L https://github.com/docker/compose/releases/download/1.19.0/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
-            chmod +x ~/docker-compose
-            sudo mv ~/docker-compose /usr/local/bin/docker-compose
+            sudo gem update --system
+            sudo gem uninstall bundler
+            sudo rm -rf /usr/local/bin/bundle
+            sudo rm -rf /usr/local/bin/bundler
+            sudo gem install bundler
+      - run: # Ruby の依存関係をインストールします
+          name: bundle install
+          command: bundle check || bundle install
+      - save_cache:
+          key: rails-bundle-{{ checksum "Gemfile.lock" }} # キャッシュに保存
+          paths:
+            - vendor/bundle # キャッシュ対象のパス
+
+      # Database の実行を待機
       - run:
-          name: docker-compose up
+          name: データベースを待機
+          command: dockerize -wait tcp://localhost:3306 -timeout 1m
+
+      # Database setup
+      - run:
+          name: Database Setup
           command: |
-            set -x
-            docker-compose up --build -d
+            bundle exec rails db:create db:schema:load --trace
+            bundle exec rails db:migrate
+            bin/rails db:schema:load --trace
+#      # アプリケーションで Webpacker または Yarn を他の何らかの方法で使用する場合にのみ必要です
+#      - restore_cache:
+#          keys:
+#            - rails-yarn-{{ checksum "yarn.lock" }}
+#            # 以下の文字列に一致するキャッシュのうち、最新のものを検索します
+#            - rails-yarn-
+#      - run:
+#          name: yarn install
+#          command: yarn install --cache-folder ~/.cache/yarn
+#      # Yarn または Webpacker のキャッシュを保存します
+#      - save_cache:
+#          key: rails-yarn-{{ checksum "yarn.lock" }}
+#          paths:
+#            - ~/.cache/yarn # キャッシュ対象のパス
+
+      # run tests!
       - run:
-          name: docker-compose stop
+          name: RSpec を並列実行
           command: |
-            set -x
-            docker-compose stop
-      - run:
-          name: docker-compose up
-          command: |
-            set -x
-            docker-compose up -d
-      - run:
-          name: test
-          command: |
-            mkdir /tmp/test-results
-            TEST_FILES="$(circleci tests glob 'spec/**/*_spec.rb' | circleci tests split --split-by=timings)"
-            docker-compose run web bundle exec rspec --format progress \
-                                                                  --format RspecJunitFormatter \
-                                                                  --out /tmp/test-results/rspec.xml \
-                                                                  $TEST_FILES
-      - run:
-          name: docker-compose down
-          command: docker-compose down
+            bundle exec rspec --profile 10 \
+                              --format RspecJunitFormatter \
+                              --out test_results/rspec.xml \
+                              --format progress \
+                              $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+
+      # タイミング解析のテスト結果を保存します
+
+      # collect reports
+      - store_test_results: # テストサマリー (https://circleci.com/docs/ja/2.0/collect-test-data/) に表示するテスト結果をアップロードします
+          path: test_results
+      # デプロイコンフィグの例については https://circleci.com/docs/ja/2.0/deployment-integrations/ を参照してください
+
+# 処理のワークフローを定義
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build
+#      - test:
+#          requires:
+#            - build
