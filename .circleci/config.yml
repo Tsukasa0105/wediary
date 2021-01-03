@@ -16,7 +16,7 @@ jobs:
           BUNDLE_JOBS: 4
           BUNDLE_RETRY: 3
           RAILS_ENV: test
-          # DB_HOST: 127.0.0.1
+          DB_HOST: 127.0.0.1
           # DB_USERNAME: 'root' # database.yml で環境変数で設定する
           # DB_PASSWORD: 'root_password' # database.yml で環境変数で設定する
       - image: circleci/mysql:5.7 # データベースイメージ
