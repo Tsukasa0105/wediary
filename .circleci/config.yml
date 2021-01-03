@@ -5,36 +5,27 @@ jobs:
       - image: circleci/ruby:2.5.3-node-browsers
     steps:
       - checkout
-      # - run:
-      #     name: update bundler
-      #     command: |
-      #       gem update --system
-      #       gem install bundler
-      # - run: bundle install
       - run:
           name: Install Docker Compose
           command: |
             curl -L https://github.com/docker/compose/releases/download/1.19.0/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
             chmod +x ~/docker-compose
             sudo mv ~/docker-compose /usr/local/bin/docker-compose
-
       - run:
           name: docker-compose up
           command: |
             set -x
-            sudo docker-compose up --build -d
+            docker-compose up --build -d
       - run:
           name: docker-compose stop
           command: |
             set -x
-            sudo docker-compose stop
-            
+            docker-compose stop
       - run:
           name: docker-compose up
           command: |
             set -x
-            sudo docker-compose up
-            
+            docker-compose up -d
       - run:
           name: test
           command: |
