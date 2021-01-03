@@ -25,7 +25,7 @@ jobs:
           name: docker-compose up
           command: |
             set -x
-            docker-compose up
+            docker-compose up -d
             
       - run:
           name: test
