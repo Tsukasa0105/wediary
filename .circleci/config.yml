@@ -10,9 +10,13 @@ jobs:
           command: |
             gem update --system
             gem install bundler
-      - run: bundle install
+      - run: docker-compose run web bundle install
       
       - setup_remote_docker
+      
+      - run:
+          name: d-c build
+          command: docker-compose build
       
       - run:
           name: Install Docker Compose
