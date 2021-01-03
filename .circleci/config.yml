@@ -3,36 +3,36 @@ jobs:
   build:
     docker:
       - image: circleci/ruby:2.5.3-node-browsers
-    working_directory: ~/Wediary
     steps:
       - checkout
+      - run:
+          name: update bundler
+          command: |
+            gem update --system
+            gem install bundler
+      - run: bundle install
+      
+      - setup_remote_docker
+      
       - run:
           name: Install Docker Compose
           command: |
             curl -L https://github.com/docker/compose/releases/download/1.19.0/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
             chmod +x ~/docker-compose
             sudo mv ~/docker-compose /usr/local/bin/docker-compose
+            
       - run:
           name: docker-compose up
           command: |
             set -x
-            docker-compose up --build -d
-      - run:
-          name: docker-compose stop
-          command: |
-            set -x
-            docker-compose stop
-      - run:
-          name: docker-compose up
-          command: |
-            set -x
-            docker-compose up -d
+            docker-compose up
+            
       - run:
           name: test
           command: |
             mkdir /tmp/test-results
             TEST_FILES="$(circleci tests glob 'spec/**/*_spec.rb' | circleci tests split --split-by=timings)"
-            sudo docker-compose run web bundle exec rspec --format progress \
+            docker-compose run web bundle exec rspec --format progress \
                                                                   --format RspecJunitFormatter \
                                                                   --out /tmp/test-results/rspec.xml \
                                                                   $TEST_FILES
