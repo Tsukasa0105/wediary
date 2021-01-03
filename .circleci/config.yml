@@ -12,13 +12,6 @@ jobs:
             gem update --system
             gem install bundler
       - setup_remote_docker
-      
-      - run: docker-compose run web bundle install
-      
-      - run:
-          name: d-c build
-          command: docker-compose build
-      
       - run:
           name: Install Docker Compose
           command: |
@@ -26,6 +19,12 @@ jobs:
             chmod +x ~/docker-compose
             sudo mv ~/docker-compose /usr/local/bin/docker-compose
             
+      - run: docker-compose run web bundle install
+      
+      - run:
+          name: d-c build
+          command: docker-compose build
+      
       - run:
           name: docker-compose up
           command: |
@@ -42,6 +41,10 @@ jobs:
           command: |
             set -x
             docker-compose up -d
+            
+      - run:
+          name: rails db:create and db:migrate
+          command: docker-compose run web rails db:create db:migrate
             
       - run:
           name: test

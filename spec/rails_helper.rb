@@ -65,6 +65,5 @@ end
 
 
 RSpec.configure do |config|
-  # 色々な記述があるので、一番下に追記する
   config.include FactoryBot::Syntax::Methods
 end
