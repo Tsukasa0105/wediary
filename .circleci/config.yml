@@ -22,25 +22,25 @@ jobs:
           name: docker-compose up
           command: |
             set -x
-            docker-compose up --build -d
+            sudo docker-compose up --build -d
       - run:
           name: docker-compose stop
           command: |
             set -x
-            docker-compose stop
+            sudo docker-compose stop
             
       - run:
           name: docker-compose up
           command: |
             set -x
-            docker-compose up
+            sudo docker-compose up
             
       - run:
           name: test
           command: |
             mkdir /tmp/test-results
             TEST_FILES="$(circleci tests glob 'spec/**/*_spec.rb' | circleci tests split --split-by=timings)"
-            docker-compose run web bundle exec rspec --format progress \
+            sudo docker-compose run web bundle exec rspec --format progress \
                                                                   --format RspecJunitFormatter \
                                                                   --out /tmp/test-results/rspec.xml \
                                                                   $TEST_FILES
