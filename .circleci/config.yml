@@ -10,7 +10,7 @@ jobs:
       #     command: |
       #       gem update --system
       #       gem install bundler
-      - run: bundle install
+      # - run: bundle install
       - run:
           name: Install Docker Compose
           command: |
