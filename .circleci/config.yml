@@ -23,7 +23,7 @@ jobs:
         environment:
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
           MYSQL_ROOT_PASSWORD: password
-          MYSQL_DATABASE: Wediary_Test_circleci
+          MYSQL_DATABASE: Wediary_Test
     steps: # 実行可能コマンドの集合
       - checkout # ソースコードを作業ディレクトリにチェックアウトする特別なステップ
       # バンドルキャッシュを復元します
@@ -58,8 +58,8 @@ jobs:
       - run:
           name: Database Setup
           command: |
-            bundle exec rails db:create db:schema:load --trace
-            bundle exec rails db:migrate
+            bundle exec bin/rails db:create db:schema:load --trace
+            bundle exec bin/rails db:migrate
             bin/rails db:schema:load --trace
 #      # アプリケーションで Webpacker または Yarn を他の何らかの方法で使用する場合にのみ必要です
 #      - restore_cache:
