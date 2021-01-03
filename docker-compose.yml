@@ -25,7 +25,6 @@ services:
     ports:
       - "0.0.0.0:3000:3000" # ホストからゲストへポートフォワード
     volumes:
-      - .:/Wediary # ソースコード変更したらDocker側も即反映されるように
       - /var/run/mysqld/mysqld.sock:/var/run/mysqld/mysqld.sock
       
   test-db:
