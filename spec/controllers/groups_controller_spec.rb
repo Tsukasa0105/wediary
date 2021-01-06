@@ -221,9 +221,9 @@ RSpec.describe GroupsController, type: :controller do
       end
       # 正常に記事を更新できるか？
       it "updates an group" do
-        group_params = {name: "name2"}
+        group_params = {name: "group2"}
         patch :update, params: {id: @group.id, group: group_params}
-        expect(@group.reload.name).to eq "name2"
+        expect(@group.reload.name).to eq "group2"
       end
       # 記事を更新した後、更新された記事の詳細ページへリダイレクトするか？
       it "redirects the page to /" do
