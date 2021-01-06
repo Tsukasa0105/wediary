@@ -1,4 +1,6 @@
 class MapsController < ApplicationController
+  before_action :require_user_logged_in, only: [:index, :create]
+  
   def index
     @map = Map.new
     @maps = Map.all
