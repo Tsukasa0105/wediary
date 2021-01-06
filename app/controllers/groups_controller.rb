@@ -37,7 +37,6 @@ class GroupsController < ApplicationController
 
   def create
     @group = Group.new(group_params)
-    # binding.pry
     if @group.save
       flash[:success] = 'グループを作成しました'
       redirect_to root_path

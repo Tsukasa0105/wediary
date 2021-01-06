@@ -3,4 +3,5 @@ FactoryBot.define do
     name {"group"}
     key {"group"}
   end
+
 end
