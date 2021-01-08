@@ -31,7 +31,7 @@ RSpec.describe EventsController, type: :controller do
           get :show, params: {group_id: @group.id, id: @event.id}
           expect(response).to_not be_success
         end
-        # 200レスポンスが返ってきているか？
+        # 302レスポンスが返ってきているか？
         it "returns a 302 response" do
           get :show, params: {group_id: @group.id, id: @event.id}
           expect(response).to have_http_status "302"
@@ -91,13 +91,14 @@ RSpec.describe EventsController, type: :controller do
         #Factorybotで確認済み
         end
         # 記事作成後に作成した記事の詳細ページへリダイレクトされているか？
-        # it "redirects the page to /" do                          #なぜかできない。。。
-        #     post :create, params: {
-        #       group_id: @group.id,
-        #       event: {name: "event1"}
-        #     }
-        #     expect(response).to redirect_to(group_event_path(@group, @event))
-        # end
+        it "redirects the page to /" do                          #なぜかできない。。。
+            post :create, params: {
+              group_id: @group.id,
+              event: {name: "event1", user_id: @user.id, group_id: @group.id, map_id: @map.id}
+            }
+            event = Event.last
+            expect(response).to redirect_to group_event_path(event.group, event)
+        end
       end
       context "with invalid attributes" do
         before do

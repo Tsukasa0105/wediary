@@ -56,14 +56,16 @@ RSpec.describe MapsController, type: :controller do
         end
         # 記事作成後に作成した記事の詳細ページへリダイレクトされているか？
         it "redirects the page to /" do
-        # post :create, params: {                           #なぜかできない。。。
-        #   map: {
-        #     title: "map1",
-        #     latitude: 35.000,
-        #     longitude: 140.000
-        #   }
-        # }
-        #   expect(response).to redirect_to new_group_event_path(@map.group_id)
+        post :create, params: {                           #なぜかできない。。。
+          map: {
+            title: "map1",
+            latitude: 35.000,
+            longitude: 140.000,
+            user_id: @user.id, 
+            group_id: @group.id
+          }
+        }
+          expect(response).to redirect_to new_group_event_path(@map.group_id)
         end
       end
       context "with invalid attributes" do
