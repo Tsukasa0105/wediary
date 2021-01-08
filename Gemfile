@@ -90,10 +90,11 @@ gem 'rails-controller-testing'
 
 gem 'rails-i18n'
 
-gem 'simple_calendar', '~> 2.0'
+gem 'simple_calendar'
 
 group :development,:test do
   gem 'database_cleaner'
+  gem 'shoulda-matchers'
 end
 
 gem 'pry-rails'

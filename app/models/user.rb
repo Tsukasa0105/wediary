@@ -7,10 +7,10 @@ class User < ApplicationRecord
     validates :password, allow_blank: true, length: { minimum: 6 }
     has_secure_password
     
-    has_many :group_users, dependent: :destroy
-    has_many :requested_groups, through: :group_users, source: :group
-    has_many :group_user_permissions, foreign_key: 'invited_user_id', dependent: :destroy
-    has_many :inviting_groups, through: :group_user_permissions, source: :inviting_group
+    has_many :user_to_groups, dependent: :destroy
+    has_many :requested_groups, through: :user_to_groups, source: :group
+    has_many :group_to_users, foreign_key: 'invited_user_id', dependent: :destroy
+    has_many :inviting_groups, through: :group_to_users, source: :inviting_group
     has_many :relationships, dependent: :destroy
     has_many :followings, through: :relationships, source: :follow
     has_many :reverses_of_relationship, class_name: 'Relationship', foreign_key: 'follow_id', dependent: :destroy
@@ -66,12 +66,12 @@ class User < ApplicationRecord
     
     # グループのメンバーか否か
     def member(group) 
-        self.group_users.find_or_create_by(group_id: group.id) 
+        self.user_to_groups.find_or_create_by(group_id: group.id) 
     end 
     
     def unpermit_member(group) 
-        group_user_permission = self.group_user_permissions.find_by(group_id: group.id) 
-        group_user_permission.destroy if group_user
+        group_to_user = self.group_to_users.find_by(group_id: group.id) 
+        group_to_user.destroy if group_to_user
     end 
     
     # 精算の有無についてのメソッド

@@ -32,7 +32,7 @@ class GroupsController < ApplicationController
 
   def new
     @group = Group.new
-    @group.group_user_permissions.build
+    @group.group_to_users.build
   end
 
   def create

@@ -1,4 +1,4 @@
-class GroupUserPermissionsController < ApplicationController
+class GroupToUsersController < ApplicationController
   def create
     group = Group.find(params[:group_id]) 
     user = User.find(params[:user_id])

@@ -48,8 +48,8 @@ Rails.application.routes.draw do
   resources :initial_pay_relationships, only: [:create, :destroy]
   resources :pay_relationships, only: [:create, :destroy]
   resources :relationships, only: [:create, :destroy]
-  resources :group_users, only: [:create, :destroy]
-  resources :group_user_permissions, only: [:create, :destroy]
+  resources :user_to_groups, only: [:create, :destroy]
+  resources :group_to_users, only: [:create, :destroy]
   
   resources :maps, only: [:index, :create]
   

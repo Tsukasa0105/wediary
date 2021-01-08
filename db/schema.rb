@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_27_005920) do
+ActiveRecord::Schema.define(version: 2021_01_08_121054) do
 
   create_table "events", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "user_id"
@@ -27,22 +27,13 @@ ActiveRecord::Schema.define(version: 2020_12_27_005920) do
     t.index ["user_id"], name: "index_events_on_user_id"
   end
 
-  create_table "group_user_permissions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "group_to_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "invited_user_id"
     t.bigint "inviting_group_id"
-    t.index ["invited_user_id"], name: "index_group_user_permissions_on_invited_user_id"
-    t.index ["inviting_group_id"], name: "index_group_user_permissions_on_inviting_group_id"
-  end
-
-  create_table "group_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
-    t.bigint "group_id"
-    t.bigint "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["group_id"], name: "index_group_users_on_group_id"
-    t.index ["user_id"], name: "index_group_users_on_user_id"
+    t.index ["invited_user_id"], name: "index_group_to_users_on_invited_user_id"
+    t.index ["inviting_group_id"], name: "index_group_to_users_on_inviting_group_id"
   end
 
   create_table "groups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
@@ -115,6 +106,15 @@ ActiveRecord::Schema.define(version: 2020_12_27_005920) do
     t.index ["user_id"], name: "index_relationships_on_user_id"
   end
 
+  create_table "user_to_groups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+    t.bigint "group_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["group_id"], name: "index_user_to_groups_on_group_id"
+    t.index ["user_id"], name: "index_user_to_groups_on_user_id"
+  end
+
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -127,10 +127,8 @@ ActiveRecord::Schema.define(version: 2020_12_27_005920) do
   add_foreign_key "events", "groups"
   add_foreign_key "events", "maps"
   add_foreign_key "events", "users"
-  add_foreign_key "group_user_permissions", "groups", column: "inviting_group_id"
-  add_foreign_key "group_user_permissions", "users", column: "invited_user_id"
-  add_foreign_key "group_users", "groups"
-  add_foreign_key "group_users", "users"
+  add_foreign_key "group_to_users", "groups", column: "inviting_group_id"
+  add_foreign_key "group_to_users", "users", column: "invited_user_id"
   add_foreign_key "initial_pay_relationships", "pay_records"
   add_foreign_key "initial_pay_relationships", "users", column: "initial_user_id"
   add_foreign_key "maps", "users"
@@ -142,4 +140,6 @@ ActiveRecord::Schema.define(version: 2020_12_27_005920) do
   add_foreign_key "photos", "groups"
   add_foreign_key "relationships", "users"
   add_foreign_key "relationships", "users", column: "follow_id"
+  add_foreign_key "user_to_groups", "groups"
+  add_foreign_key "user_to_groups", "users"
 end

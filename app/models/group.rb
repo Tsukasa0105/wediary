@@ -1,8 +1,8 @@
 class Group < ApplicationRecord
-  has_many :group_users, dependent: :destroy
-  has_many :request_users, through: :group_users, source: :user
-  has_many :group_user_permissions, foreign_key: 'inviting_group_id', dependent: :destroy
-  has_many :invited_users, through: :group_user_permissions, source: :invited_user
+  has_many :user_to_groups, dependent: :destroy
+  has_many :request_users, through: :user_to_groups, source: :user
+  has_many :group_to_users, foreign_key: 'inviting_group_id', dependent: :destroy
+  has_many :invited_users, through: :group_to_users, source: :invited_user
   has_many :events, dependent: :destroy
   has_many :photos, dependent: :destroy
   has_many :maps, dependent: :destroy
@@ -18,11 +18,11 @@ class Group < ApplicationRecord
   end
 
   def unmember(user) 
-      group_user = self.group_users.find_by(user_id: user.id) 
-      group_user.destroy if group_user
+      user_to_group = self.user_to_groups.find_by(user_id: user.id) 
+      user_to_group.destroy if user_to_group
   end 
   
   def permit_member(user) 
-      self.group_user_permissions.find_or_create_by(user_id: user.id) 
+      self.group_to_users.find_or_create_by(user_id: user.id) 
   end 
 end
