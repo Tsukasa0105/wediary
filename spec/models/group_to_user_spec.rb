@@ -26,11 +26,11 @@ RSpec.describe GroupToUser, type: :model do
   end
 
   # validations
-  describe "validations" do
-    # 存在性 presence
-    describe "presence" do
-      it { is_expected.to validate_presence_of(:invited_user_id) }
-      it { is_expected.to validate_presence_of(:inviting_group_id) }
-    end
-  end
+  # describe "validations" do
+  #   # 存在性 presence
+  #   describe "presence" do
+  #     it { is_expected.to validate_presence_of(:invited_user_id) }
+  #     it { is_expected.to validate_presence_of(:inviting_group_id) }
+  #   end
+  # end
 end

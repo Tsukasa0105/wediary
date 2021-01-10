@@ -1,13 +1,13 @@
 <div style="display:inline-block" class="follow_button float-right" >
     <% if group.request_users.include?(user) %>
         <% if group.invited_users.include?(user) %>
-            <%= form_with(model: user.group_user_permissions.find_by(group_id: group.id), local: true, method: :delete) do |f| %>
+            <%= form_with(model: user.group_to_users.find_by(group_id: group.id), local: true, method: :delete) do |f| %>
               <%= hidden_field_tag :group_id, group.id %>
               <%= hidden_field_tag :user_id, user.id %>
               <%= f.submit '退会させる', class: 'btn btn-danger' %>
             <% end %>
         <% else %>
-            <%= form_with(model: user.group_user_permissions.build, local: true) do |f| %>
+            <%= form_with(model: user.group_to_users.build, local: true) do |f| %>
               <%= hidden_field_tag :group_id, group.id %>
               <%= hidden_field_tag :user_id, user.id %>
               <%= f.submit '承認する', class: 'btn btn-secondary' %>
@@ -15,13 +15,13 @@
         <% end %>  
     <% else %>
         <% if group.invited_users.include?(user) %>
-            <%= form_with(model: user.group_user_permissions.find_by(group_id: group.id), local: true, method: :delete) do |f| %>
+            <%= form_with(model: user.group_to_users.find_by(group_id: group.id), local: true, method: :delete) do |f| %>
               <%= hidden_field_tag :group_id, group.id %>
               <%= hidden_field_tag :user_id, user.id %>
               <%= f.submit '招待中', class: 'btn btn-light' %>
             <% end %>
         <% else %>
-            <%= form_with(model: user.group_user_permissions.build, local: true) do |f| %>
+            <%= form_with(model: user.group_to_users.build, local: true) do |f| %>
               <%= hidden_field_tag :group_id, group.id %>
               <%= hidden_field_tag :user_id, user.id %>
               <%= f.submit '招待する', class: 'btn btn-info' %>

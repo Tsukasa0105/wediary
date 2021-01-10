@@ -27,10 +27,10 @@
                       </div>
                   </div>
                   <div class="col-md-3">
-                    <%= link_to edit_group_path(@group), class: "icons float-right" do %>
+                    <%= link_to edit_group_path(@group), title: "edit_group", class: "icons float-right" do %>
                       <span><i class="fas fa-cogs"></i></span>
                     <% end %>
-                    <%= link_to @event, method: :delete, data: { confirm: "削除してよろしいですか?" }, class:"icons float-right" do %>
+                    <%= link_to @event, method: :delete, data: { confirm: "削除してよろしいですか?" }, title: "destroy", class:"icons float-right" do %>
                       <span><i class="fas fa-trash-alt"></i></span>
                     <% end %>
                   </div>

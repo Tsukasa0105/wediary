@@ -13,7 +13,9 @@
 # it.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
+require 'selenium-webdriver'
 require 'capybara/rspec'
+Capybara.javascript_driver = :selenium_chrome_headless
 RSpec.configure do |config|
   config.include Capybara::DSL
   # rspec-expectations config goes here. You can use an alternate
@@ -28,6 +30,24 @@ RSpec.configure do |config|
     # ...rather than:
     #     # => "be bigger than 2"
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
+  end
+
+  # テスト全体の前に実行する処理をブロックで記述
+  config.before(:suite) do
+    # データベースをCleanする方法を'transaction'に指定
+    DatabaseCleaner.strategy = :transaction
+    # このタイミングで'transaction'でデータベースをCleanしておく
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
+  # 各exampleの前および後に実行する処理をブロックで記述
+  config.around(:each) do |example|
+    DatabaseCleaner.cleaning do
+      # ここに処理を記述する
+      # ここがexampleの実行タイミング
+      example.run
+      # ここに処理を記述する ##
+    end
   end
 
   # rspec-mocks config goes here. You can use an alternate test double

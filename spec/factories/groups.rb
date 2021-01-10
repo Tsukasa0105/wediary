@@ -9,5 +9,10 @@ FactoryBot.define do
     name {"another_group"}
     key {"another_group"}
   end
+  
+  factory :integration_group, class: Group do
+    name {"integration_group"}
+    key {"integration_group"}
+  end
 
 end
