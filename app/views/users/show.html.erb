@@ -4,7 +4,7 @@
             <%= link_to logout_path, method: :delete, data: { confirm: "ログアウトしますか?" }, class: "icons float-right" do %>
                 <span><i class="fas fa-sign-out-alt"></i></span>
             <% end %>
-            <%= link_to edit_user_path, class: "icons float-right" do %>
+            <%= link_to edit_user_path, title: "edit_user", class: "icons float-right" do %>
                 <span><i class="fas fa-cogs"></i></span>
             <% end %>
         <% end %>
