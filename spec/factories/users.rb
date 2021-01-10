@@ -4,6 +4,7 @@ FactoryBot.define do
     email {"user@gmail.com"}
     password {"0000000"}
     password_confirmation {"0000000"}
+    image { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/image.png')) }
   end
 
   factory :another_user, class: User do
