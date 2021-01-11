@@ -10,31 +10,39 @@
     </div>
     <body id="page-top">
         
+        <script>
+            $(function() {
+                // ↓タブをクリックした時の処理↓
+                $('.nav-item').click(function(){
+                    // ↓現在アクティブなタブを切り替え↓
+                    $('.active').removeClass('active');
+                    // ↓タブをアクティブにする↓
+                    $(this).addClass('active');
+                    // ↓現在アクティブなタブの中身を非表示
+                    $('.show').removeClass('show');
+                    // ↓クリックしたタブから順番を取得↓
+                    const index = $(this).index();
+                    // ↓クリックしたタブと同じ順番のコンテンツを表示↓
+                    $('.box').eq(index).addClass('show');
+                });
+            });
+        </script>
+        
         <ul class="nav nav-tabs nav-justified mb-3">
-          <li class="nav-item"><a href="<%= groups_path(current_user) %>" class="nav-link active">所属 <span class="badge badge-secondary"><%= current_user.join_groups.count %></span></a></li>
-          <li class="nav-item"><a href="<%= requested_groups_user_path(current_user) %>" class="nav-link">申請中  <span class="badge badge-secondary"><%= current_user.only_requested_groups.count %></span></a></li>
-          <li class="nav-item"><a href="<%= inviting_groups_user_path(current_user) %>" class="nav-link">招待中  <span class="badge badge-secondary"><%= current_user.only_inviting_groups.count %></span></a></li>
+          <li class="nav-item"><a href="#" class="nav-link active">所属 <span class="badge badge-secondary"><%= current_user.join_groups.count %></span></a></li>
+          <li class="nav-item"><a href="#" class="nav-link">申請中  <span class="badge badge-secondary"><%= current_user.only_requested_groups.count %></span></a></li>
+          <li class="nav-item"><a href="#" class="nav-link">招待中  <span class="badge badge-secondary"><%= current_user.only_inviting_groups.count %></span></a></li>
         </ul>
-        <!-- Portfolio-->
-        <div id="portfolio">
-            <div class="container-fluid p-0">
-                <div class="row no-gutters">
-                    <% @groups.uniq.each do |group| %>
-                        <div class="col-lg-4 col-sm-6">
-                            <%= link_to group_path(group), class: "portfolio-box m-1" do %>
-                                <% if group.image.present? %>
-                                    <%= image_tag group.image.url, class: "img-fluid" %>
-                                <% else %>                   
-                                    <img class = "img-fluid" src= "/assets/group_default.png">
-                                <% end %>
-                                <div class="portfolio-box-caption">
-                                    <div class="project-updated_at"><time><%= group.updated_at.strftime("%Y-%m-%d %H:%M") %></time>更新</div>
-                                    <div class="project-name"><h2><%= group.name %></h2></div>
-                                </div>
-                            <% end %>
-                        </div>
-                    <% end %>
-                </div>
+     
+        <div class="contents">
+            <div class="box show">
+                <%= render partial: 'event_images', locals: { groups: @groups } %>
+            </div>
+            <div class="box">
+                <%= render partial: 'event_images', locals: { groups: @requested_groups } %>
+            </div>
+            <div class="box">
+                <%= render partial: 'event_images', locals: { groups: @inviting_groups } %>
             </div>
         </div>
     </body>

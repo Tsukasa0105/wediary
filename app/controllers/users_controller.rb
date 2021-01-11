@@ -69,14 +69,6 @@ class UsersController < ApplicationController
   def friends
     @friends = current_user.friends
   end
-  
-  def requested_groups
-    @groups = current_user.only_requested_groups
-  end
-
-  def inviting_groups
-    @groups = current_user.only_inviting_groups
-  end
 
   def join_groups
     @groups = current_user.join_groups

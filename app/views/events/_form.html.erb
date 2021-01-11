@@ -10,13 +10,13 @@
     
     <div class="form-group">
         <%= f.label :start_time %>
-        <%= f.datetime_select :start_time, {} %>
+        <%= f.datetime_field :start_time, {}, class: "form-control" %>
     </div>
     
     <div class="form-group">
         <%= f.label :map_id, '場所' %>
         <%= f.fields_for :maps do |od| %>
-            <%= f.collection_select :map_id, Map.where(user_id: current_user.id), :id, :title %>
+            <%= f.collection_select :map_id, Map.where(user_id: current_user.id), :id, :title, class: "form-control" %>
         <% end %>
         <%= link_to '地図から選ぶ', maps_path(group_id: event.group.id), class: 'btn btn-lg btn-light' %>
   　</div>

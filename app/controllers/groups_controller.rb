@@ -5,6 +5,8 @@ class GroupsController < ApplicationController
   def index 
     if logged_in?
       @groups = current_user.join_groups
+      @inviting_groups = current_user.only_inviting_groups
+      @requested_groups = current_user.only_requested_groups
     end
   end
   

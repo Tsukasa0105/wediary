@@ -7,12 +7,12 @@
       <%= f.text_field :name, class: 'chat__group_name chat-group-form__input form-control', placeholder: 'グループ名を入力してください' %>
     </div>
     
-    <div class="chat-group-form__field--right">
+    <div class="form-group chat-group-form__field--right">
       <%= f.label :image, class: 'chat-group-form__label' %>
       <%= f.file_field :image, class: 'chat__group_name chat-group-form__input form-control', placeholder: 'トップ画像を選択してください' %>
     </div>
     
-    <div class="chat-group-form__field--right">
+    <div class="form-group chat-group-form__field--right">
       <%= f.label :key, class: 'chat-group-form__label' %>
       <%= f.text_field :key, class: 'chat__group_name chat-group-form__input form-control', placeholder: 'キーを設定してください（メンバー招待時に使用します）' %>
     </div>
@@ -20,7 +20,7 @@
   
   <div class="form-group chat-group-form__field.clearfix">
     <div class="chat-group-form__field--left">
-      <%= f.label :invited_user_ids, class: 'chat-group-form__label form-group' %>
+      <%= f.label :invited_user_ids, class: 'chat-group-form__label' %>
       <%= f.collection_check_boxes :invited_user_ids, current_user.friends << current_user, :id, :name, include_hidden: false, class:"form-control" %>
     </div>
   </div>
