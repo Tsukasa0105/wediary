@@ -1,4 +1,8 @@
-<h2>リクエスト一覧</h2>
+<div class="head-wrap">
+  <h2 class="head">
+      RequesRequesting Users<span class="head-point">－参加申請中のユーザ－</span>
+  </h2>
+</div>
 <% @request_users.each do |user| %>
   <% unless @group.invited_users.include?(user) %>
     <div class ="">

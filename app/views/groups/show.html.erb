@@ -43,7 +43,7 @@
   
   <div class="head-wrap mt-5">
       <h2 class="head">
-          イベント<span class="head-point">－Events－</span>
+          Summary<span class="head-point">－概要－</span>
           <%= link_to "/groups/#{@group.id}/events/new", class:"icons float-right" do %>
             <span><i class="far fa-plus-square"></i></span>
           <% end %>
@@ -136,7 +136,16 @@
       </div>
     </div>
   </div>
-
+  
+  <div class="head-wrap mt-5">
+      <h2 class="head">
+          Events<span class="head-point">－イベント－</span>
+          <%= link_to "/groups/#{@group.id}/events/new", class:"icons float-right" do %>
+            <span><i class="far fa-plus-square"></i></span>
+          <% end %>
+      </h2>
+  </div>
+  
   <body id="page-top">
     <div id="portfolio">
         <div class="container-fluid p-0">

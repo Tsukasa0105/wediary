@@ -49,7 +49,7 @@
 
 
 /*laundary-master*/
-h1,h2,h3,h4,h5,h6{font-family:"游ゴシック",sans-serif;margin-top:0px;font-style:normal;font-weight:500;text-transform:normal}p{font-family:"Muli",sans-serif;font-size:16px;line-height:30px;margin-bottom:15px;font-weight:normal}
+h1,h2,h3,h4,h5,h6{font-family:"Noto Sans JP", sans-serif;margin-top:0px;font-style:normal;font-weight:500;text-transform:normal}p{font-family:"Noto Sans JP", sans-serif;font-size:16px;line-height:30px;margin-bottom:15px;font-weight:normal}
 .img{max-width:100%;-webkit-transition:.3s;-moz-transition:.3s;-o-transition:.3s;transition:.3s}
 a,.button{-webkit-transition:.3s;-moz-transition:.3s;-o-transition:.3s;transition:.3s}
 a:focus,.button:focus{text-decoration:none;outline:none}

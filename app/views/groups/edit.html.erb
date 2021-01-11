@@ -1,6 +1,10 @@
 <% if @group.request_users.include?(current_user) && @group.invited_users.include?(current_user) %>
+
+<div class="login_image">
+    <span class="center"><img src="/assets/undraw_team_spirit_hrr4.png" width="350px"></span>
+</div>
+
   <div class="chat-group-form">
-    <h3>グループ設定</h3> 
     <%= render partial: 'form', locals: { group: @group } %>
   </div>
 <% end %>

@@ -7,3 +7,4 @@ ja:
         name: グループ名
         key: キー
         image: イメージ
+        invited_user_ids: 招待ユーザ
