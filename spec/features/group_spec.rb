@@ -27,14 +27,8 @@ feature 'Group', type: :feature do
       click_on "Groups", match: :first
       expect(current_path).to eq root_path
     end
-    
-    scenario 'inviting_groups_user_pathに遷移できるか' do
-      click_on "Groups", match: :first
-      click_on "招待中"
-      expect(current_path).to eq inviting_groups_user_path(@user)
-    end
-    
-    scenario 'group_to_userとuser_to_groupが機能していない場合、inviting_groups_user_pathからgroups/showに遷移できるか' do
+
+    scenario 'group_to_userとuser_to_groupが機能していない場合、inviting_groupsからgroups/showに遷移できるか' do
       click_on "Groups", match: :first
       click_on "招待中"
       find(".portfolio-box").click

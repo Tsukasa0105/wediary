@@ -13,9 +13,9 @@
         <div class="col-4">
             <div class="profile_side">
                 <h3><i class="fas fa-users"></i></h3>
-                <div class="profile-status"><h5>グループ　<%= link_to @user.join_groups.count, join_groups_user_path(current_user) %></h5></div>
-                <div class="profile-status"><h5>申請中　<%= link_to @user.only_requested_groups.count, requested_groups_user_path(current_user) %></h5></div>
-                <div class="profile-status"><h5>招待　<%= link_to @user.only_inviting_groups.count, inviting_groups_user_path(current_user) %></h5></div>
+                <div class="profile-status"><h5>グループ　<%= link_to @user.join_groups.count, groups_path %></h5></div>
+                <div class="profile-status"><h5>申請中　<%= link_to @user.only_requested_groups.count, groups_path %></h5></div>
+                <div class="profile-status"><h5>招待　<%= link_to @user.only_inviting_groups.count, groups_path %></h5></div>
             </div>
         </div>
         <div class="col-4 text-center">
