@@ -1,54 +1,54 @@
-<div class="login_image">
-    <span class="center"><img src="/assets/undraw_wallet_aym5.png" width="350px"></span>
+<div>
+  
+  <%= form_with(model:[group, event, pay_record], local: true) do |f| %>
+    <%= render 'layouts/error_messages', model: f.object %>
+    <div class="form-group chat-group-form__field">
+      <%= f.hidden_field :event_id, {value: event.id} %> 
+      <div class="chat-group-form__field--left m-2 container">
+        <div class="row">
+          <div class="col-2">
+            <%= f.label :name, "精算イベント名", class: 'chat-group-form__label' %>
+          </div>
+          <div class="col-10">
+            <%= f.text_field :name, class: 'chat__group_name chat-group-form__input form-control' %>
+          </div>
+        </div>
+      </div>
+      <div class="chat-group-form__field--left m-2 container">
+        <div class="row">
+          <div class="col-2">
+            <%= f.label :paied_user_id, "立替者", class: 'chat-group-form__label' %>
+          </div>
+          <div class="col-10">
+            <%= f.collection_select :paied_user_id, event.group.joined_users.uniq, :id, :name %>
+          </div>
+        </div>
+      </div>
+      <div class="chat-group-form__field--right m-2 container">
+        <div class="row">
+          <div class="col-2">
+            <%= f.label :amount, "金額", class: 'chat-group-form__label' %>
+          </div>
+          <div class="col-10">
+            <%= f.number_field :amount, class: 'chat__group_name chat-group-form__input form-control', placeholder: '立替えた金額を入力してください' %>
+          </div>
+        </div>
+      </div>
+      <div class="chat-group-form__field--left m-2 container">
+        <div class="row">
+          <div class="col-2">
+            <%= f.label :user_ids, "関係者", class: 'chat-group-form__label form-group' %>
+          </div>
+          <div class="col-10">
+            <%= f.collection_check_boxes :user_ids, event.group.joined_users.uniq, :id, :name, class:"form-control", include_hidden: false %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group chat-group-form__field.clearfix">
+      <div class="chat-group-form__field--right">
+        <%= f.submit "登録", class: 'btn btn-secondary chat-group-form__action-btn form-control' %>
+      </div>
+    </div>
+  <% end %>
 </div>
-
-<%= form_with(model:[group, event, pay_record], local: true) do |f| %>
-  <div class="form-group chat-group-form__field">
-    <%= f.hidden_field :event_id, {value: event.id} %> 
-    <div class="chat-group-form__field--left m-2 container">
-      <div class="row">
-        <div class="col-2">
-          <%= f.label :name, "精算イベント名", class: 'chat-group-form__label' %>
-        </div>
-        <div class="col-10">
-          <%= f.text_field :name, class: 'chat__group_name chat-group-form__input form-control' %>
-        </div>
-      </div>
-    </div>
-    <div class="chat-group-form__field--left m-2 container">
-      <div class="row">
-        <div class="col-2">
-          <%= f.label :paied_user_id, "立替者", class: 'chat-group-form__label' %>
-        </div>
-        <div class="col-10">
-          <%= f.collection_select :paied_user_id, event.group.joined_users.uniq, :id, :name %>
-        </div>
-      </div>
-    </div>
-    <div class="chat-group-form__field--right m-2 container">
-      <div class="row">
-        <div class="col-2">
-          <%= f.label :amount, "金額", class: 'chat-group-form__label' %>
-        </div>
-        <div class="col-10">
-          <%= f.number_field :amount, class: 'chat__group_name chat-group-form__input form-control', placeholder: '立替えた金額を入力してください' %>
-        </div>
-      </div>
-    </div>
-    <div class="chat-group-form__field--left m-2 container">
-      <div class="row">
-        <div class="col-2">
-          <%= f.label :user_ids, "関係者", class: 'chat-group-form__label form-group' %>
-        </div>
-        <div class="col-10">
-          <%= f.collection_check_boxes :user_ids, event.group.joined_users.uniq, :id, :name, class:"form-control" %>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="form-group chat-group-form__field.clearfix">
-    <div class="chat-group-form__field--right">
-      <%= f.submit "登録", class: 'btn btn-secondary chat-group-form__action-btn form-control' %>
-    </div>
-  </div>
-<% end %>

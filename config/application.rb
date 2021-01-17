@@ -13,15 +13,15 @@ module Wediary
     config.i18n.default_locale = :ja
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.yml').to_s]
     config.generators do |g|
-          # 色々な記述があるので、一番下に追記する
-          g.test_framework :rspec,
-                           fixtures: true,
-                           view_specs: false,
-                           helper_specs: false,
-                           routing_specs: false,
-                           controller_specs: true,
-                           request_specs: false
-          g.fixture_replacement :factory_bot, dir: "spec/factories"
+      # 色々な記述があるので、一番下に追記する
+      g.test_framework :rspec,
+                       fixtures: true,
+                       view_specs: false,
+                       helper_specs: false,
+                       routing_specs: false,
+                       controller_specs: true,
+                       request_specs: false
+      g.fixture_replacement :factory_bot, dir: 'spec/factories'
     end
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
@@ -29,4 +29,3 @@ module Wediary
     # the framework and any gems in your application.
   end
 end
-

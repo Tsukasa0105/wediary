@@ -15,24 +15,20 @@ class PhotosController < ApplicationController
       render :new
     end
   end
-  
+
   def show
     @photo = Photo.find(params[:id])
     @event = @photo.event
     @map = Map.find_by(id: @event.map_id)
   end
 
+  def edit; end
 
-  def edit
-  end
+  def update; end
 
-  def update
-  end
+  def destroy; end
 
-  def destroy
-  end
-  
   def photo_params
-    params.require(:photo).permit(:group_id, {images: []}, :event_id)
+    params.require(:photo).permit(:group_id, { images: [] }, :event_id)
   end
 end

@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
-  before_action :require_user_logged_in, only: [:show, :new, :create, :edit, :update, :destroy]
-  
+  before_action :require_user_logged_in, only: %i[show new create edit update destroy]
+
   def show
     @event = Event.find(params[:id])
     @photos = @event.photos
@@ -50,5 +50,4 @@ class EventsController < ApplicationController
   def event_params
     params.require(:event).permit(:name, :content, :start_time, :group_id, :user_id, :map_id, :image)
   end
-  
 end

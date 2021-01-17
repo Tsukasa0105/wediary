@@ -44,7 +44,7 @@
   <div class="head-wrap mt-5">
       <h2 class="head">
           Summary<span class="head-point">－概要－</span>
-          <%= link_to "/groups/#{@group.id}/events/new", class:"icons float-right" do %>
+          <%= link_to "/groups/#{@group.id}/events/new", title: "new_event", class: "icons float-right" do %>
             <span><i class="far fa-plus-square"></i></span>
           <% end %>
       </h2>
@@ -62,7 +62,7 @@
             <%= f.submit 'フィルタ', class: 'btn btn-secondary' %> 
           </div>
         <% end %>
-        <div id="map", class="mx-auto", style='height: 500px; width: 500px;'>
+        <div id="map", class="mx-auto", style='height: 400px; width: 400px;'>
         </div>
         <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&callback=initMap" async></script>   
         

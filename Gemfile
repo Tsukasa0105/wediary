@@ -38,13 +38,13 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'byebug', platforms: %i[mri mingw x64_mingw]
 end
 
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
-  gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
+  gem 'web-console', '>= 3.3.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end
@@ -60,16 +60,16 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data'
 
-#本番環境のデータベース設定
+# 本番環境のデータベース設定
 group :production do
   gem 'pg', '>= 0.18', '< 2.0'
 end
 
-#jqueryの使用
+# jqueryの使用
 gem 'jquery-rails'
-#ページネーションの使用
+# ページネーションの使用
 gem 'kaminari'
-#サインイン、サインアウト等の認証のgem
+# サインイン、サインアウト等の認証のgem
 gem 'carrierwave'
 gem 'cloudinary'
 gem 'mini_magick'
@@ -84,17 +84,20 @@ gem 'rails_12factor', group: :production
 
 gem 'rspec_junit_formatter'
 
-gem 'rspec-rails'
 gem 'factory_bot_rails'
 gem 'rails-controller-testing'
+gem 'rspec-rails'
 
 gem 'rails-i18n'
 
 gem 'simple_calendar'
 
-group :development,:test do
+group :development, :test do
   gem 'database_cleaner'
   gem 'shoulda-matchers'
 end
 
 gem 'pry-rails'
+
+gem 'rubocop', require: false
+gem 'rubocop-rails', require: false

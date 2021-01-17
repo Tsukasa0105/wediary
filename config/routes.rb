@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   get 'group_users/create'
   get 'group_users/destroy'
   get 'addresses/create'
@@ -7,18 +6,18 @@ Rails.application.routes.draw do
   get 'maps/index'
   get 'maps/create'
   root to: 'groups#index'
-  
+
   get 'contact', to: 'toppages#contact'
-  
+
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'
-  
+
   get 'signup', to: 'users#new'
   resources :users do
     collection do
       get :search
-    end 
+    end
     member do
       get :followings
       get :followers
@@ -26,31 +25,28 @@ Rails.application.routes.draw do
       get :join_groups
     end
   end
-  
+
   resources :groups do
     collection do
       get :search
-    end 
-    
+    end
+
     member do
       get :group_users
       get :request_users
     end
-    
+
     resources :events do
       resources :photos
-      resources :pay_records, only: [:index, :new, :create]
+      resources :pay_records, only: %i[index new create]
     end
   end
-  
-  resources :initial_pay_relationships, only: [:create, :destroy]
-  resources :pay_relationships, only: [:create, :destroy]
-  resources :relationships, only: [:create, :destroy]
-  resources :user_to_groups, only: [:create, :destroy]
-  resources :group_to_users, only: [:create, :destroy]
-  
-  resources :maps, only: [:index, :create]
-  
-  
-  
+
+  resources :initial_pay_relationships, only: %i[create destroy]
+  resources :pay_relationships, only: %i[create destroy]
+  resources :relationships, only: %i[create destroy]
+  resources :user_to_groups, only: %i[create destroy]
+  resources :group_to_users, only: %i[create destroy]
+
+  resources :maps, only: %i[index create]
 end

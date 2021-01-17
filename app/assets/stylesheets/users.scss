@@ -59,3 +59,21 @@ body{
     text-align: center;
     padding-top:60px;
 }
+
+.profile_for_pc {
+    
+}
+
+.profile_for_sp {
+    display: none;
+}
+
+@media only screen and (max-width: 980px) {
+    .profile_for_sp {
+        display: block;
+    }
+    
+    .profile_for_pc {
+        display: none;
+    }
+}

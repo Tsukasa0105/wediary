@@ -1,5 +1,5 @@
 class DropTableInitialPayRelationship < ActiveRecord::Migration[5.2]
   def change
-    drop_table:initial_pay_relationships
+    drop_table :initial_pay_relationships
   end
 end

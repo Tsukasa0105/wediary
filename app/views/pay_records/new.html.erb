@@ -1,1 +1,9 @@
+<div>
+  <%= link_to group_event_path(@group, @event), class: "icons float-left" do %>
+    <span><i class="fas fa-arrow-left"></i></span>
+  <% end %>
+</div>
+<div class="login_image">
+    <span class="center"><img src="/assets/undraw_wallet_aym5.png" width="350px"></span>
+</div>
 <%= render '/pay_records/form', pay_record: @pay_record, event: @event, group: @group %>
