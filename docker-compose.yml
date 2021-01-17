@@ -25,7 +25,7 @@ services:
     ports:
       - "0.0.0.0:3000:3000" # ホストからゲストへポートフォワード
     volumes:
-      # - .:/Wediary # githubにプッシュする前にコメントアウト。ローカルのみ使用
+      - .:/Wediary # githubにプッシュする前にコメントアウト。ローカルのみ使用
       - /var/run/mysqld/mysqld.sock:/var/run/mysqld/mysqld.sock
       
   test-db:

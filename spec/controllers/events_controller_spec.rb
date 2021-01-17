@@ -93,7 +93,7 @@ RSpec.describe EventsController, type: :controller do
       it 'redirects the page to /' do # なぜかできない。。。
         post :create, params: {
           group_id: @group.id,
-          event: { name: 'event1', user_id: @user.id, group_id: @group.id, map_id: @map.id }
+          event: { name: 'event1', user_id: @user.id, group_id: @group.id, map_id: @map.id, start_time: Time.now }
         }
         event = Event.last
         expect(response).to redirect_to group_event_path(event.group, event)

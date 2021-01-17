@@ -29,11 +29,11 @@ RSpec.describe PayRelationship, type: :model do
   end
 
   # validations
-  describe 'validations' do
-    # 存在性 presence
-    describe 'presence' do
-      it { is_expected.to validate_presence_of(:user_id) }
-      it { is_expected.to validate_presence_of(:pay_record_id) }
-    end
-  end
+  # describe 'validations' do
+  #   # 存在性 presence
+  #   describe 'presence' do
+  #     it { is_expected.to validate_presence_of(:user_id) }
+  #     it { is_expected.to validate_presence_of(:pay_record_id) }
+  #   end
+  # end
 end
