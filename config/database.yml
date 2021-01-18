@@ -48,7 +48,7 @@ test:
 #
 production:
   adapter: postgresql
-  encoding: utf8mb4
+  encoding: unicode
   pool: 5
   database: <%= ENV['WEDIARY_DATABASE'] %>
   username: <%= ENV['WEDIARY_USERNAME'] %>
