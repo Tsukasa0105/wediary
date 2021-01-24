@@ -32,7 +32,7 @@ feature 'Group', type: :feature do
       click_on '招待中'
       find('.portfolio-box').click
       expect(current_path).to eq group_path(@group)
-      expect(page).to have_content('このグループのメンバーではありません')
+      expect(page).to have_button('メンバーになる')
     end
 
     scenario '招待中のグループのメンバーになる' do
