@@ -3,7 +3,6 @@
     <span><i class="fas fa-arrow-left"></i></span>
   <% end %>
 </div>
-<div class="login_image">
-    <span class="center"><img src="/assets/undraw_wallet_aym5.png" width="350px"></span>
-</div>
+<%= render '/layouts/top_image', iamge_url: "/assets/undraw_wallet_aym5.png" %>
+
 <%= render '/pay_records/form', pay_record: @pay_record, event: @event, group: @group %>

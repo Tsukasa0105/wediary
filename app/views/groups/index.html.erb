@@ -3,10 +3,10 @@
     <div class="head-wrap">
       <h2 class="head">
           Groups<span class="head-point">－グループ－</span>
-            <%= link_to "/groups/new", title: "new_group", class:"icons float-right" do %>
-              <span><i class="far fa-plus-square"></i></span>
-            <% end %>
       </h2>
+        <%= link_to "/groups/new", title: "new_group", class:"icons float-right" do %>
+          <span><i class="far fa-plus-square"></i></span>
+        <% end %>
     </div>
     <body id="page-top">
         
@@ -17,7 +17,7 @@
                     // ↓現在アクティブなタブを切り替え↓
                     $('.active').removeClass('active');
                     // ↓タブをアクティブにする↓
-                    $(this).addClass('active');
+                    $(this).children('.nav-link').addClass('active');
                     // ↓現在アクティブなタブの中身を非表示
                     $('.show').removeClass('show');
                     // ↓クリックしたタブから順番を取得↓
@@ -27,8 +27,8 @@
                 });
             });
         </script>
-        
-        <ul class="nav nav-tabs nav-justified mb-3">
+
+        <ul class="nav nav-tabs nav-justify_content_center mb-3">
           <li class="nav-item"><a href="#" class="nav-link active">所属 <span class="badge badge-secondary"><%= current_user.join_groups.count %></span></a></li>
           <li class="nav-item"><a href="#" class="nav-link">申請中  <span class="badge badge-secondary"><%= current_user.only_requested_groups.count %></span></a></li>
           <li class="nav-item"><a href="#" class="nav-link">招待中  <span class="badge badge-secondary"><%= current_user.only_inviting_groups.count %></span></a></li>

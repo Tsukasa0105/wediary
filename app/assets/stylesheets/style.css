@@ -118,6 +118,12 @@ hr{border-bottom:1px solid #eceff8;border-top:0 none;margin:30px 0;padding:0}
     margin-left:  10px;     /* 周りの余白指定 */
 }
 
+@media only screen and (max-width: 400px) {
+  .head-point {
+    display:none;
+  }
+}
+
 .icons {
   font-size:30px !important;
   margin:0 5px;
@@ -170,6 +176,7 @@ hr{border-bottom:1px solid #eceff8;border-top:0 none;margin:30px 0;padding:0}
 
 .body {
   padding-top:100px;
+  margin:0 auto;
 }
 
 .not_joined {
@@ -261,4 +268,32 @@ hr{border-bottom:1px solid #eceff8;border-top:0 none;margin:30px 0;padding:0}
 .fadein.scrollin {
 	opacity : 1;
 	transform : translate(0, 0);
+}
+
+.top_image {
+    width:400px;
+    text-align:center;
+    margin:0 auto;
+}
+
+
+
+  .top_image {
+      width:300px;
+      text-align:center;
+      margin:0 auto;
+  }
+}
+
+
+.full-width {
+  width:100%;
+}
+
+.nav-tabs a{
+  color:black;
+  background-color: #C0C0C0
+}
+.nav-tabs.nav-item:active {
+  background-color: white
 }

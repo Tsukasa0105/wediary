@@ -1,8 +1,14 @@
 <div id="portfolio">
+    <div class="container">
+        <%= form_with url: root_path, method: :get, local: true do |f| %>
+          <%= f.select "sort", options_for_select({新しい順: "new", 古い順: "old", 名前順: "name"}), include_blank: "選択する", selected: params[:sort] %>
+          <%= f.submit "並べ替え" %>
+        <% end %>
+    </div>
     <div class="container-fluid p-0">
         <div class="row no-gutters">
             <% groups.uniq.each do |group| %>
-                <div class="col-lg-4 col-sm-6">
+                <div class="col-lg-4 col-6">
                     <%= link_to group_path(group), class: "portfolio-box m-1" do %>
                         <% if group.image.present? %>
                             <%= image_tag group.image.url, class: "img-fluid" %>
@@ -17,6 +23,7 @@
                     <% end %>
                 </div>
             <% end %>
+            <%= paginate groups %>
         </div>
     </div>
 </div>

@@ -5,7 +5,7 @@
                <%= link_to default_group_picture(group, 40), group_path(group.id) %>
           </div>
           <div class="col-sm-9 col-lg-10">
-               <%= render 'group_users/member_button', group: group %>
+               <%= render 'user_to_groups/member_button', group: group %>
               <p><%= link_to group.name, group_path(group.id), class: "text-dark" %></p>
           </div>
       </dix>
