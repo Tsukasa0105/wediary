@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class GroupsController < ApplicationController
   before_action :set_group, only: %i[show edit update group_users]
   before_action :require_user_logged_in,
@@ -5,26 +7,27 @@ class GroupsController < ApplicationController
 
   def index
     if logged_in?
-      if params[:sort] == "new"
-        @groups = current_user.join_groups.sort_by{|f| f[:updated_at]}.reverse!
+      case params[:sort]
+      when 'new'
+        @groups = current_user.join_groups.sort_by { |f| f[:updated_at] }.reverse!
         @groups = Kaminari.paginate_array(@groups).page(params[:page]).per(12)
-        @inviting_groups = current_user.only_inviting_groups.sort_by{|f| f[:updated_at]}.reverse!
+        @inviting_groups = current_user.only_inviting_groups.sort_by { |f| f[:updated_at] }.reverse!
         @inviting_groups = Kaminari.paginate_array(@inviting_groups).page(params[:page]).per(12)
-        @requested_groups = current_user.only_requested_groups.sort_by{|f| f[:updated_at]}.reverse!
+        @requested_groups = current_user.only_requested_groups.sort_by { |f| f[:updated_at] }.reverse!
         @requested_groups = Kaminari.paginate_array(@requested_groups).page(params[:page]).per(12)
-      elsif params[:sort] == "old"
-        @groups = current_user.join_groups.sort_by{|f| f[:updated_at]}
+      when 'old'
+        @groups = current_user.join_groups.sort_by { |f| f[:updated_at] }
         @groups = Kaminari.paginate_array(@groups).page(params[:page]).per(12)
-        @inviting_groups = current_user.only_inviting_groups.sort_by{|f| f[:updated_at]}
+        @inviting_groups = current_user.only_inviting_groups.sort_by { |f| f[:updated_at] }
         @inviting_groups = Kaminari.paginate_array(@inviting_groups).page(params[:page]).per(12)
-        @requested_groups = current_user.only_requested_groups.sort_by{|f| f[:updated_at]}
+        @requested_groups = current_user.only_requested_groups.sort_by { |f| f[:updated_at] }
         @requested_groups = Kaminari.paginate_array(@requested_groups).page(params[:page]).per(12)
-      elsif params[:sort] == "name"
-        @groups = current_user.join_groups.sort_by{|f| f[:name]}
+      when 'name'
+        @groups = current_user.join_groups.sort_by { |f| f[:name] }
         @groups = Kaminari.paginate_array(@groups).page(params[:page]).per(12)
-        @inviting_groups = current_user.only_inviting_groups.sort_by{|f| f[:name]}
+        @inviting_groups = current_user.only_inviting_groups.sort_by { |f| f[:name] }
         @inviting_groups = Kaminari.paginate_array(@inviting_groups).page(params[:page]).per(12)
-        @requested_groups = current_user.only_requested_groups.sort_by{|f| f[:name]}
+        @requested_groups = current_user.only_requested_groups.sort_by { |f| f[:name] }
         @requested_groups = Kaminari.paginate_array(@requested_groups).page(params[:page]).per(12)
       else
         @groups = Kaminari.paginate_array(current_user.join_groups).page(params[:page]).per(12)
@@ -117,5 +120,4 @@ class GroupsController < ApplicationController
   def set_group
     @group = Group.find(params[:id])
   end
-  
 end

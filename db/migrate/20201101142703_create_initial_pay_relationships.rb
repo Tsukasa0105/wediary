@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateInitialPayRelationships < ActiveRecord::Migration[5.2]
   def change
     create_table :initial_pay_relationships do |t|

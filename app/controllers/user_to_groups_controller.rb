@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UserToGroupsController < ApplicationController
   def create
     group = Group.find(params[:group_id])

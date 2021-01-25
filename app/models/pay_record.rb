@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PayRecord < ApplicationRecord
   has_many :pay_relationships, dependent: :destroy
   has_many :users, through: :pay_relationships

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Event, type: :model do
@@ -19,7 +21,7 @@ RSpec.describe Event, type: :model do
     event.valid?
     expect(event.errors[:name]).to include('を入力してください')
   end
-  
+
   # イベント開始日がなければ無効。
   it 'is invalid without start_time' do
     event = FactoryBot.build(:event, user: @user, group: @group, map: @map, start_time: nil)

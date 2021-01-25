@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PayRecordsController < ApplicationController
   before_action :require_user_logged_in, only: %i[new create]
 

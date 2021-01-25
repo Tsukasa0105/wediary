@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ToppagesHelper
   def profile_picture(user, width = 100)
     image_path = user.image.present? ? user.image.thumb.url : 'default.png'

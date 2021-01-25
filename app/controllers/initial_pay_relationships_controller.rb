@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class InitialPayRelationshipsController < ApplicationController
   def create
     initial_user = User.find(params[:initial_user_id])

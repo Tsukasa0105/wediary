@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Map < ApplicationRecord
   # 存在性のバリデーション
   validates :latitude, presence: true

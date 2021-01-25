@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 feature 'User', type: :feature do
   feature 'ユーザー登録前' do
     scenario 'ユーザー登録ができるか' do
-      visit root_path        # sessionがないのでlogin_pathに移行
+      visit root_path # sessionがないのでlogin_pathに移行
       click_on '新規登録はコチラ'
       fill_in 'ユーザ名', with: 'integration_test'
       fill_in 'メールアドレス', with: 'integration_test@gmail.com'

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UsersController < ApplicationController
   before_action :require_user_logged_in,
                 only: %i[index show edit update search followings followers friends requested_groups inviting_groups

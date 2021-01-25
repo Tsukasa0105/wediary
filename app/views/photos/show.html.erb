@@ -1,9 +1,18 @@
+<div class="container">
+  <div class="row">
+    <div class="full_width">
+      <%= link_to group_event_path(@event.group, @event), class: "icons float-left" do %>
+        <span><i class="fas fa-arrow-left"></i></span>
+      <% end %>
+    </div>
+  </div>
+</div>
 <div class="head-wrap">
     <h2 class="head">
       <% if @map.present? %>
-        <%= @event.name %><span class="head-point">－<%= @event.event_date %> @<%= @map.title %>－</span>
+        <%= @event.name %><span class="head-point">－<%= @event.start_time %> @<%= @map.title %>－</span>
       <% else %>
-        <%= @event.name %><span class="head-point">－<%= @event.event_date %>－</span>
+        <%= @event.name %><span class="head-point">－<%= @event.start_time %>－</span>
       <% end %>
       <%= link_to edit_group_event_path(@event.group), class: "icons float-right" do %>
         <span><i class="fas fa-cogs"></i></span>
@@ -13,12 +22,64 @@
       <% end %>
     </h2>
 </div>
-<div class="container-fluid p-0">
-  <div class="row no-gutters">
+
+<!--大きいSwiper-->
+  <div class="swiper-container swiper1">
+  	<div class="swiper-wrapper">
       <% @photo.images.each do |image| %>
-            <div class="offset-1 col-10 offset-1">
+            <div class="swiper-slide">
                 <%= image_tag image.url, class: "m-5 img-fluid" %> 
             </div>  
       <% end %>
+  	</div>
+  	<div class="swiper-button-prev prev1"></div>
+  	<div class="swiper-button-next prev2"></div>
+  	<div class="swiper-pagination"></div>
   </div>
+<!--小さいSwiper-->
+  <div class="swiper-container swiper2">
+  	<div class="swiper-wrapper">
+      <% @photo.images.each do |image| %>
+            <div class="swiper-slide">
+                <%= image_tag image.url, class: "m-5 img-fluid" %> 
+            </div>  
+      <% end %>
+  	</div>
+  </div>
+  <script>
+    var mySwiper1 = new Swiper('.swiper1', {
+      initialSlide: 2,
+      loop: true,
+      spaceBetween: 10,
+    	navigation: {
+    		nextEl: '.next1',
+    		prevEl: '.prev1'
+    	},
+    	pagination: {
+    		el: '.page1',
+    		type: 'bullets',
+    		clickable: true
+    	}
+    });
+    
+    //2個目のSwiper
+    var mySwiper2 = new Swiper('.swiper2', {
+      freeMode: true,
+      effect: 'coverflow',
+      initialSlide: 2,
+      loop: true,
+      spaceBetween: 10,
+      enteredSlides: true,
+      slidesPerView: 3,
+    	navigation: {
+    		nextEl: '.next2',
+    		prevEl: '.prev2'
+    	},
+    	pagination: {
+    		el: '.page2',
+    		type: 'bullets',
+    		clickable: true
+    	}
+    });
+  </script>
 </div>

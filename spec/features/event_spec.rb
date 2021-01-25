@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 feature 'Event', type: :feature do
@@ -14,7 +16,7 @@ feature 'Event', type: :feature do
       click_on 'ログインする'
     end
 
-    #MapのJavascriptが機能しないのでとりあえず保留
+    # MapのJavascriptが機能しないのでとりあえず保留
     # scenario 'イベント登録画面遷移→マップ登録できるか' do
     #   visit group_path(@group)
     #   click_on "new_event"

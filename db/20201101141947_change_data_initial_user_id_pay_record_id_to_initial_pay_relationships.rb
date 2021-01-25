@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ChangeDataInitialUserIdPayRecordIdToInitialPayRelationships < ActiveRecord::Migration[5.2]
   def change
     change_column :initial_pay_relationships, :initial_user_id, :bigint

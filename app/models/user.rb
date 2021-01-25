@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   before_save { email.downcase! }
   validates :name, presence: true, length: { maximum: 50 }
@@ -29,7 +31,7 @@ class User < ApplicationRecord
 
   def unfollow(other_user)
     relationship = relationships.find_by(follow_id: other_user.id)
-    relationship.destroy if relationship
+    relationship&.destroy
   end
 
   def following?(other_user)
@@ -71,7 +73,7 @@ class User < ApplicationRecord
 
   def unpermit_member(group)
     group_to_user = group_to_users.find_by(group_id: group.id)
-    group_to_user.destroy if group_to_user
+    group_to_user&.destroy
   end
 
   # 精算の有無についてのメソッド
@@ -83,7 +85,7 @@ class User < ApplicationRecord
   def paied(pay_record)
     pay_relationship = pay_relationships.find_by(pay_record_id: pay_record.id)
     # pay_relationshipを削除=支払う必要なし（精算者）
-    pay_relationship.destroy if pay_relationship
+    pay_relationship&.destroy
   end
 
   def need_pay?(pay_record)

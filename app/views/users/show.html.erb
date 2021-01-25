@@ -1,11 +1,13 @@
-<div class="container">
-    <% if current_user?(@user.id) %>
-        <%= link_to edit_user_path, title: "edit_user", class: "icons float-right" do %>
-            <span><i class="fas fa-cogs"></i></span>
-        <% end %>
-    <% end %>
-</div>
 <div class="mt-5 conrainer">
+        <div class="row">
+            <div class="col-12">
+                <% if current_user?(@user.id) %>
+                    <%= link_to edit_user_path, title: "edit_user", class: "icons float-right" do %>
+                        <span><i class="fas fa-cogs"></i></span>
+                    <% end %>
+                <% end %>
+            </div>
+        </div>
     <div class="row profile_for_pc">
         <div class="col-4">
             <div class="profile_side">

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Group < ApplicationRecord
   has_many :user_to_groups, dependent: :destroy
   has_many :request_users, through: :user_to_groups, source: :user
@@ -18,7 +20,7 @@ class Group < ApplicationRecord
 
   def unmember(user)
     user_to_group = user_to_groups.find_by(user_id: user.id)
-    user_to_group.destroy if user_to_group
+    user_to_group&.destroy
   end
 
   def permit_member(user)
