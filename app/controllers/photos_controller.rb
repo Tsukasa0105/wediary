@@ -1,6 +1,16 @@
 # frozen_string_literal: true
 
 class PhotosController < ApplicationController
+  
+  before_action :require_user_logged_in,
+                only: %i[show new create]
+                
+  def index
+    @event = Event.find(params[:event_id])
+    @photos = @event.photos
+    @map = Map.find_by(id: @event.map_id)    
+  end
+                
   def new
     @group = Group.find(params[:group_id])
     @event = Event.find(params[:event_id])
@@ -19,9 +29,6 @@ class PhotosController < ApplicationController
   end
 
   def show
-    @photo = Photo.find(params[:id])
-    @event = @photo.event
-    @map = Map.find_by(id: @event.map_id)
   end
 
   def edit; end

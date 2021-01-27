@@ -3,7 +3,7 @@ html {
 }
 
 .img-fluid {
-  max-width: 100%;
+  max-width: 70%;
   height: auto;
 }
 
@@ -281,39 +281,10 @@ hr{border-bottom:1px solid #eceff8;border-top:0 none;margin:30px 0;padding:0}
   background-color: white
 }
 
-.swiper-slide:nth-child(4n+1) {
-	height: 250px;
-	line-height: 250px;
-}
-/* 4の倍数＋2枚目のスライドの高さ（2枚目、6枚目…） */
-.swiper-slide:nth-child(4n+2) {
-	height: 100px;
-	line-height: 100px;
-}
-/* 4の倍数＋3枚目のスライドの高さ（3枚目、7枚目…） */
-.swiper-slide:nth-child(4n+3) {
-	height: 200px;
-	line-height: 200px;
-}
-/* 4の倍数＋4枚目のスライドの高さ（4枚目、8枚目…） */
-.swiper-slide:nth-child(4n+4) {
-	height: 150px;
-	line-height: 150px;
+.swiper-slide {
+  text-align: center;
 }
 
-.swiper2 {
-	height: 80px;
-	margin-top: 10px;
-}
-/* 2個目のSwiperのスライドのスタイル */
-.swiper2 .swiper-slide {
-	height: 80px;
-	line-height: 80px;
-	-webkit-filter: brightness(0.5);
-	filter: brightness(0.5);
-}
-/* 2個目のSwiperの現在のスライドのスタイル */
-.swiper2 .swiper-slide-active {
-	-webkit-filter: brightness(1);
-	filter: brightness(1);
+.thumblist-item {
+  width:100px;
 }

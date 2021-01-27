@@ -1,0 +1,88 @@
+<div class="container">
+  <div class="row">
+    <div class="full_width">
+      <%= link_to group_event_path(@event.group, @event), class: "icons float-left" do %>
+        <span><i class="fas fa-arrow-left"></i></span>
+      <% end %>
+    </div>
+  </div>
+</div>
+<div class="head-wrap">
+    <h2 class="head">
+      <% if @map.present? %>
+        <%= @event.name %><span class="head-point">－<%= @event.start_time %> @<%= @map.title %>－</span>
+      <% else %>
+        <%= @event.name %><span class="head-point">－<%= @event.start_time %>－</span>
+      <% end %>
+      <%= link_to edit_group_event_path(@event.group, @event), class: "icons float-right" do %>
+        <span><i class="fas fa-cogs"></i></span>
+      <% end %>
+      <%= link_to "/groups/#{@event.group.id}/events/#{@event.id}/photos/new", class:"icons float-right" do %>
+        <span><i class="far fa-plus-square"></i></span>
+      <% end %>
+    </h2>
+</div>
+
+<!--大きいSwiper-->
+  <div class="swiper-container">
+  	<div class="swiper-wrapper">
+        <% @photos.each do |photo| %>
+            <% photo.images.each do |image| %>
+              <div class="swiper-slide">
+                  <%= image_tag image.url, class: "mb-10 img-fluid" %> 
+              </div> 
+            <% end %>
+        <% end %>
+  	</div>
+  	<div class="swiper-button-prev"></div>
+  	<div class="swiper-button-next"></div>
+  	<!--<div class="swiper-pagination"></div>-->
+    <div class="container">
+	    <div class="thumblist row"></div>
+    </div>
+  </div>
+    <script>
+      const thumbClass = 'thumblist-item';
+      const mytap = window.ontouchstart === null?"touchstart":"click";
+      var mySwiper = new Swiper('.swiper-container', {
+        autoHeight: true,
+        // initialSlide: 1,
+        loop: true,
+        spaceBetween: 10,
+      	navigation: {
+      		nextEl: '.swiper-button-next',
+      		prevEl: '.swiper-button-prev'
+      	},
+        pagination:{
+          el:'.thumblist',
+          type:'custom',
+          renderCustom: function (swiper, current, total) {
+            const slides = swiper.slides;
+            let html = '';
+            for( let i = 0 ; i < total; i++ ){
+              if( current == i+1 ){
+                html = html + `<div class="${thumbClass} current col-sm-3" data-slideto="${i}">${slides[i].innerHTML}</div>`;
+              }else{
+                html = html + `<div class="${thumbClass} col-sm-3" data-slideto="${i}">${slides[i].innerHTML}</div>`;
+              }
+            }
+            return html;
+          }
+        }
+      });
+      
+      const clickThumbs = (()=>{
+        const thumbItems = document.getElementsByClassName(thumbClass);
+        for(let i = 0; i < thumbItems.length ; i ++){
+          thumbItems[i].addEventListener(mytap,((e)=>{
+            let index = e.currentTarget.dataset.slideto;
+            mySwiper.slideTo(index, 1500, true);
+            // autoplayオプションを使わない場合は、以下をコメントアウトをする
+          }),false);
+        }
+      });
+  
+      clickThumbs();
+      mySwiper.on('slideChange',clickThumbs);
+    </script>
+</div>
