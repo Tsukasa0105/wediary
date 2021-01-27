@@ -3,6 +3,6 @@
 class Photo < ApplicationRecord
   belongs_to :group
   belongs_to :event
-  mount_uploaders :images, ImageUploader
+  mount_uploaders :images, ImageUploader, limit: 255
   serialize :images
 end

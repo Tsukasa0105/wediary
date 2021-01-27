@@ -48,6 +48,7 @@
         <h3>写真はありません</h3>
       </div>
     <% end %>
+    <%= pagenate @photos %>
   </div>
   <div class="mb-5">
     <%= link_to "もっと見る", "/groups/#{@group.id}/events/#{@event.id}/photos", class: "btn btn-secondary float-right" %> 

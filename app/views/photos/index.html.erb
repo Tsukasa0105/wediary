@@ -29,7 +29,7 @@
         <% @photos.each do |photo| %>
             <% photo.images.each do |image| %>
               <div class="swiper-slide">
-                  <%= image_tag image.url, class: "mb-10 img-fluid" %> 
+                  <%= image_tag image.url, class: "mb-10 photo-fluid" %> 
               </div> 
             <% end %>
         <% end %>

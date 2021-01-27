@@ -5,10 +5,10 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:id])
-    @photos = @event.photos
+    @photos = @event.photos.page(params[:page]).per(12)
     @group = @event.group
     @map = Map.find_by(id: @event.map_id)
-    @pay_records = @event.pay_records
+    @pay_records = @event.pay_records.page(params[:page]).per(10)
     # @amount_per_person = pay_record.amount/pay_record.users.count
   end
 
