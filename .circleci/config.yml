@@ -36,8 +36,8 @@ jobs:
           command: docker-compose run web bin/rails db:create db:migrate
           
       - run:
-          name: rails db:create RAILS_ENV and db:migrate RAILS_ENV
-          command: docker-compose run web bin/rails db:create RAILS_ENV db:migrate RAILS_ENV
+          name: rails db:migrate RAILS_ENV
+          command: docker-compose run web bin/rails db:migrate RAILS_ENV
             
       - run:
           name: test
