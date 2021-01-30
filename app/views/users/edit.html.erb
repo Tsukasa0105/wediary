@@ -1,6 +1,4 @@
-<div class="login_image">
-    <span class="center"><img src="/assets/undraw_my_notifications_rjej.png" width="350px"></span>
-</div>
+<%= render '/layouts/top_image', image_url: '/assets/undraw_my_notifications_rjej.png' %>
 <p>変更したい項目を入力してください</p>
 <p>（パスワードを変更する場合は「パスワード確認」の項目も入力してください）</p>
 <br><br>
@@ -32,10 +30,10 @@
       
       <div>
         <%= f.label :password_confirmation, 'パスワード確認' %>
-        <%= f.password_field :password_confirmation, class: 'form-control' %>
+        <%= f.password_field :password_confirmation, class: 'mb-5 form-control' %>
       </div>
 
-      <%= f.submit '変更', class: 'btn btn-primary btn-block way_edit_submit' %>
+      <%= f.submit '変更', class: 'btn btn-secondary btn-block way_edit_submit' %>
     <% end %>
   </div>
 </div>

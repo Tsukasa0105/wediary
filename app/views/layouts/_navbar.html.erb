@@ -33,7 +33,6 @@
                                     <li><%= link_to 'Users', search_users_path %></li>
                                     <li><%= link_to 'Friends', friends_user_path(current_user) %></li>
                                     <li><%= link_to 'Follow Requests', followers_user_path(current_user) %></li>
-                                    <li><%= link_to 'Maps', maps_index_path %></li>
                                 </ul>
                             </li>
                             <li class="nav-item">
@@ -52,8 +51,9 @@
     // ↓タブをクリックした時の処理↓
       $('.navbar-toggler').on('click', function(){
           if($('#navigation').hasClass('show')){
-            $('#navigation').hide();
-          });
+            $('#navigation').toggle();
+          }
+        });
       });
     </script>
 <% else %>
