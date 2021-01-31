@@ -38,7 +38,12 @@ class EventsController < ApplicationController
       redirect_to group_event_path(@event.group, @event)
       flash.now[:success] = 'イベントを編集しました'
     else
-      render :new
+      case params[:order_sort]
+      when "1"
+        render "photos/new"
+      else
+        render :edit
+      end
     end
   end
 

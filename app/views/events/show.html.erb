@@ -37,14 +37,12 @@
   <div class="row no-gutters">
     <% if @photos.present? %>
       <% @photos.each do |photo| %>
-            <% photo.images.each do |image| %>
                   <div class="col-3">
-                      <%= image_tag image.url, class: "m-1 img-fluid" %> 
+                      <%= image_tag photo.image.url, class: "m-1 img-fluid" %> 
                       <% @number += 1 %>
                       <% break if @number == 13 %>
                   </div> 
                   <% break if @number == 13 %>
-            <% end %>
       <% end %>
     <% else %>
       <div class="no_image">

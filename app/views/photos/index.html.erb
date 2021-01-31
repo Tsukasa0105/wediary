@@ -27,11 +27,9 @@
   <div class="swiper-container">
   	<div class="swiper-wrapper">
         <% @photos.each do |photo| %>
-            <% photo.images.each do |image| %>
               <div class="swiper-slide">
-                  <%= image_tag image.url, class: "mb-10 photo-fluid" %> 
+                  <%= image_tag photo.image.url, class: "mb-10 photo-fluid" %> 
               </div> 
-            <% end %>
         <% end %>
   	</div>
   	<div class="swiper-button-prev"></div>

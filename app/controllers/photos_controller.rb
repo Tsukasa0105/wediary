@@ -18,10 +18,11 @@ class PhotosController < ApplicationController
   end
 
   def create
-    @photo = Photo.new(photo_params)
-    if @photo.save
+    @group = Group.find(params[:group_id])
+    @event = Event.find(params[:event_id])
+    if Photo.create_photos_by(photo_params)
       flash[:success] = '写真を投稿しました'
-      redirect_to group_event_path(@photo.event.group, @photo.event)
+      redirect_to group_event_path(@group, @event)
     else
       flash.now[:danger] = '写真の投稿に失敗しました'
       render :new
@@ -38,6 +39,6 @@ class PhotosController < ApplicationController
   def destroy; end
 
   def photo_params
-    params.require(:photo).permit(:group_id, { images: [] }, :event_id)
+    params.require(:photo).permit(:group_id, { images:[] }, :event_id, :image)
   end
 end
