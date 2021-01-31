@@ -29,6 +29,9 @@
         <% @photos.each do |photo| %>
               <div class="swiper-slide">
                   <%= image_tag photo.image.url, class: "mb-10 photo-fluid" %> 
+                  <%= link_to group_event_photo_path(@event.group, @event, photo), method: :delete, title: "destroy", class:"icons float-right" do %>
+                    <span><i class="fa fa-trash-alt"></i></span>
+                  <% end %>
               </div> 
         <% end %>
   	</div>
@@ -44,9 +47,8 @@
       const mytap = window.ontouchstart === null?"touchstart":"click";
       var mySwiper = new Swiper('.swiper-container', {
         autoHeight: true,
-        // initialSlide: 1,
         loop: true,
-        spaceBetween: 10,
+        spaceBetween: 5,
       	navigation: {
       		nextEl: '.swiper-button-next',
       		prevEl: '.swiper-button-prev'

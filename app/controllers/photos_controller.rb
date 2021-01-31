@@ -36,7 +36,15 @@ class PhotosController < ApplicationController
 
   def update; end
 
-  def destroy; end
+  def destroy
+    @photo = Photo.find(params[:id])
+    @group = Group.find(params[:group_id])
+    @event = Event.find(params[:event_id])
+    
+    @photo = Photo.find(params[:id]).destroy
+
+    redirect_to group_event_photos_path(@group, @event)
+  end
 
   def photo_params
     params.require(:photo).permit(:group_id, { images:[] }, :event_id, :image)

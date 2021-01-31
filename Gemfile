@@ -106,3 +106,4 @@ gem 'rubocop', require: false
 gem 'rubocop-rails', require: false
 
 gem 'ransack'
+gem 'carrierwave-i18n'

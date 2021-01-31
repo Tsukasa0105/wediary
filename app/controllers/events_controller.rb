@@ -5,11 +5,11 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:id])
-    @photos = @event.photos
+    @photos = @event.photos.page(params[:page]).per(8)
     @number = 1
     @group = @event.group
     @map = Map.find_by(id: @event.map_id)
-    @pay_records = @event.pay_records.page(params[:page]).per(10)
+    @pay_records = @event.pay_records.page(params[:page]).per(5)
   end
 
   def new

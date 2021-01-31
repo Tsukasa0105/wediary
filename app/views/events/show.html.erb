@@ -37,18 +37,20 @@
   <div class="row no-gutters">
     <% if @photos.present? %>
       <% @photos.each do |photo| %>
-                  <div class="col-3">
-                      <%= image_tag photo.image.url, class: "m-1 img-fluid" %> 
-                      <% @number += 1 %>
-                      <% break if @number == 13 %>
-                  </div> 
-                  <% break if @number == 13 %>
+        <div class="col-3">
+          <div class="m-1">
+            <%= image_tag photo.image.url, class: "m-1 img-fluid" %> 
+          </div>
+        </div> 
       <% end %>
     <% else %>
       <div class="no_image">
         <h3>写真はありません</h3>
       </div>
     <% end %>
+  </div>
+  <div class="row">
+    <%= paginate @photos %>
   </div>
   <div class="mt-3">
       <%= link_to "もっと見る", "/groups/#{@group.id}/events/#{@event.id}/photos", class: "btn btn-secondary float-right" %> 
@@ -62,6 +64,19 @@
           <span><i class="far fa-plus-square"></i></span>
         <% end %>
     </h2>
-    
+    <div class="right">
+      <div style="display:inline-block" class="follow_button">
+        <button type="button" class="btn btn-secondary m-1">立替者</button>
+      </div>
+      <div style="display:inline-block" class="follow_button">
+        <button type="button" class="btn btn-muted m-1">精算済</button>
+      </div>
+      <div style="display:inline-block" class="follow_button">
+        <button type="button" class="btn btn-danger m-1">未精算</button>
+      </div>
+    </div>
     <%= render '/pay_records/payments', pay_records: @pay_records %>
+    <div class="">
+      <%= paginate @pay_records %>
+    </div>
 </div>
