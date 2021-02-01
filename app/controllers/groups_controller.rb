@@ -3,7 +3,7 @@
 class GroupsController < ApplicationController
   before_action :set_group, only: %i[show edit update group_users]
   before_action :require_user_logged_in,
-                only: %i[index show new create edit update search destroy group_users request_users]
+                only: %i[show new create edit update search destroy group_users request_users]
 
   def index
     if logged_in?
