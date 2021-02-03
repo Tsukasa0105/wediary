@@ -5,7 +5,8 @@ require 'rails_helper'
 feature 'User', type: :feature do
   feature 'ユーザー登録前' do
     scenario 'ユーザー登録ができるか' do
-      visit root_path # sessionがないのでlogin_pathに移行
+      visit root_path
+      click_on '新しく始める'
       click_on '新規登録はコチラ'
       fill_in 'ユーザ名', with: 'integration_test'
       fill_in 'メールアドレス', with: 'integration_test@gmail.com'
@@ -16,7 +17,8 @@ feature 'User', type: :feature do
     end
 
     scenario 'ログインできないか' do
-      visit root_path # sessionがないのでlogin_pathに移行
+      visit root_path
+      click_on 'ログイン', match: :first
       fill_in 'メールアドレス', with: 'integration_test2@gmail.com'
       fill_in 'パスワード', with: 'integration_test2'
       click_on 'ログインする'

@@ -28,19 +28,14 @@ RSpec.describe GroupsController, type: :controller do
     # 権限を有さないユーザの場合
     context 'as a guest user' do
       # 正常なレスポンスか？
-      it 'does not respond successfully' do
+      it 'responds successfully' do
         get :index
-        expect(response).to_not be_success
+        expect(response).to be_success
       end
       # 200レスポンスが返ってきているか？
-      it 'returns a 302 response' do
+      it 'returns a 200 response' do
         get :index
-        expect(response).to have_http_status '302'
-      end
-      # ログイン画面にリダイレクトされているか？
-      it 'redirects the page to /login' do
-        get :index
-        expect(response).to redirect_to '/login'
+        expect(response).to have_http_status '200'
       end
     end
   end
