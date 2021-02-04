@@ -7,7 +7,6 @@ feature 'User', type: :feature do
     scenario 'ユーザー登録ができるか' do
       visit root_path
       click_on '新しく始める'
-      click_on '新規登録はコチラ'
       fill_in 'ユーザ名', with: 'integration_test'
       fill_in 'メールアドレス', with: 'integration_test@gmail.com'
       fill_in 'パスワード', with: 'integration_test'
