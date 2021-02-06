@@ -9,6 +9,7 @@ RUN apt-get update \
     build-essential  \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* 
+
 WORKDIR /Wediary
 
 COPY Gemfile /Wediary/Gemfile
