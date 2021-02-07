@@ -6,7 +6,7 @@
                 <div class="cp_tag01"><a href="#"><%= memo.title %></a></div>   
                 <div class="balloon1">
                   <div class="icon"><%= link_to profile_picture(memo.user, 50), edit_user_path(current_user.id) %></div>
-                  <%= memo.content %>
+                  <%= Rinku.auto_link(memo.content, :all, 'target="_blank"').html_safe %>
                 </div>
                 <div class="delete_memo_button">
                     <%= link_to group_event_memo_path(memo.event.group, memo.event, memo), method: :delete, title: "destroy", class:"icons" do %>

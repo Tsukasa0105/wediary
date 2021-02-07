@@ -111,3 +111,5 @@ gem 'carrierwave-i18n'
 group :development, :test do
   gem 'rails-erd'
 end
+
+gem 'rinku'
