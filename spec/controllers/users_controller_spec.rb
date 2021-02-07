@@ -192,7 +192,7 @@ RSpec.describe UsersController, type: :controller do
       it 'redirects the page to /' do
         user_params = { name: 'user2' }
         patch :update, params: { id: @user.id, user: user_params }
-        expect(response).to redirect_to '/'
+        expect(response).to redirect_to :show
       end
     end
     context 'with invalid attributes' do
