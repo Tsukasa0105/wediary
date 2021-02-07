@@ -39,6 +39,8 @@ Rails.application.routes.draw do
       resources :memos, only: %i[index new create destroy]
     end
   end
+  
+  resources :favorites
 
   resources :initial_pay_relationships, only: %i[create destroy]
   resources :pay_relationships, only: %i[create destroy]

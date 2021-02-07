@@ -46,7 +46,7 @@
 	padding: 0;
 
 	position: absolute;
-	top: 30px;
+	top: 35px;
 	left: 120px;
 	-webkit-transform: translate(-50%,-50%);
 					transform: translate(-50%,-50%);
@@ -103,4 +103,21 @@
 	left: 1050px;
 	width: 6px;
 	height: 6px;
+}
+
+.memo_favorite_button {
+  position: absolute;
+	top: 10px;
+	left: 20px;
+	width: 6px;
+	height: 6px;
+}
+
+.favorites_count {
+  position: absolute;
+	top: 40px;
+	left: 40px;
+	width: 6px;
+	height: 6px;
+	float: center;
 }

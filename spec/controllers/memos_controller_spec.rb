@@ -2,13 +2,13 @@
 
 require 'rails_helper'
 
-RSpec.describe PayRecordsController, type: :controller do
+RSpec.describe MemosController, type: :controller do
   before do
     @user = FactoryBot.create(:user)
     @group = FactoryBot.create(:group)
     @map = FactoryBot.create(:map, user: @user, group: @group)
     @event = FactoryBot.create(:event, user: @user, group: @group, map: @map)
-    @pay_record = FactoryBot.create(:pay_record, paied_user_id: @user.id, event: @event)
+    @memo = FactoryBot.create(:memo, user_id: @user.id, event: @event)
   end
 
   describe '#new' do
@@ -54,7 +54,7 @@ RSpec.describe PayRecordsController, type: :controller do
         session[:user_id] = @user.id
       end
       # 正常にグループを作成できるか？
-      it 'adds a new pay_record' do
+      it 'adds a new memo' do
         # Factorybotで確認済み
       end
       # 記事作成後に作成した記事の詳細ページへリダイレクトされているか？
@@ -62,10 +62,10 @@ RSpec.describe PayRecordsController, type: :controller do
         post :create, params: {
           group_id: @group.id,
           event_id: @event.id,
-          pay_record: {
-            name: 'pay_record1',
-            amount: 10000,
-            paied_user_id: @user.id,
+          memo: {
+            title: 'memo1',
+            content: 'memo1',
+            user_id: @user.id,
             event_id: @event.id
           }
         }
@@ -77,20 +77,20 @@ RSpec.describe PayRecordsController, type: :controller do
         session[:user_id] = @user.id
       end
       # 不正なアトリビュートを含む記事は作成できなくなっているか？
-      it 'does not add a new pay_record' do
+      it 'does not add a new memo' do
         # expect {
         #   @group = FactoryBot.create(:another_group, name: nil)
         # }.to_not change(@groups, :count)
       end
       # 不正な記事を作成しようとすると、再度作成ページへリダイレクトされるか？
-      it 'redirects the page to pay_records/new' do
+      it 'redirects the page to memos/new' do
         post :create, params: {
           group_id: @group.id,
           event_id: @event.id,
-          pay_record: {
-            name: nil,
-            amount: 10000,
-            paied_user_id: @user.id,
+          memo: {
+            title: nil,
+            content: 'memo2',
+            user_id: @user.id,
             event_id: @event.id
           }
         }

@@ -19,6 +19,8 @@ class User < ApplicationRecord
   has_many :followers, through: :reverses_of_relationship, source: :user
   has_many :events
   has_many :memos
+  has_many :favorites, dependent: :destroy
+  has_many :favorite_memos, through: :favorites, source: :memo
   has_many :maps
   has_many :pay_relationships, dependent: :destroy
   has_many :pay_records, through: :pay_relationships
@@ -110,6 +112,20 @@ class User < ApplicationRecord
   def only_inviting_groups
     inviting_groups - requested_groups
   end
+  
+  def favorite(memo)
+      favorites.find_or_create_by(memo_id: memo.id)
+  end
+
+  def unfavorite(memo)
+    favorite = favorites.find_by(memo_id: memo.id)
+    favorite.destroy if favorite
+  end
+
+  def favorite?(memo)
+    self.favorite_memos.include?(memo)
+  end
 
   mount_uploader :image, ImageUploader
 end
+

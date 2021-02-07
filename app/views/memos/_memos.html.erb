@@ -2,6 +2,7 @@
     <div class="row">
         <% memos.each do |memo| %>
             <div class="col-12">
+                <div class="memo_favorite_button"><%= render 'favorites/favorite_button', memo: memo %></div>
                 <div class="cp_tag01"><a href="#"><%= memo.title %></a></div>   
                 <div class="balloon1">
                   <div class="icon"><%= link_to profile_picture(memo.user, 50), edit_user_path(current_user.id) %></div>
@@ -11,6 +12,9 @@
                     <%= link_to group_event_memo_path(memo.event.group, memo.event, memo), method: :delete, title: "destroy", class:"icons" do %>
                         <span><i class="fas fa-times"></i></span>
                     <% end %>
+                </div>
+                <div class="favorites_count">
+                    <%= memo.favorites.count %>
                 </div>
             </div>
         <% end %>

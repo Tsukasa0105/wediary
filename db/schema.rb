@@ -10,13 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_31_085137) do
+ActiveRecord::Schema.define(version: 2021_02_07_081935) do
 
   create_table "events", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "group_id"
     t.string "image"
-    t.string "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
@@ -25,6 +24,15 @@ ActiveRecord::Schema.define(version: 2021_01_31_085137) do
     t.index ["group_id"], name: "index_events_on_group_id"
     t.index ["map_id"], name: "index_events_on_map_id"
     t.index ["user_id"], name: "index_events_on_user_id"
+  end
+
+  create_table "favorites", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "memo_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["memo_id"], name: "index_favorites_on_memo_id"
+    t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
   create_table "group_to_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
@@ -64,6 +72,17 @@ ActiveRecord::Schema.define(version: 2021_01_31_085137) do
     t.string "group_id"
     t.bigint "user_id"
     t.index ["user_id"], name: "index_maps_on_user_id"
+  end
+
+  create_table "memos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+    t.string "title"
+    t.text "content"
+    t.bigint "event_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["event_id"], name: "index_memos_on_event_id"
+    t.index ["user_id"], name: "index_memos_on_user_id"
   end
 
   create_table "pay_records", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
@@ -127,11 +146,15 @@ ActiveRecord::Schema.define(version: 2021_01_31_085137) do
   add_foreign_key "events", "groups"
   add_foreign_key "events", "maps"
   add_foreign_key "events", "users"
+  add_foreign_key "favorites", "memos"
+  add_foreign_key "favorites", "users"
   add_foreign_key "group_to_users", "groups", column: "inviting_group_id"
   add_foreign_key "group_to_users", "users", column: "invited_user_id"
   add_foreign_key "initial_pay_relationships", "pay_records"
   add_foreign_key "initial_pay_relationships", "users", column: "initial_user_id"
   add_foreign_key "maps", "users"
+  add_foreign_key "memos", "events"
+  add_foreign_key "memos", "users"
   add_foreign_key "pay_records", "events"
   add_foreign_key "pay_records", "users", column: "paied_user_id"
   add_foreign_key "pay_relationships", "pay_records"
