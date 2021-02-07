@@ -18,6 +18,7 @@ class User < ApplicationRecord
   has_many :reverses_of_relationship, class_name: 'Relationship', foreign_key: 'follow_id', dependent: :destroy
   has_many :followers, through: :reverses_of_relationship, source: :user
   has_many :events
+  has_many :memos
   has_many :maps
   has_many :pay_relationships, dependent: :destroy
   has_many :pay_records, through: :pay_relationships

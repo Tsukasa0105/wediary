@@ -1,0 +1,106 @@
+/* 吹き出し本体 */
+.balloon1{
+  position: relative;
+  padding: 20px;
+  border: solid 3px #555;
+  border-radius: 10px;
+  color: black;
+  background-color: #FFFFFF;
+  margin: 0 50px 20px 250px; 
+}
+/* 画像 - 絶対配置で左上に配置 */
+.balloon1 .icon{
+  position: absolute;
+  left: -80px;
+  top: 5px;
+}
+/* 三角アイコン */
+.balloon1::before{
+  content: '';
+  position: absolute;
+  display: block;
+  width: 0;
+  height: 0;
+  left: -15px;
+  top: 20px;
+  border-right: 14px solid #555;
+  border-top: 15px solid transparent;
+  border-bottom: 15px solid transparent;
+}
+
+.balloon1::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -25px;
+  margin-top: -11px;
+  border: 14px solid transparent;
+  border-right: 14px solid #FFF;
+  z-index: 1;
+}
+
+.cp_tag01 {
+	list-style: none;
+	margin: 0;
+	overflow: hidden;
+	padding: 0;
+
+	position: absolute;
+	top: 30px;
+	left: 120px;
+	-webkit-transform: translate(-50%,-50%);
+					transform: translate(-50%,-50%);
+}
+.cp_tag01 a {
+	line-height: 26px;
+	position: relative;
+	display: inline-block;
+	height: 26px;
+	margin: 0 10px 10px 0;
+	padding: 0 20px 0 23px;
+	-webkit-transition: color 0.2s;
+	        transition: color 0.2s;
+	text-decoration: none;
+	color: #455a64;
+	border-radius: 3px 0 0 3px;
+	background: #cfd8dc;
+}
+.cp_tag01 a::before, .cp_tag01 a::after {
+	background: #fafcfc;/*背景色*/
+}
+.cp_tag01 a::before {
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	width: 6px;
+	height: 6px;
+	content: '';
+	border-radius: 10px;
+}
+.cp_tag01 a::after {
+	position: absolute;
+	top: -2px;
+	right: -6px;
+	width: 0;
+	height: 0;
+	content: '';
+	border-width: 15px 0 15px 8px;
+	border-style: solid;
+	border-color: transparent transparent transparent #cfd8dc;
+	border-radius: 4px;
+}
+.cp_tag01 a:hover {
+	color: #ffffff;
+	background-color: #ec407a;
+}
+.cp_tag01 a:hover::after {
+	border-left-color: #ec407a;
+}
+
+.delete_memo_button {
+  position: absolute;
+	top: 10px;
+	left: 1050px;
+	width: 6px;
+	height: 6px;
+}

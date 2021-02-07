@@ -1,12 +1,7 @@
-# frozen_string_literal: true
 
 Rails.application.routes.draw do
-  get 'group_users/create'
-  get 'group_users/destroy'
   get 'addresses/create'
   get 'addresses/destroy'
-  get 'maps/index'
-  get 'maps/create'
   root to: 'groups#index'
 
   get 'contact', to: 'toppages#contact'
@@ -40,7 +35,8 @@ Rails.application.routes.draw do
 
     resources :events do
       resources :photos
-      resources :pay_records, only: %i[index new create]
+      resources :pay_records, only: %i[index new create destroy]
+      resources :memos, only: %i[index new create destroy]
     end
   end
 

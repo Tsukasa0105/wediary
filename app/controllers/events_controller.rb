@@ -10,6 +10,7 @@ class EventsController < ApplicationController
     @group = @event.group
     @map = Map.find_by(id: @event.map_id)
     @pay_records = @event.pay_records.page(params[:page]).per(5)
+    @memos = @event.memos.page(params[:page]).per(5)
   end
 
   def new

@@ -6,6 +6,7 @@ class Event < ApplicationRecord
   belongs_to :map
   has_many :photos, dependent: :destroy
   has_many :pay_records, dependent: :destroy
+  has_many :memos, dependent: :destroy
 
   validates :name, presence: true
   validates :start_time, presence: true

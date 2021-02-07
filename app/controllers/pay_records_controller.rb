@@ -23,6 +23,16 @@ class PayRecordsController < ApplicationController
       flash.now[:danger] = '精算記録を作成できませんでした'
     end
   end
+  
+  def destroy
+    @pay_record = Pay_record.find(params[:id])
+    @group = Group.find(params[:group_id])
+    @event = Event.find(params[:event_id])
+    
+    @pay_record = Pay_record.find(params[:id]).destroy
+
+    redirect_to group_event_path(@group, @event)
+  end
 
   def pay_record_params
     params.require(:pay_record).permit(:name, :amount, :paied_user_id, { user_ids: [] }, { initial_user_ids: [] },
