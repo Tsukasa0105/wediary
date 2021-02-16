@@ -22,6 +22,11 @@ jobs:
       - run: docker-compose run web bundle install
       
       - run:
+          name: docker-compose run web yarn Install
+          command: docker-compose run web yarn install
+      - run: docker-compose run web bundle exec bin/webpack
+      
+      - run:
           name: rails db:create and db:migrate
           command: docker-compose run web bin/rails db:create db:migrate
           

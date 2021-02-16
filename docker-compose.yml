@@ -27,8 +27,6 @@ services:
     volumes:
       # - .:/Wediary # githubにプッシュする前にコメントアウト。ローカルのみ使用
       - /var/run/mysqld/mysqld.sock:/var/run/mysqld/mysqld.sock
-    environment:
-      WEBPACKER_DEV_SERVER_HOST: webpacker
       
   test-db:
     image: mysql:5.7
@@ -38,13 +36,3 @@ services:
       MYSQL_DATABASE: Wediary_test
     ports:
       - '3307:3306' # ローカルPCから接続するために設定
-
-  webpacker:
-    build: .
-    environment:
-      NODE_ENV: development
-      RAILS_ENV: development
-      WEBPACKER_DEV_SERVER_HOST: 0.0.0.0
-    command: ./bin/webpack-dev-server
-    ports:
-      - '3035:3035'
