@@ -33,7 +33,7 @@ jobs:
       - run:
           name: docker-compose run web yarn Install
           command: docker-compose run web yarn install
-      - run: docker-compose run web bin/rails webpacker:install:react
+      - run: NODE_ENV=test bundle exec rails webpacker:compile
           
       - run:
           name: d-c build
