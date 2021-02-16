@@ -50,3 +50,57 @@
     justify-content: center; /*左右中央揃え*/
     align-items: center;     /*上下中央揃え*/
 }
+
+.cp_qa *, .cp_qa *:after, .cp_qa *:before {
+	font-family: 'FontAwesome', sans-serif;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
+}
+.cp_qa dt {
+	position: relative;
+	margin: 0 0 1.5em 0;
+}
+.cp_qa dd {
+	position: relative;
+	margin: 0 0 2em 0;
+	padding: 0 0 1.5em 2em;
+	border-bottom: 1px dotted #0097a7;
+}
+.cp_qa dt::before, .cp_qa dd::before {
+	font-size: 1.2em;
+	margin: 0 0.5em 0 0;
+	color: #ffffff;
+	border-radius: 50%;
+	display: inline-block;
+	width: 1.3em;
+	height: 1.3em;
+	line-height: 1.2em;
+}
+.cp_qa dt::before {
+	padding: 0.1em 0.3em;
+	content: '?';
+	background: #f57c00;
+}
+.cp_qa dd::before {
+	padding: 0.12em 0.45em;
+	content: '!';
+	background: #0097a7;
+}
+.cp_qa dt::after, .cp_qa dd::after {
+	position: absolute;
+	top: 0.5em;
+	display: inline-block;
+	width: 0;
+	height: 0;
+	content: '';
+	border-width: 5px 0 5px 5px;
+	border-style: solid;
+}
+.cp_qa dt::after {
+	left: 1.5em;
+	border-color: transparent transparent transparent #f57c00;
+}
+.cp_qa dd::after {
+	left: 3.5em;
+	border-color: transparent transparent transparent #0097a7;
+}

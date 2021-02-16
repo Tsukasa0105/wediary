@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get 'addresses/destroy'
   root to: 'groups#index'
 
-  get 'contact', to: 'toppages#contact'
+  get 'question', to: 'toppages#question'
 
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'
