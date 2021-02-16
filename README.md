@@ -2,7 +2,7 @@
 # Wediary
 仲間との旅行などの記録を、「いつ」、「どこで」、「だれと」、「なにを」したか記録できるアプリです。
 
-
+![Toppage_for_ReadMe](https://user-images.githubusercontent.com/60285180/107160195-14ef1f80-69d8-11eb-927b-89f53511d7a4.png)
 
 具体的には以下のことができます。
 
