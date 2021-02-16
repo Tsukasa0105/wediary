@@ -14,6 +14,7 @@ RUN curl -sL https://deb.nodesource.com/setup_10.x | bash \
     build-essential  \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
+    
 WORKDIR /Wediary
 
 COPY Gemfile /Wediary/Gemfile
