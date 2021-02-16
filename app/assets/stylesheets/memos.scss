@@ -6,7 +6,9 @@
   border-radius: 10px;
   color: black;
   background-color: #FFFFFF;
-  margin: 0 50px 20px 250px; 
+  margin: 0 50px 20px 190px; 
+  word-break : break-all;
+  top: -40px;
 }
 /* 画像 - 絶対配置で左上に配置 */
 .balloon1 .icon{
@@ -22,7 +24,8 @@
   width: 0;
   height: 0;
   left: -15px;
-  top: 20px;
+  top: 10px;
+  margin-top: 0px;
   border-right: 14px solid #555;
   border-top: 15px solid transparent;
   border-bottom: 15px solid transparent;
@@ -31,12 +34,14 @@
 .balloon1::after {
   content: "";
   position: absolute;
-  top: 50%;
+  top: 11px;
   left: -25px;
-  margin-top: -11px;
   border: 14px solid transparent;
   border-right: 14px solid #FFF;
   z-index: 1;
+}
+.balloon1 p{
+ overflow-wrap: normal;
 }
 
 .cp_tag01 {
@@ -46,7 +51,7 @@
 	padding: 0;
 
 	position: absolute;
-	top: 35px;
+	top: 32px;
 	left: 120px;
 	-webkit-transform: translate(-50%,-50%);
 					transform: translate(-50%,-50%);
@@ -56,7 +61,7 @@
 	position: relative;
 	display: inline-block;
 	height: 26px;
-	margin: 0 10px 10px 0;
+	margin: 80px 10px 10px 0;
 	padding: 0 20px 0 23px;
 	-webkit-transition: color 0.2s;
 	        transition: color 0.2s;
@@ -100,24 +105,15 @@
 .delete_memo_button {
   position: absolute;
 	top: 10px;
-	left: 1050px;
+	right: 50px;
 	width: 6px;
 	height: 6px;
 }
 
 .memo_favorite_button {
   position: absolute;
-	top: 10px;
+	top: 55px;
 	left: 20px;
-	width: 6px;
+	width: 35px;
 	height: 6px;
-}
-
-.favorites_count {
-  position: absolute;
-	top: 40px;
-	left: 40px;
-	width: 6px;
-	height: 6px;
-	float: center;
 }

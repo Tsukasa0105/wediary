@@ -36,7 +36,7 @@ gem 'bcrypt', '~> 3.1.7q'
 # gem 'capistrano-rails', group: :development
 
 # Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', '>= 1.1.0', require: false
+gem 'bootsnap', '>= 1.1.0', '< 1.4.2', require: false
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -113,3 +113,6 @@ group :development, :test do
 end
 
 gem 'rinku'
+
+gem 'webpacker'
+gem 'react-rails'

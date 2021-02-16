@@ -36,7 +36,7 @@ feature 'Event', type: :feature do
     #   fill_in "キー", with: "integration_test"
     #   check(@user.name)
     #   click_on "登録する"
-    #   expect(page).to have_content("グループを作成しました")
+    #   expect(page).to have_content("イベントを作成しました")
     # end
 
     # # binding.pry

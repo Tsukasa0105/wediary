@@ -62,4 +62,6 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::FileUpdateChecker
 
   config.web_console.whitelisted_ips = '0.0.0.0/0'
+  
+  config.react.variant = :development
 end

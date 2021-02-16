@@ -2,19 +2,16 @@
     <div class="row">
         <% memos.each do |memo| %>
             <div class="col-12">
-                <div class="memo_favorite_button"><%= render 'favorites/favorite_button', memo: memo %></div>
+                <div class="icon"><%= link_to profile_picture(memo.user, 50), edit_user_path(current_user.id) %>  <%= memo.user.name %></div>
+                <div class="memo_favorite_button"><%= react_component("Favorite", { memoId: memo.id, favoriteId: memo.favorite_by(current_user)&.id, baseCount: memo.favorites.count }, prerender: false) %></div>
                 <div class="cp_tag01"><a href="#"><%= memo.title %></a></div>   
                 <div class="balloon1">
-                  <div class="icon"><%= link_to profile_picture(memo.user, 50), edit_user_path(current_user.id) %></div>
-                  <%= Rinku.auto_link(memo.content, :all, 'target="_blank"').html_safe %>
+                  <p><%= Rinku.auto_link(memo.content, :all, 'target="_blank"').html_safe %></p>
                 </div>
                 <div class="delete_memo_button">
                     <%= link_to group_event_memo_path(memo.event.group, memo.event, memo), method: :delete, title: "destroy", class:"icons" do %>
                         <span><i class="fas fa-times"></i></span>
                     <% end %>
-                </div>
-                <div class="favorites_count">
-                    <%= memo.favorites.count %>
                 </div>
             </div>
         <% end %>

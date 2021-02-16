@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   delete 'logout', to: 'sessions#destroy'
 
   get 'signup', to: 'users#new'
+  
   resources :users do
     collection do
       get :search
@@ -40,8 +41,7 @@ Rails.application.routes.draw do
     end
   end
   
-  resources :favorites
-
+  resources :favorites, only: %i[create destroy]
   resources :initial_pay_relationships, only: %i[create destroy]
   resources :pay_relationships, only: %i[create destroy]
   resources :relationships, only: %i[create destroy]

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class MemosController < ApplicationController
-  before_action :require_user_logged_in, only: %i[new create]
+  before_action :require_user_logged_in, only: %i[new create destroy]
 
   def new
     @event = Event.find(params[:event_id])

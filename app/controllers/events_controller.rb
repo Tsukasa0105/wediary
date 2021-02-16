@@ -11,6 +11,7 @@ class EventsController < ApplicationController
     @map = Map.find_by(id: @event.map_id)
     @pay_records = @event.pay_records.page(params[:page]).per(5)
     @memos = @event.memos.page(params[:page]).per(5)
+    gon.current_user = current_user
   end
 
   def new
