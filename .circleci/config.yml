@@ -41,7 +41,7 @@ jobs:
       - run:
           name: rm files related to webpacker
           command: |
-            rm config/webpack
+            rm -r config/webpack
             rm config/webpacker.yml
             rm bin/webpack
             rm bin/webpack-dev-server
