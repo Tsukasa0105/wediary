@@ -35,8 +35,20 @@ jobs:
           command: docker-compose run web yarn install
           
       - run:
-          name: Build assets
-          command: docker-compose run web bundle exec bin/rails assets:precompile
+          name: yarn remove @rails/webpacker
+          command: docker-compose run web yarn remove @rails/webpacker
+          
+      - run:
+          name: rm files related to webpacker
+          command: |
+            rm config/webpack
+            rm config/webpacker.yml
+            rm bin/webpack
+            rm bin/webpack-dev-server
+            
+      - run:
+          name: docker-compose run web bin/rails webpacker:install
+          command: docker-compose run web bin/rails webpacker:install
           
       - run:
           name: d-c build
