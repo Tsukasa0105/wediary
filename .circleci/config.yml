@@ -50,9 +50,13 @@ jobs:
       #     name: docker-compose run web bin/rails webpacker:install
       #     command: docker-compose run web bin/rails webpacker:install
       
+      # - run:
+      #     name: docker-compose run web bundle exec bin/webpack
+      #     command: docker-compose run web bundle exec bin/webpack
+      
       - run:
-          name: docker-compose run web bundle exec bin/webpack
-          command: docker-compose run web bundle exec bin/webpack
+          name: docker-compose run web bundle exec bin/rails webpacker:compile
+          command: docker-compose run web bundle exec bin/rails webpacker:compile
           
       - run:
           name: d-c build
