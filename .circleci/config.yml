@@ -34,21 +34,25 @@ jobs:
           name: docker-compose run web yarn Install
           command: docker-compose run web yarn install
           
-      - run:
-          name: yarn remove @rails/webpacker
-          command: docker-compose run web yarn remove @rails/webpacker
+      # - run:
+      #     name: yarn remove @rails/webpacker
+      #     command: docker-compose run web yarn remove @rails/webpacker
           
-      - run:
-          name: rm files related to webpacker
-          command: |
-            docker-compose run web rm -r config/webpack
-            docker-compose run web rm config/webpacker.yml
-            docker-compose run web rm bin/webpack
-            docker-compose run web rm bin/webpack-dev-server
+      # - run:
+      #     name: rm files related to webpacker
+      #     command: |
+      #       docker-compose run web rm -r config/webpack
+      #       docker-compose run web rm config/webpacker.yml
+      #       docker-compose run web rm bin/webpack
+      #       docker-compose run web rm bin/webpack-dev-server
             
+      # - run:
+      #     name: docker-compose run web bin/rails webpacker:install
+      #     command: docker-compose run web bin/rails webpacker:install
+      
       - run:
-          name: docker-compose run web bin/rails webpacker:install
-          command: docker-compose run web bin/rails webpacker:install
+          name: docker-compose run web bundle exec bin/webpack
+          command: docker-compose run web bundle exec bin/webpack
           
       - run:
           name: d-c build
