@@ -7,8 +7,8 @@ class PhotosController < ApplicationController
                 
   def index
     @event = Event.find(params[:event_id])
-    @photos = @event.photos
-    @map = Map.find_by(id: @event.map_id)    
+    @map = Map.find_by(id: @event.map_id)   
+    @photos = @event.photos.page(params[:page]).per(12)
   end
                 
   def new

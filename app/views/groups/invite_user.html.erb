@@ -1,10 +1,9 @@
 <div class="head-wrap">
   <h2 class="head">
-      Requesting Users<span class="head-point">－参加申請中のユーザ－</span>
+      Invite<span class="head-point">－ユーザ招待－</span>
   </h2>
 </div>
-<% @request_users.each do |user| %>
-  <% unless @group.invited_users.include?(user) %>
+<% @friends.each do |user| %>
     <div class ="">
         <dix class="row user_row mt-2 mb-2">
             <div class="col-1 user-picture">
@@ -18,5 +17,4 @@
             </div>
         </dix>
     </div>
-  <% end %>
 <% end %>

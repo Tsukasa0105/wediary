@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   root to: 'groups#index'
 
   get 'question', to: 'toppages#question'
+  get 'how_to', to: 'toppages#how_to'
 
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'
@@ -32,6 +33,7 @@ Rails.application.routes.draw do
     member do
       get :group_users
       get :request_users
+      get :invite_user
     end
 
     resources :events do

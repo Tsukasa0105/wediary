@@ -110,6 +110,11 @@ class GroupsController < ApplicationController
     @group = Group.find(params[:id])
     @request_users = @group.request_users
   end
+  
+  def invite_user
+    @group = Group.find(params[:id])
+    @friends = current_user.friends
+  end
 
   private
 

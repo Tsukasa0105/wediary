@@ -5,12 +5,14 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:id])
-    @photos = @event.photos.page(params[:page]).per(8)
+    @photos = @event.photos.page(params[:page]).per(4)
     @number = 1
     @group = @event.group
     @map = Map.find_by(id: @event.map_id)
     @pay_records = @event.pay_records.page(params[:page]).per(5)
-    @memos = @event.memos.page(params[:page]).per(5)
+    # @all_memos = Memo.find(Favorite.group(:memo_id).order('count(memo_id) desc').limit(3).pluck(:memo_id))
+    @memos = @event.memos.limit(3).sort {|a,b| b.favorite_users.count <=> a.favorite_users.count}
+    # @memos = @all_memos.select{ |memo| memo.user_id == current_user.id }
     gon.current_user = current_user
   end
 

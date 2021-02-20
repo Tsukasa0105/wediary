@@ -2,6 +2,12 @@
 
 class MemosController < ApplicationController
   before_action :require_user_logged_in, only: %i[new create destroy]
+  
+  def index
+    @event = Event.find(params[:event_id])
+    @group = @event.group
+    @memos = @event.memos.page(params[:page]).per(10)
+  end
 
   def new
     @event = Event.find(params[:event_id])

@@ -6,33 +6,51 @@
         <% end %>
       </div>
       <div class="row">
-          <div class="col-md-4 center">
-              <span><%= default_group_picture(@group, 200) %></span>
+          <div class="col-md-12 right">
+            <%= link_to edit_group_path(@group), title: "edit_group", class: "icons float-right" do %>
+              <span><i class="fas fa-cogs"></i></span>
+            <% end %>
+            <%= link_to @event, method: :delete, data: { confirm: "削除してよろしいですか?" }, title: "destroy", class:"icons float-right" do %>
+              <span><i class="fas fa-trash-alt"></i></span>
+            <% end %>
           </div>
-          <div class="col-md-8 center">
-              <div class="row">
-                  <div class="col-md-9 group-status vartical-middle">
-                      <h1 class="mt-2"><strong><%= @group.name %></strong></h1>
-                      <h3>キー：<%= @group.key %></h3>
-                      <div class="row mt-4">
-                          <div class="col-4 float-center">
-                              <div class="profile-status"><h5><%= @group.events.uniq.count %> events</h5></div>
-                          </div>
-                          <div class="col-4">
-                              <div class="profile-status"><h5><%= link_to @joined_users.uniq.count, group_users_group_path(users: @group.request_users) %> members</h5></div>
-                          </div>
-                          <div class="col-4">
-                              <div class="profile-status"><h5><%= link_to @only_request_users.uniq.count, request_users_group_path(@group) %> requests</h5></div>
+          <div class="col-md-12 center mt-3">
+              <span><%= default_group_picture(@group, 300) %></span>
+          </div>
+          <div class="center col-md-12">
+              <h1 class="mt-2"><strong><%= @group.name %></strong></h1>
+              <h3>キー：<%= @group.key %></h3>
+          </div>
+          <div class="center col-md-12">
+              <div class="group-status vartical-middle">
+                  <div class="row mt-4">
+                      <div class="col-4 float-center">
+                          <div class="profile-status"><h5><%= @group.events.uniq.count %><br>events</h5></div>
+                      </div>
+                      <div class="col-4">
+                          <div class="profile-status"><h5><%= link_to @joined_users.uniq.count, group_users_group_path(users: @group.request_users) %><br>members</h5></div>
+                      </div>
+                      <div class="col-4">
+                          <div class="profile-status">
+                            <h5>
+                              <%= link_to @only_request_users.uniq.count, request_users_group_path(@group) %>
+                              <br>
+                              requests
+                            </h5>
                           </div>
                       </div>
                   </div>
-                  <div class="col-md-3">
-                    <%= link_to edit_group_path(@group), title: "edit_group", class: "icons float-right" do %>
-                      <span><i class="fas fa-cogs"></i></span>
-                    <% end %>
-                    <%= link_to @event, method: :delete, data: { confirm: "削除してよろしいですか?" }, title: "destroy", class:"icons float-right" do %>
-                      <span><i class="fas fa-trash-alt"></i></span>
-                    <% end %>
+              </div>
+          </div>
+          <div class="center col-md-12">
+              <div class="group-status vartical-middle">
+                  <div class="row mt-4">
+                      <div class="col-6 center">
+                          <h5 class="btn btn-success mt-3" style="width: 400px"><%= link_to "イベント作成", "/groups/#{@group.id}/events/new" %> </h5>
+                      </div>
+                      <div class="col-6 center">
+                          <h5 class="btn btn-primary mt-3" style="width: 400px"><%= link_to "友達を招待", "/groups/#{@group.id}/invite_user" %> </h5>
+                      </div>
                   </div>
               </div>
           </div>

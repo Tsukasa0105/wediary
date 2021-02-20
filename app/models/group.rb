@@ -24,6 +24,6 @@ class Group < ApplicationRecord
   end
 
   def permit_member(user)
-    group_to_users.find_or_create_by(user_id: user.id)
+    group_to_users.find_or_create_by(invited_user_id: user.id)
   end
 end

@@ -116,3 +116,8 @@ gem 'rinku'
 
 gem 'webpacker'
 gem 'react-rails'
+
+
+group :development do
+  gem 'bullet'
+end

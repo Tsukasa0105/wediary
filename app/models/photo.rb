@@ -3,6 +3,7 @@
 class Photo < ApplicationRecord
   belongs_to :group
   belongs_to :event
+  
   mount_uploader :image, ImageUploader
   serialize :image
   
