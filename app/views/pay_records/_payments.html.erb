@@ -1,22 +1,23 @@
-<!--支払いレコード全体表示-->
+<!--パソコンサイズの場合-->
 <% pay_records.each do |pay_record| %>
-  <div class ="">
+  <div class ="payments_pc">
       <dix class="row user_row mt-2 mb-2">
           <!--レコード名-->
-          <div class="col-3 to_table">
-              <h3 class="vertical-middle"><%= pay_record.name %></h3>
+          <div class="col-2 to_table">
+              <h6 class="vertical-middle"><%= pay_record.name %></h6>
           </div>
           <!--精算金額-->
           <div class="col-4 to_table">
               <p class="vertical-middle">
                 <span><%= pay_record.amount %>円</span>
+                <br>
                 <% if pay_record.initial_users.present? %>
-                  <span>（一人当り<%= pay_record.amount.div(pay_record.initial_users.count) %>円）</span>
+                  <span>(<%= pay_record.amount.div(pay_record.initial_users.count) %>円/人)</span>
                 <% end %>
               </p>
           </div>      
           <!--精算、未精算者-->
-          <div class="col-5 to_table">
+          <div class="col-6 to_table">
             <% pay_record.initial_users.all.each do |pay_user| %>
               <div class="vertical-middle float-right">
                 <% if pay_user == User.find(pay_record.paied_user_id) %>
@@ -28,6 +29,35 @@
                 <% end %>
               </div>
             <% end %>
+          </div>    
+      </dix>
+  </div>
+<% end %>
+
+<!--スマホサイズの場合-->
+<% pay_records.each do |pay_record| %>
+  <div class ="payments_sc">
+      <dix class="row user_row mt-2 mb-2">
+          <!--レコード名-->
+          <div class="col-5 to_table">
+              <h6 class="vertical-middle"><%= pay_record.name %></h6>
+          </div>
+          <!--精算金額-->
+          <div class="col-5 to_table">
+              <p class="vertical-middle">
+                <span><%= pay_record.amount %>円</span>
+                <br>
+                <% if pay_record.initial_users.present? %>
+                  <span>(<%= pay_record.amount.div(pay_record.initial_users.count) %>円/人)</span>
+                <% end %>
+              </p>
+          </div>      
+          <!--精算、未精算者-->
+          <div class="col-2 to_table">
+            <h6 class="vertical-middle"><%= link_to pay_users_group_event_pay_record_path(pay_record.event.group,pay_record.event, pay_record), remote: true do %>
+              <i class="fas fa-user-check"></i>
+            <% end %></h6>
+            <div id="user-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
           </div>    
       </dix>
   </div>

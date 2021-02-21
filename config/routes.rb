@@ -38,7 +38,11 @@ Rails.application.routes.draw do
 
     resources :events do
       resources :photos
-      resources :pay_records, only: %i[index new create destroy]
+      resources :pay_records, only: %i[index new create destroy] do
+        member do
+          get :pay_users
+        end
+      end
       resources :memos, only: %i[index new create destroy]
     end
   end

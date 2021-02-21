@@ -25,13 +25,19 @@ class PayRecordsController < ApplicationController
   end
   
   def destroy
-    @pay_record = Pay_record.find(params[:id])
+    @pay_record = PayRecord.find(params[:id])
     @group = Group.find(params[:group_id])
     @event = Event.find(params[:event_id])
     
-    @pay_record = Pay_record.find(params[:id]).destroy
+    @pay_record = PayRecord.find(params[:id]).destroy
 
     redirect_to group_event_path(@group, @event)
+  end
+  
+  def pay_users
+    @pay_record = PayRecord.find(params[:id])
+    @group = Group.find(params[:group_id])
+    @event = Event.find(params[:event_id])
   end
 
   def pay_record_params

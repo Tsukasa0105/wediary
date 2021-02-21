@@ -1,19 +1,45 @@
-<div class="container">
-    <div class="row">
-        <% memos.each do |memo| %>
-            <div class="col-12">
-                <div class="icon"><%= link_to profile_picture(memo.user, 50), edit_user_path(current_user.id) %>  <%= memo.user.name %></div>
-                <div class="memo_favorite_button"><%= react_component("Favorite", { memoId: memo.id, favoriteId: memo.favorite_by(current_user)&.id, baseCount: memo.favorites.count }, prerender: false) %></div>
-                <div class="cp_tag01"><a href="#"><%= memo.title %></a></div>   
-                <div class="balloon1">
-                  <p><%= Rinku.auto_link(memo.content, :all, 'target="_blank"').html_safe %></p>
+<!--パソコンサイズの場合-->
+<div class="memos_pc">
+    <div class="container">
+        <div class="row">
+            <% memos.each do |memo| %>
+                <div class="col-12">
+                    <div class="icon"><%= link_to profile_picture(memo.user, 50), edit_user_path(current_user.id) %>  <%= memo.user.name %></div>
+                    <div class="memo_favorite_button"><%= react_component("Favorite", { memoId: memo.id, favoriteId: memo.favorite_by(current_user)&.id, baseCount: memo.favorites.count }, prerender: false) %></div>
+                    <div class="cp_tag01"><a href="#"><%= memo.title %></a></div>   
+                    <div class="balloon1">
+                      <p><%= Rinku.auto_link(memo.content, :all, 'target="_blank"').html_safe %></p>
+                    </div>
+                    <div class="delete_memo_button">
+                        <%= link_to group_event_memo_path(memo.event.group, memo.event, memo), method: :delete, title: "destroy", class:"icons" do %>
+                            <span><i class="fas fa-times"></i></span>
+                        <% end %>
+                    </div>
                 </div>
-                <div class="delete_memo_button">
-                    <%= link_to group_event_memo_path(memo.event.group, memo.event, memo), method: :delete, title: "destroy", class:"icons" do %>
-                        <span><i class="fas fa-times"></i></span>
-                    <% end %>
+            <% end %>
+        </div>
+    </div>
+</div>
+
+<!--スマホサイズの場合-->
+<div class="memos_sc">
+    <div class="container">
+        <div class="row">
+            <% memos.each do |memo| %>
+                <div class="col-12">
+                    <div class="icon"><%= link_to profile_picture(memo.user, 50), edit_user_path(current_user.id) %>  <%= memo.user.name %></div>
+                    <div class="memo_favorite_button"><%= react_component("Favorite", { memoId: memo.id, favoriteId: memo.favorite_by(current_user)&.id, baseCount: memo.favorites.count }, prerender: false) %></div>
+                    <div class="cp_tag01"><a href="#"><%= memo.title %></a></div>   
+                    <div class="balloon1">
+                      <p><%= Rinku.auto_link(memo.content, :all, 'target="_blank"').html_safe %></p>
+                    </div>
+                    <div class="delete_memo_button">
+                        <%= link_to group_event_memo_path(memo.event.group, memo.event, memo), method: :delete, title: "destroy", class:"icons" do %>
+                            <span><i class="fas fa-times"></i></span>
+                        <% end %>
+                    </div>
                 </div>
-            </div>
-        <% end %>
+            <% end %>
+        </div>
     </div>
 </div>

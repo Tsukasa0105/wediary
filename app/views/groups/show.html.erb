@@ -1,12 +1,12 @@
 <% if @group.request_users.include?(current_user) && @group.invited_users.include?(current_user) %>
   <div class="conrainer group_show mb-5">
-      <div class="full_width">
-        <%= link_to groups_path(current_user), class: "icons float-left" do %>
-          <span><i class="fas fa-arrow-left"></i></span>
-        <% end %>
-      </div>
       <div class="row">
-          <div class="col-md-12 right">
+          <div class="col-6">
+            <%= link_to groups_path(current_user), class: "icons float-left" do %>
+              <span><i class="fas fa-arrow-left"></i></span>
+            <% end %>
+          </div>
+          <div class="col-6 right">
             <%= link_to edit_group_path(@group), title: "edit_group", class: "icons float-right" do %>
               <span><i class="fas fa-cogs"></i></span>
             <% end %>
@@ -14,6 +14,8 @@
               <span><i class="fas fa-trash-alt"></i></span>
             <% end %>
           </div>
+      </div>
+      <div class="row">
           <div class="col-md-12 center mt-3">
               <span><%= default_group_picture(@group, 300) %></span>
           </div>
@@ -46,10 +48,10 @@
               <div class="group-status vartical-middle">
                   <div class="row mt-4">
                       <div class="col-6 center">
-                          <h5 class="btn btn-success mt-3" style="width: 400px"><%= link_to "イベント作成", "/groups/#{@group.id}/events/new" %> </h5>
+                          <h5 class="btn btn-success mt-3" style="width: 100%"><%= link_to "イベント作成", "/groups/#{@group.id}/events/new" %> </h5>
                       </div>
                       <div class="col-6 center">
-                          <h5 class="btn btn-primary mt-3" style="width: 400px"><%= link_to "友達を招待", "/groups/#{@group.id}/invite_user" %> </h5>
+                          <h5 class="btn btn-primary mt-3" style="width: 100%"><%= link_to "友達を招待", "/groups/#{@group.id}/invite_user" %> </h5>
                       </div>
                   </div>
               </div>
@@ -80,7 +82,7 @@
             <%= f.submit 'フィルタ', class: 'btn btn-secondary' %> 
           </div>
         <% end %>
-        <div id="map", class="mx-auto", style='height: 400px; width: 400px;'>
+        <div id="map", class="mx-auto", style='width: 90%;'>
         </div>
         <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&callback=initMap" async></script>   
         
@@ -141,7 +143,7 @@
         </script>
     </div>
     <div class="col-lg-6">
-      <div class="event_history">
+      <div class="event_history", style="width: 90%">
           <%= month_calendar events: @events do |date, events| %>
             <%= date.day %>
           
@@ -180,8 +182,8 @@
                                 <% end %>
                               </div>
                               <div class="portfolio-box-caption">
-                                  <div class="project-date"><h2><%= event.start_time.strftime("%Y年%m月%d日") %></h2></div>
-                                  <div class="project-name"><h1><%= event.name %></h1></div>
+                                  <div class="project-date"><p><%= event.start_time.strftime("%Y年%m月%d日") %></p></div>
+                                  <div class="project-name"><h3><%= event.name %></h3></div>
                               </div>
                           <% end %>
                         </div>

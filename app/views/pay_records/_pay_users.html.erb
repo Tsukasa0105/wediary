@@ -1,0 +1,15 @@
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <% @pay_record.initial_users.all.each do |pay_user| %>
+      <div class="right">
+        <% if pay_user == User.find(@pay_record.paied_user_id) %>
+          <div style="display:inline-block" class="follow_button">
+            <button type="button" class="btn btn-secondary m-1"><%= pay_user.name %></button>
+          </div>
+        <% else %>
+          <%= render 'pay_relationships/paied_button', user: pay_user, pay_record: @pay_record %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
