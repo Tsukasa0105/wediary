@@ -16,8 +16,7 @@
                             <img class = "img-fluid" src= "/assets/group_default.png">
                         <% end %>
                         <div class="portfolio-box-caption">
-                            <div class="project-updated_at"><time><%= group.updated_at.strftime("%Y-%m-%d %H:%M") %></time>更新</div>
-                            <div class="project-name"><h2><%= group.name %></h2></div>
+                            <div class="project-name"><h5><%= group.name %></h5></div>
                             <%= render 'user_to_groups/member_button', user: current_user, group: group %>
                         </div>
                     <% end %>
