@@ -65,7 +65,7 @@ class UsersController < ApplicationController
 
   def followers
     @user = User.find(params[:id])
-    @followers = @user.followers.page(params[:page])
+    @followers = @user.followers - followings.page(params[:page])
     # counts(@user)
   end
 
@@ -76,24 +76,6 @@ class UsersController < ApplicationController
   def join_groups
     @groups = current_user.join_groups
   end
-
-  # def like_hobbies
-  #   @user = User.find(params[:id])
-  #   @like_hobbies = @user.like_hobbies.page(params[:page])
-  #   counts(@user)
-  # end
-
-  # def like_ways
-  #   @user = User.find(params[:id])
-  #   @like_ways = @user.like_ways.page(params[:page])
-  #   counts(@user)
-  # end
-
-  # def satisfied_ways
-  #   @user = User.find(params[:id])
-  #   @satisfied_ways = @user.satisfied_ways.page(params[:page])
-  #   counts(@user)
-  # end
 
   private
 

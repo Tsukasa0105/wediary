@@ -20,6 +20,7 @@ class PhotosController < ApplicationController
   def create
     @group = Group.find(params[:group_id])
     @event = Event.find(params[:event_id])
+    @event.create_notification_edit_event(current_user, @group)
     if Photo.create_photos_by(photo_params)
       flash[:success] = '写真を投稿しました'
       redirect_to group_event_path(@group, @event)

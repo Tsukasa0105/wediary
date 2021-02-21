@@ -8,6 +8,7 @@ class Group < ApplicationRecord
   has_many :events, dependent: :destroy
   has_many :photos, dependent: :destroy
   has_many :maps, dependent: :destroy
+  has_many :notifications, dependent: :destroy
 
   validates :name, presence: true
   validates :key, presence: true, uniqueness: true
@@ -25,5 +26,14 @@ class Group < ApplicationRecord
 
   def permit_member(user)
     group_to_users.find_or_create_by(invited_user_id: user.id)
+  end
+  
+  def create_notification_invitation(current_user, user)
+      notification = current_user.active_notifications.new(
+        group_id: id,
+        visited_id: user.id,
+        action: "invitation"
+      )
+      notification.save if notification.valid?
   end
 end

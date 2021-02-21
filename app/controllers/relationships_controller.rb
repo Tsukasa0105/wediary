@@ -4,6 +4,7 @@ class RelationshipsController < ApplicationController
   def create
     user = User.find(params[:follow_id])
     current_user.follow(user)
+    user.create_notification_follow!(current_user)
     flash[:success] = if user.following?(current_user)
                         '友達申請を承認しました'
                       else

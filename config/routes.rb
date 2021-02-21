@@ -53,6 +53,11 @@ Rails.application.routes.draw do
   resources :relationships, only: %i[create destroy]
   resources :user_to_groups, only: %i[create destroy]
   resources :group_to_users, only: %i[create destroy]
+  resources :notifications, only: %i[index] do
+    collection do
+      delete :destroy_all
+    end
+  end
 
   resources :maps, only: %i[index create]
 end

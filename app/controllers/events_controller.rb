@@ -22,6 +22,7 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
     if @event.save
+      @event.create_notification_new_event(current_user, @event.group)
       redirect_to group_event_path(@event.group, @event)
       flash.now[:success] = 'イベントを作成しました'
     else
@@ -50,10 +51,11 @@ class EventsController < ApplicationController
   end
 
   def destroy
+    @event = Event.find(params[:id])
+    @group = Group.find(params[:group_id])
     @event.destroy
-
     flash[:success] = '正常に削除されました'
-    redirect_to root_path
+    redirect_to group_path(@group)
   end
 
   def event_params

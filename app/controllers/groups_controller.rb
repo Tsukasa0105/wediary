@@ -113,7 +113,10 @@ class GroupsController < ApplicationController
   
   def invite_user
     @group = Group.find(params[:id])
-    @friends = current_user.friends
+    @request_users = @group.request_users
+    @invited_users = @group.invited_users
+    @joined_users = @request_users & @invited_users
+    @friends = current_user.friends - @joined_users
   end
 
   private

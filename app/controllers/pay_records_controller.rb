@@ -13,6 +13,7 @@ class PayRecordsController < ApplicationController
     @pay_record = PayRecord.new(pay_record_params)
     @event = Event.find(params[:event_id])
     @group = @event.group
+    @event.create_notification_edit_event(current_user, @group)
     if @pay_record.save
       @pay_record.initial_user_ids = @pay_record.user_ids
       @pay_record.save

@@ -1,0 +1,14 @@
+<% visiter = notification.visiter %>
+<% group = notification.group %>
+<% event = notification.event %>
+
+<div class="user-view clearfix mt-3 container">
+    <div class="row">
+        <div class="notification_icon col-2 col-md-1">
+            <%= link_to profile_picture(notification.visiter, 40), user_path(notification.visiter.id) %>
+        </div>
+        <div class="notification_content col-10 col-md-11">
+            <%= notification_form(notification) %><span class="moderate-font"><%= " (#{time_ago_in_words(notification.created_at)}前)" %></span>
+        </div>
+    </div>
+</div>

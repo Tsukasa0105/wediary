@@ -10,9 +10,6 @@
             <%= link_to edit_group_path(@group), title: "edit_group", class: "icons float-right" do %>
               <span><i class="fas fa-cogs"></i></span>
             <% end %>
-            <%= link_to @event, method: :delete, data: { confirm: "削除してよろしいですか?" }, title: "destroy", class:"icons float-right" do %>
-              <span><i class="fas fa-trash-alt"></i></span>
-            <% end %>
           </div>
       </div>
       <div class="row">
@@ -171,7 +168,7 @@
         <div class="container-fluid p-0">
             <div class="row no-gutters">
                 <% @events.each do |event| %>
-                    <div class="col-lg-4 col-6 fadein">
+                    <div class="col-lg-4 col-6">
                         <div class="ml-2 mb-2">
                           <%= link_to group_event_path(@group, event), class: "portfolio-box" do %>
                               <div class ="portfolio-box">
@@ -197,23 +194,75 @@
 <% else %>
   <div class="conrainer group_show mb-5">
       <div class="row">
-        <%= link_to groups_path(current_user), class: "icons float-left" do %>
-          <span><i class="fas fa-arrow-left"></i></span>
-        <% end %>
+          <div class="col-6">
+            <%= link_to groups_path(current_user), class: "icons float-left" do %>
+              <span><i class="fas fa-arrow-left"></i></span>
+            <% end %>
+          </div>
+          <div class="col-6 right">
+            <%= link_to edit_group_path(@group), title: "edit_group", class: "icons float-right" do %>
+              <span><i class="fas fa-cogs"></i></span>
+            <% end %>
+          </div>
       </div>
       <div class="row">
-          <div class="col-md-4 center">
-              <span><%= default_group_picture(@group, 200) %></span>
+          <div class="col-md-12 center mt-3">
+              <span><%= default_group_picture(@group, 300) %></span>
           </div>
-          <div class="col-md-8 center">
-              <div class="row", style="height:200px">
-                  <div class="col-md-9">
-                      <h1 class="mt-5"><strong><%= @group.name %></strong><%= render 'user_to_groups/member_button', class: "center", group: @group %></h1>
+          <div class="center col-md-12">
+              <h1 class="mt-2"><strong><%= @group.name %></strong></h1>
+              <h3>キー：<%= @group.key %></h3>
+          </div>
+          <div class="center col-md-12">
+              <div class="group-status vartical-middle">
+                  <div class="row mt-4">
+                      <div class="col-4 float-center">
+                          <div class="profile-status"><h5><%= @group.events.uniq.count %><br>events</h5></div>
+                      </div>
+                      <div class="col-4">
+                          <div class="profile-status"><h5><%= link_to @joined_users.uniq.count, group_users_group_path(users: @group.request_users) %><br>members</h5></div>
+                      </div>
+                      <div class="col-4">
+                          <div class="profile-status">
+                            <h5>
+                              <%= link_to @only_request_users.uniq.count, request_users_group_path(@group) %>
+                              <br>
+                              requests
+                            </h5>
+                          </div>
+                      </div>
                   </div>
               </div>
           </div>
       </div>
-      <div>
-      </div>    
+      <div class="col-12", style="width: 100%">
+        <div class="center">
+            <% if @group.invited_users.include?(current_user) %>  
+                <% if @group.request_users.include?(current_user) %>
+                    <%= form_with(model: current_user.user_to_groups.find_by(group_id: @group.id), local: true, method: :delete) do |f| %>
+                      <%= hidden_field_tag :group_id, @group.id %>
+                      <%= f.submit '退会する', class: 'btn btn-danger' %>
+                    <% end %>
+                <% else %>
+                    <%= form_with(model: current_user.user_to_groups.build, local: true) do |f| %>
+                      <%= hidden_field_tag :group_id, @group.id %>
+                      <%= f.submit 'メンバーになる', class: 'btn btn-secondary' %>
+                    <% end %>
+                <% end %>  
+            <% else %>
+                <% if @group.request_users.include?(current_user) %>
+                    <%= form_with(model: current_user.user_to_groups.find_by(group_id: @group.id), local: true, method: :delete) do |f| %>
+                      <%= hidden_field_tag :group_id, @group.id %>
+                      <%= f.submit '申請取り消し', class: 'btn btn-light' %>
+                    <% end %>
+                <% else %>
+                    <%= form_with(model: current_user.user_to_groups.build, local: true) do |f| %>
+                      <%= hidden_field_tag :group_id, @group.id %>
+                      <%= f.submit 'メンバー申請する', class: 'btn btn-info' %>
+                    <% end %>
+                <% end %>  
+            <% end %>
+        </div>
+      </div>
   </div>
 <% end %>

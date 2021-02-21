@@ -19,6 +19,7 @@ class MemosController < ApplicationController
     @memo = Memo.new(memo_params)
     @event = Event.find(params[:event_id])
     @group = @event.group
+    @event.create_notification_edit_event(current_user, @group)
     if @memo.save
       redirect_to group_event_path(@group, @event)
       flash[:success] = 'メモを作成しました'
