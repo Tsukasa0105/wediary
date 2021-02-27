@@ -10,7 +10,7 @@ class EventsController < ApplicationController
     @group = @event.group
     @map = Map.find_by(id: @event.map_id)
     @pay_records = @event.pay_records.page(params[:page]).per(5)
-    @memos = @event.memos.limit(3).sort {|a,b| b.favorite_users.count <=> a.favorite_users.count}
+    @memos = @event.memos.limit(3).sort { |a, b| b.favorite_users.count <=> a.favorite_users.count }
     gon.current_user = current_user
   end
 
@@ -42,8 +42,8 @@ class EventsController < ApplicationController
       flash.now[:success] = 'イベントを編集しました'
     else
       case params[:order_sort]
-      when "1"
-        render "photos/new"
+      when '1'
+        render 'photos/new'
       else
         render :edit
       end

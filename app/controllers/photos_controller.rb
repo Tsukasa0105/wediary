@@ -1,16 +1,15 @@
 # frozen_string_literal: true
 
 class PhotosController < ApplicationController
-  
   before_action :require_user_logged_in,
                 only: %i[show new create]
-                
+
   def index
     @event = Event.find(params[:event_id])
-    @map = Map.find_by(id: @event.map_id)   
+    @map = Map.find_by(id: @event.map_id)
     @photos = @event.photos.page(params[:page]).per(12)
   end
-                
+
   def new
     @group = Group.find(params[:group_id])
     @event = Event.find(params[:event_id])
@@ -30,8 +29,7 @@ class PhotosController < ApplicationController
     end
   end
 
-  def show
-  end
+  def show; end
 
   def edit; end
 
@@ -41,13 +39,13 @@ class PhotosController < ApplicationController
     @photo = Photo.find(params[:id])
     @group = Group.find(params[:group_id])
     @event = Event.find(params[:event_id])
-    
+
     @photo = Photo.find(params[:id]).destroy
 
     redirect_to group_event_photos_path(@group, @event)
   end
 
   def photo_params
-    params.require(:photo).permit(:group_id, { images:[] }, :event_id, :image)
+    params.require(:photo).permit(:group_id, { images: [] }, :event_id, :image)
   end
 end

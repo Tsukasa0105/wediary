@@ -105,8 +105,8 @@ gem 'pry-rails'
 gem 'rubocop', require: false
 gem 'rubocop-rails', require: false
 
-gem 'ransack'
 gem 'carrierwave-i18n'
+gem 'ransack'
 
 group :development, :test do
   gem 'rails-erd'
@@ -114,9 +114,8 @@ end
 
 gem 'rinku'
 
-gem 'webpacker'
 gem 'react-rails'
-
+gem 'webpacker'
 
 group :development do
   gem 'bullet'

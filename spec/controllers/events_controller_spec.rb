@@ -92,7 +92,7 @@ RSpec.describe EventsController, type: :controller do
         # Factorybotで確認済み
       end
       # 記事作成後に作成した記事の詳細ページへリダイレクトされているか？
-      it 'redirects the page to /' do 
+      it 'redirects the page to /' do
         post :create, params: {
           group_id: @group.id,
           event: { name: 'event1', user_id: @user.id, group_id: @group.id, map_id: @map.id, start_time: Time.now }

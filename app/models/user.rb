@@ -26,8 +26,8 @@ class User < ApplicationRecord
   has_many :pay_records, through: :pay_relationships
   has_many :initial_pay_relationships, foreign_key: 'initial_user_id', dependent: :destroy
   has_many :initial_pay_records, through: :initial_pay_relationships, source: :pay_record
-  has_many :active_notifications, class_name: "Notification", foreign_key: "visiter_id", dependent: :destroy
-  has_many :passive_notifications, class_name: "Notification", foreign_key: "visited_id", dependent: :destroy
+  has_many :active_notifications, class_name: 'Notification', foreign_key: 'visiter_id', dependent: :destroy
+  has_many :passive_notifications, class_name: 'Notification', foreign_key: 'visited_id', dependent: :destroy
 
   # フォローについてのメソッド
   def follow(other_user)
@@ -114,22 +114,22 @@ class User < ApplicationRecord
   def only_inviting_groups
     inviting_groups - requested_groups
   end
-  
+
   def favorite(memo)
-      favorites.find_or_create_by(memo_id: memo.id)
+    favorites.find_or_create_by(memo_id: memo.id)
   end
 
   def unfavorite(memo)
     favorite = favorites.find_by(memo_id: memo.id)
-    favorite.destroy if favorite
+    favorite&.destroy
   end
 
   def favorite?(memo)
-    self.favorite_memos.include?(memo)
+    favorite_memos.include?(memo)
   end
-  
+
   def create_notification_follow!(current_user)
-    temp = Notification.where(["visiter_id = ? and visited_id = ? and action = ? ",current_user.id, id, 'follow'])
+    temp = Notification.where(['visiter_id = ? and visited_id = ? and action = ? ', current_user.id, id, 'follow'])
     if temp.blank?
       notification = current_user.active_notifications.new(
         visited_id: id,
@@ -141,4 +141,3 @@ class User < ApplicationRecord
 
   mount_uploader :image, ImageUploader
 end
-

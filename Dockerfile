@@ -18,10 +18,10 @@ RUN curl -sL https://deb.nodesource.com/setup_10.x | bash \
 WORKDIR /Wediary
 
 COPY Gemfile /Wediary/Gemfile
-COPY Gemfile.lock /Wediary/Gemfile.lock
+# COPY Gemfile.lock /Wediary/Gemfile.lock
 
-RUN gem install bundler
-RUN bundle install
+# RUN gem install bundler
+# RUN bundle install
 
 #既存railsプロジェクトをコンテナ内にコピー
 COPY . /Wediary

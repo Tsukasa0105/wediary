@@ -24,14 +24,14 @@ class PayRecordsController < ApplicationController
       flash.now[:danger] = '精算記録を作成できませんでした'
     end
   end
-  
+
   def destroy
     @pay_record = PayRecord.find(params[:id])
     @group = Group.find(params[:group_id])
     @event = Event.find(params[:event_id])
     @pay_record = PayRecord.find(params[:id]).destroy
   end
-  
+
   def pay_users
     @pay_record = PayRecord.find(params[:id])
     @group = Group.find(params[:group_id])

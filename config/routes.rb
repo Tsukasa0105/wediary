@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 Rails.application.routes.draw do
   get 'addresses/create'
@@ -12,7 +13,7 @@ Rails.application.routes.draw do
   delete 'logout', to: 'sessions#destroy'
 
   get 'signup', to: 'users#new'
-  
+
   resources :users do
     collection do
       get :search
@@ -46,7 +47,7 @@ Rails.application.routes.draw do
       resources :memos, only: %i[index new create destroy]
     end
   end
-  
+
   resources :favorites, only: %i[create destroy]
   resources :initial_pay_relationships, only: %i[create destroy]
   resources :pay_relationships, only: %i[create destroy]

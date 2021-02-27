@@ -54,8 +54,6 @@
               </div>
           </div>
       </div>
-      <div>
-      </div>    
   </div>
   
   <div class="head-wrap mt-5">
@@ -170,10 +168,10 @@
                 <% @events.each do |event| %>
                     <div class="col-lg-4 col-6">
                         <div class="ml-2 mb-2">
-                          <%= link_to group_event_path(@group, event), class: "portfolio-box" do %>
+                          <%= link_to group_event_path(@group, event), size: "100x100",class: "portfolio-box" do %>
                               <div class ="portfolio-box">
                                 <% if event.image.present? %>
-                                  <%= image_tag event.image.url, class: "img-fluid" %>
+                                  <%= image_tag event.image.url(:thumb), class: "img-fluid" %>
                                 <% else %>                   
                                   <img class = "img-fluid" src= "/assets/event_default.png">
                                 <% end %>

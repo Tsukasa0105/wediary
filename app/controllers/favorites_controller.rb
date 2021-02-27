@@ -1,7 +1,8 @@
+# frozen_string_literal: true
 
 class FavoritesController < ApplicationController
-   before_action :require_user_logged_in
-  
+  before_action :require_user_logged_in
+
   def create
     favorite = current_user.favorites.create!(favorite_params)
     render json: favorite
@@ -12,7 +13,7 @@ class FavoritesController < ApplicationController
     favorite.destroy
     render json: favorite
   end
-  
+
   def favorite_params
     params.permit(:memo_id)
   end

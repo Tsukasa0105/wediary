@@ -64,7 +64,7 @@ RSpec.describe PayRecordsController, type: :controller do
           event_id: @event.id,
           pay_record: {
             name: 'pay_record1',
-            amount: 10000,
+            amount: 10_000,
             paied_user_id: @user.id,
             event_id: @event.id
           }
@@ -89,7 +89,7 @@ RSpec.describe PayRecordsController, type: :controller do
           event_id: @event.id,
           pay_record: {
             name: nil,
-            amount: 10000,
+            amount: 10_000,
             paied_user_id: @user.id,
             event_id: @event.id
           }

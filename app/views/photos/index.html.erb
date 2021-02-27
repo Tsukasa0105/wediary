@@ -28,7 +28,7 @@
   	<div class="swiper-wrapper">
         <% @photos.each do |photo| %>
               <div class="swiper-slide mb-1">
-                  <span><%= image_tag photo.image.url, class: "mb-1 photo-fluid" %></span>
+                  <span><%= image_tag photo.image.url(:thumb), class: "mb-1 photo-fluid" %></span>
                   <%= link_to group_event_photo_path(@event.group, @event, photo), method: :delete, title: "destroy", class:"icons float-right" do %>
                     <span><i class="fa fa-xs fa-trash-alt"></i></span>
                   <% end %>

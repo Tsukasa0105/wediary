@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RemoveCheckedFromNotifications < ActiveRecord::Migration[5.2]
   def change
     remove_column :notifications, :checked

@@ -112,33 +112,33 @@ RSpec.describe MemosController, type: :controller do
     end
   end
 
-  describe "#destroy" do
-    context "as an authorized user" do
+  describe '#destroy' do
+    context 'as an authorized user' do
       before do
         session[:user_id] = @user.id
       end
       # 正常にmemoを削除できるか？
-      it "deletes an memo" do
-        expect {
-          delete :destroy, params: {group_id: @group.id, event_id: @event.id, id: @memo.id}
-        }.to change(Memo.all, :count).by(-1)
+      it 'deletes an memo' do
+        expect do
+          delete :destroy, params: { group_id: @group.id, event_id: @event.id, id: @memo.id }
+        end.to change(Memo.all, :count).by(-1)
       end
       # 記事を削除した後、event/showへリダイレクトしているか？
-      it "redirects the page to event_path" do
-        delete :destroy, params: {group_id: @group.id, event_id: @event.id, id: @memo.id}
+      it 'redirects the page to event_path' do
+        delete :destroy, params: { group_id: @group.id, event_id: @event.id, id: @memo.id }
         expect(response).to redirect_to group_event_path(@group, @event)
       end
     end
-    context "as a guest user" do
+    context 'as a guest user' do
       # 302レスポンスを返すか？
-      it "returns a 302 response" do
-        delete :destroy, params: {group_id: @group.id, event_id: @event.id, id: @memo.id}
-        expect(response).to have_http_status "302"
+      it 'returns a 302 response' do
+        delete :destroy, params: { group_id: @group.id, event_id: @event.id, id: @memo.id }
+        expect(response).to have_http_status '302'
       end
       # ログイン画面にリダイレクトされているか？
-      it "redirects the page to /login" do
-        delete :destroy, params: {group_id: @group.id, event_id: @event.id, id: @memo.id}
-        expect(response).to redirect_to "/login"
+      it 'redirects the page to /login' do
+        delete :destroy, params: { group_id: @group.id, event_id: @event.id, id: @memo.id }
+        expect(response).to redirect_to '/login'
       end
     end
   end
