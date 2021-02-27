@@ -1,6 +1,7 @@
 body {
     font-family:"Noto Sans JP", sans-serif;
     background-color: #DDDDDD;
+    margin-bottom:100px;
 }
 .img-fluid {
   max-width: 100%;
@@ -65,7 +66,7 @@ h1,h2,h3,h4,h5,h6{font-family:"Noto Sans JP", sans-serif;margin-top:0px;font-sty
 a,.button{-webkit-transition:.3s;-moz-transition:.3s;-o-transition:.3s;transition:.3s}
 a:focus,.button:focus{text-decoration:none;outline:none}
 a:hover{color:#808080}
-a:focus,a:hover,.portfolio-cat a:hover,.footer -menu li a:hover{text-decoration:none}
+/*a:focus,a:hover,.portfolio-cat a:hover,.footer -menu li a:hover{text-decoration:none}*/
 button:focus,input:focus,input:focus,textarea,textarea:focus{outline:0}
 input:focus::-moz-placeholder{opacity:0;-webkit-transition:.4s;-o-transition:.4s;transition:.4s}
 h1 a,h2 a,h3 a,h4 a,h5 a,h6 a{color:inherit}
@@ -202,35 +203,6 @@ hr{border-bottom:1px solid #eceff8;border-top:0 none;margin:30px 0;padding:0}
     border-bottom: 1px solid #ddd;
 }
 
-.btn-danger:hover {
-  background-color:red;
-  opacity:1;
-  font-weight:900;
-}
-
-.btn-success:hover {
-  background-color:green;
-  opacity:1;
-  font-weight:900;
-}
-
-.btn-primary:hover {
-  background-color:blue;
-  opacity:1;
-  font-weight:900;
-}
-
-.btn-secondary:hover {
-  background-color:teal;
-  opacity:1;
-  font-weight:900;
-}
-
-.btn-light:hover {
-  background-color:white;
-  opacity:1;
-  font-weight:900;
-}
 
 .all_center {
   display: flex;

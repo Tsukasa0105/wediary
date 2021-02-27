@@ -29,10 +29,7 @@ class PayRecordsController < ApplicationController
     @pay_record = PayRecord.find(params[:id])
     @group = Group.find(params[:group_id])
     @event = Event.find(params[:event_id])
-    
     @pay_record = PayRecord.find(params[:id]).destroy
-
-    redirect_to group_event_path(@group, @event)
   end
   
   def pay_users

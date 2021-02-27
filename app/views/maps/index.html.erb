@@ -1,6 +1,6 @@
 <div class="gmap">
   <input id="address" title="address" type="textbox" placeholder="検索キーワードを入力">
-  <input type="button" value="検索" onclick="codeAddress()">
+  <input type="button" class="btn btn-primary" value="検索" onclick="codeAddress()">
 
   <!-- 地図情報を保存するフォーム -->
   <%= form_for @map do |f| %>
@@ -9,7 +9,7 @@
   <%= f.text_field :title, :placeholder => "タイトルを入力" %>
   <%= f.hidden_field :group_id, {value: params[:group_id]} %>
   <%= f.hidden_field :user_id, {value: current_user.id} %>
-  <%= f.submit "保存" %>
+  <%= f.submit "保存", class:"btn btn-success" %>
   <% end %>
   <div id='map'>
   </div>
@@ -18,7 +18,6 @@
 <script>
   let map
   let geocoder
-  // 変数を追加
   let marker
 
   function initMap() {
@@ -37,15 +36,15 @@
     <% @maps.each do |map| %>
     // google.maps.LatLngインスタンスを生成
     pos = new google.maps.LatLng(
-    <%=map.latitude%>, //latitude
-    <%=map.longitude%> //longitude
+    <%=map.latitude%>,
+    <%=map.longitude%>
     );
     default_marker = new google.maps.Marker({
     map: mapInstance,
     position: pos,
     icon: {
-    url: ' https://maps.google.com/mapfiles/ms/icons/green-dot.png', //アイコンのURL
-    scaledSize: new google.maps.Size(40, 40) //サイズ
+    url: ' https://maps.google.com/mapfiles/ms/icons/green-dot.png', 
+    scaledSize: new google.maps.Size(40, 40) 
     }
     });
     <% end %>
@@ -58,7 +57,6 @@
       'address': inputAddress
     }, function (results, status) {
       if (status == 'OK') {
-        // map→mapInstanceに変更
         mapInstance.setCenter(results[0].geometry.location);
 
         // 既存の検索マーカーを削除
@@ -67,7 +65,6 @@
         }
         marker = null;
 
-        // var marker → markerへ変更
         marker = new google.maps.Marker({
           //map→mapInstanceに変更
           map: mapInstance,

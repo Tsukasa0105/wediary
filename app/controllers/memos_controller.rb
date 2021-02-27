@@ -6,7 +6,7 @@ class MemosController < ApplicationController
   def index
     @event = Event.find(params[:event_id])
     @group = @event.group
-    @memos = @event.memos.page(params[:page]).per(10).sort {|a,b| b.favorite_users.count <=> a.favorite_users.count}
+    @memos = @event.memos.page(params[:page]).per(10)
   end
 
   def new
@@ -33,10 +33,8 @@ class MemosController < ApplicationController
     @memo = Memo.find(params[:id])
     @group = Group.find(params[:group_id])
     @event = Event.find(params[:event_id])
-    
-    @memo = Memo.find(params[:id]).destroy
-
-    redirect_to group_event_path(@group, @event)
+    @memos = @event.memos
+    @memo.destroy
   end
 
   def memo_params
