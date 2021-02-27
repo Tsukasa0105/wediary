@@ -40,9 +40,15 @@
     </h2>
 </div>
 <div class="container-fluid p-0" style="margin-bottom: 100px">
-  <div id='memos_area'>
-    <%= render '/memos/memos', memos: @memos %>
-  </div>
+  <% if @memos.present? %>
+    <div id='memos_area'>
+      <%= render '/memos/memos', memos: @memos %>
+    </div>
+  <% else %>
+      <div class="no_image">
+        <h3>メモはありません</h3>
+      </div>
+  <% end %>
   <div class="mt-3 mb-5">
       <%= link_to "もっと見る", "/groups/#{@group.id}/events/#{@event.id}/memos", class: "btn btn-muted float-right" %> 
   </div>
@@ -98,8 +104,14 @@
         <button type="button" class="btn btn-danger m-1">未精算</button>
       </div>
     </div>
-    <%= render '/pay_records/payments', pay_records: @pay_records %>
-    <div class="">
-      <%= paginate @pay_records %>
-    </div>
+    <% if @pay_records.present? %>
+      <%= render '/pay_records/payments', pay_records: @pay_records %>
+      <div class="">
+        <%= paginate @pay_records %>
+      </div>
+    <% else %>
+        <div class="no_image">
+          <h3>精算記録はありません</h3>
+        </div>
+    <% end %>
 </div>

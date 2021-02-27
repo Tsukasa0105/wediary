@@ -1,0 +1,44 @@
+<% @photos = @event.photos.page(params[:page]).per(12) %>
+$('#photos-index').html('<%= escape_javascript(render('photos', photos: @photos, event: @event)) %>');
+
+const thumbClass = 'thumblist-item';
+  const mytap = window.ontouchstart === null?"touchstart":"click";
+  var mySwiper = new Swiper('.swiper-container', {
+    autoHeight: true,
+    loop: true,
+    spaceBetween: 5,
+  	navigation: {
+  		nextEl: '.swiper-button-next',
+  		prevEl: '.swiper-button-prev'
+  	},
+    pagination:{
+      el:'.thumblist',
+      type:'custom',
+      renderCustom: function (swiper, current, total) {
+        const slides = swiper.slides;
+        let html = '';
+        for( let i = 0 ; i < total; i++ ){
+          if( current == i+1 ){
+            html = html + `<div class="${thumbClass} current col-sm-3" data-slideto="${i}">${slides[i].innerHTML}</div>`;
+          }else{
+            html = html + `<div class="${thumbClass} col-sm-3" data-slideto="${i}">${slides[i].innerHTML}</div>`;
+          }
+        }
+        return html;
+      }
+    }
+  });
+  
+  const clickThumbs = (()=>{
+    const thumbItems = document.getElementsByClassName(thumbClass);
+    for(let i = 0; i < thumbItems.length ; i ++){
+      thumbItems[i].addEventListener(mytap,((e)=>{
+        let index = e.currentTarget.dataset.slideto;
+        mySwiper.slideTo(index, 1500, true);
+        // autoplayオプションを使わない場合は、以下をコメントアウトをする
+      }),false);
+    }
+  });
+
+  clickThumbs();
+  mySwiper.on('slideChange',clickThumbs);

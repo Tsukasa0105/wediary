@@ -74,6 +74,7 @@ gem 'jquery-rails'
 gem 'kaminari'
 # サインイン、サインアウト等の認証のgem
 gem 'carrierwave'
+gem "piet"
 gem 'cloudinary'
 gem 'mini_magick'
 
