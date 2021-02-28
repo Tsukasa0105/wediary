@@ -13,7 +13,58 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
-  def show; end
+  def show
+    @groups = @user.join_groups
+    @events = []
+    @groups.each do |group|
+      @events.concat(group.events)
+    end
+    # binding.pry
+    gon.group_maps = []
+    @groups.each do |group|
+      gon.group_maps.concat(Map.where(group_id: group.id))
+    end
+    @sort_events = if params[:from] && (params[:from] != '') && params[:to] && (params[:to] != '')
+                     Event.where(event_date: params[:from]..params[:to]) & @events
+                   elsif params[:from] && (params[:from] != '')
+                     Event.where('event_date >= ?', params[:from]) & @events
+                   elsif params[:to] && (params[:to] != '')
+                     Event.where('event_date <= ?', params[:to]) & @events
+                   else
+                     @user.events
+                   end
+    gon.sort_group_maps = []
+    @sort_events.each do |event|
+      gon.sort_group_maps.push(event.map)
+    end
+    case params[:sort]
+    when 'new'
+      @join_groups = current_user.join_groups.sort_by { |f| f[:updated_at] }.reverse!
+      @join_groups = Kaminari.paginate_array(@groups).page(params[:page]).per(12)
+      @inviting_groups = current_user.only_inviting_groups.sort_by { |f| f[:updated_at] }.reverse!
+      @inviting_groups = Kaminari.paginate_array(@inviting_groups).page(params[:page]).per(12)
+      @requested_groups = current_user.only_requested_groups.sort_by { |f| f[:updated_at] }.reverse!
+      @requested_groups = Kaminari.paginate_array(@requested_groups).page(params[:page]).per(12)
+    when 'old'
+      @join_groups = current_user.join_groups.sort_by { |f| f[:updated_at] }
+      @join_groups = Kaminari.paginate_array(@groups).page(params[:page]).per(12)
+      @inviting_groups = current_user.only_inviting_groups.sort_by { |f| f[:updated_at] }
+      @inviting_groups = Kaminari.paginate_array(@inviting_groups).page(params[:page]).per(12)
+      @requested_groups = current_user.only_requested_groups.sort_by { |f| f[:updated_at] }
+      @requested_groups = Kaminari.paginate_array(@requested_groups).page(params[:page]).per(12)
+    when 'name'
+      @join_groups = current_user.join_groups.sort_by { |f| f[:name] }
+      @join_groups = Kaminari.paginate_array(@groups).page(params[:page]).per(12)
+      @inviting_groups = current_user.only_inviting_groups.sort_by { |f| f[:name] }
+      @inviting_groups = Kaminari.paginate_array(@inviting_groups).page(params[:page]).per(12)
+      @requested_groups = current_user.only_requested_groups.sort_by { |f| f[:name] }
+      @requested_groups = Kaminari.paginate_array(@requested_groups).page(params[:page]).per(12)
+    else
+      @join_groups = Kaminari.paginate_array(current_user.join_groups).page(params[:page]).per(12)
+      @inviting_groups = Kaminari.paginate_array(current_user.only_inviting_groups).page(params[:page]).per(12)
+      @requested_groups = Kaminari.paginate_array(current_user.only_requested_groups).page(params[:page]).per(12)
+    end
+  end
 
   def create
     @user = User.new(user_params)

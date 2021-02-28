@@ -9,7 +9,7 @@ class Event < ApplicationRecord
   has_many :memos, dependent: :destroy
   has_many :notifications, dependent: :destroy
 
-  validates :name, presence: true
+  validates :name, presence: true, length: { maximum: 20 }
   validates :start_time, presence: true
 
   mount_uploader :image, ImageUploader

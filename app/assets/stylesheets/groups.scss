@@ -60,3 +60,14 @@
 #portfolio .container-fluid .portfolio-box:hover .portfolio-box-caption .project-name, .container-fluid .portfolio-box:hover .portfolio-box-caption .project-updated_at {
   opacity: 1 !important;
 }
+
+.new-group {
+  position: absolute;
+  right: 10px;
+}
+
+@media only screen and (max-width: 400px) {
+  .new-group-word {
+    display: none;
+  }
+}

@@ -4,7 +4,7 @@
             <div class="col-lg-2 logo collapse navbar-collapse">
                 <a href="/"class="vertical-middle"><img src="/assets/logo.png" width=100px></a>
             </div>
-            <div class="col-lg-4 vertical-middle">
+            <div class="col-lg-3 vertical-middle">
                 <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="ナビゲーションの切替">
                   <span class="navbar-toggler-icon"></span>
                 </button>
@@ -16,11 +16,10 @@
                         <% end %>
                     </span>
             </div>
-            <div class="menu-wrapper align-items-center col-lg-6">
+            <div class="menu-wrapper align-items-center col-lg-4">
                 <div class="main-menu collapse navbar-collapse justify-content-end", id="navigation">
                     <nav> 
                         <ul class="navbar-nav">                                                                                          
-                            <li class="nav-item"><a href="/"><i class="fas fa-home"></i> グループ</a></li>
                             <li class="nav-item">
                                 <%= link_to notifications_path do %>
                                     <% if unchecked_notifications.any? %>
@@ -45,6 +44,11 @@
                     </nav>
                 </div>
             </div>
+            <div class="new-group">
+                <%= link_to new_group_path, class: "btn btn-success" do %>
+                    <span><i class="far fa-plus-square"></i><span class="new-group-word">グループ作成</span></span>
+                <% end %>
+            </div>
         </div>
     </div>
     <script>
@@ -61,7 +65,7 @@
     <div class="header-area">
         <div class="navbar navbar-expand-lg navbar-light bg-light main-header">
             <div class="col-6">
-                <a href="/"class="vertical-middle"><img src="/assets/logo.png" width=150px></a>
+                <a href="/"class="vertical-middle"><img src="/assets/logo.png" width=100px></a>
             </div>
             <div class="col-6">
                 <div class="main-menu justify-content-end", id="navigation">

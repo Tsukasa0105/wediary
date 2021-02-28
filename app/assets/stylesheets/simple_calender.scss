@@ -1,5 +1,11 @@
 .simple-calendar {
-  .day {}
+  .day {
+    max-width: 50px;
+    font-size: 0.5rem !important ;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 
   .wday-0 {}
   .wday-1 {}

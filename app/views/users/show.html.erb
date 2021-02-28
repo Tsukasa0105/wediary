@@ -57,8 +57,128 @@
         </div>    
     </div>
 </div>
-<div class="head-wrap">
-  <h2 class="head">
-      Activities<span class="head-point">－アクティビティ－</span>
-  </h2>
-</div>
+
+<% if @user = current_user %>
+    <div class="head-wrap">
+      <h2 class="head">
+          Activities<span class="head-point">－アクティビティ－</span>
+      </h2>
+    </div>
+
+  <!--地図表示-->
+  <div class="row mb-5">
+    <div class="col-lg-6 mb-5">
+        <%= form_with url: user_path(@user), method: :get, local: true do |f| %>
+          <div class='form-group mt-1 mb-1'>
+            <%= f.date_field :from, value: params[:from] %> 
+            ~
+            <%= f.date_field :to, value: params[:to] %> 
+            <%= f.submit 'フィルタ', class: 'btn btn-secondary' %> 
+          </div>
+        <% end %>
+        <div id="map", class="mx-auto", style='width: 90%;'>
+        </div>
+        <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&callback=initMap" async></script>   
+        
+        <script>
+              let map;
+              let marker = [];
+              let infoWindow = []; 
+              let markerData = gon.sort_group_maps; 
+              function initMap() {
+                geocoder = new google.maps.Geocoder()
+            
+                map = new google.maps.Map(document.getElementById('map'), {
+                  center: { lat: 35.6585, lng: 139.7486 }, 
+                  zoom: 1,
+                });
+            
+                for (var i = 0; i < markerData.length; i++) {
+                  var id = markerData[i]['id'];
+            
+                  markerLatLng = new google.maps.LatLng({
+                    lat: markerData[i]['latitude'],
+                    lng: markerData[i]['longitude']
+                  });
+            
+                  marker[i] = new google.maps.Marker({
+                    position: markerLatLng,
+                    map: map
+                  });
+                  <% @events.each do |event| %>
+                    <% if event.map_id.present? %>
+                      var contentStr = '<a href="/groups/<%= event.group.id %>/events/<%= event.id %>"><%= event.name %></a>';
+                      if (id === <%= event.map_id %>) {
+                        infoWindow[i] = new google.maps.InfoWindow({
+                          content: contentStr
+                        });
+                      }
+                    <% end %>
+                  <% end %>
+                  markerEvent(i);
+                }
+              }
+    
+              function markerEvent(i) {
+                marker[i].addListener('click', function () {
+                  infoWindow[i].open(map, marker[i]);
+                });
+              }
+        </script>
+    </div>
+    <div class="col-lg-6">
+      <div class="event_history", style="width: 90%">
+          <%= month_calendar events: @events do |date, events| %>
+            <%= date.day %>
+          
+            <% events.each do |event| %>
+              <div>
+                <%= link_to event.name, group_event_path(event.group, event) %>
+              </div>
+            <% end %>
+          <% end %>
+      </div>
+    </div>
+  </div>
+  
+    <div class="head-wrap">
+      <h2 class="head">
+          Groups<span class="head-point">－グループ－</span>
+      </h2>
+        <%= link_to "/groups/new", title: "new_group", class:"icons float-right" do %>
+          <span><i class="far fa-plus-square"></i></span>
+        <% end %>
+    </div>
+    <body id="page-top">
+        
+        <script>
+            $(function() {
+                $('.nav-item').click(function(){
+                    $('.active').removeClass('active');
+                    $(this).children('.nav-link').addClass('active');
+                    $('.show').removeClass('show');
+                    const index = $(this).index();
+                    $('.box').eq(index).addClass('show');
+                });
+            });
+        </script>
+
+        <ul class="nav nav-tabs nav-justify_content_center mb-3">
+          <li class="nav-item"><a href="#" class="nav-link active">所属 <span class="badge badge-secondary"><%= current_user.join_groups.count %></span></a></li>
+          <li class="nav-item"><a href="#" class="nav-link">申請中  <span class="badge badge-secondary"><%= current_user.only_requested_groups.count %></span></a></li>
+          <li class="nav-item"><a href="#" class="nav-link">招待中  <span class="badge badge-secondary"><%= current_user.only_inviting_groups.count %></span></a></li>
+        </ul>
+     
+        <div class="contents">
+            <div class="box show">
+                <%= render partial: 'groups/event_images', locals: { groups: @join_groups } %>
+            </div>
+            <div class="box">
+                <%= render partial: 'groups/event_images', locals: { groups: @requested_groups } %>
+            </div>
+            <div class="box">
+                <%= render partial: 'groups/event_images', locals: { groups: @inviting_groups } %>
+            </div>
+        </div>
+    </body>
+ <% end %>

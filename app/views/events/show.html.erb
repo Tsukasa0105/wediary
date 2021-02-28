@@ -19,7 +19,12 @@
       <div class="center event-status">
           <%= default_event_picture(@event, 100) %>
           <% if @map.present? %>
-              <span class="event-status-name"><strong><%= @event.name %></strong></span><span class="head-point">－<%= @event.start_time.strftime("%Y年%m月%d日") %> @<%= @map.title %>－</span>
+            <div>
+              <span class="event-status-name"><strong><%= @event.name %></strong></span>
+            </div>
+            <div>
+              <span class="head-point">－<%= @event.start_time.strftime("%Y年%m月%d日") %> @<%= @map.title %>－</span>
+            </div>
           <% else %>
             <div>
               <%= @event.name %>

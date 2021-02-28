@@ -3,7 +3,7 @@
 Rails.application.routes.draw do
   get 'addresses/create'
   get 'addresses/destroy'
-  root to: 'groups#index'
+  root to: 'toppages#index'
 
   get 'question', to: 'toppages#question'
   get 'how_to', to: 'toppages#how_to'

@@ -11,7 +11,7 @@
     
     <div class="form-group">
         <%= f.label :start_time %>
-        <%= f.datetime_select :start_time, {} %>
+        <%= f.datetime_select :start_time, discard_hour: true, discard_minute: true %>
     </div>
     
     <div class="form-group">

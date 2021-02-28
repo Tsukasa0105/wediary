@@ -5,38 +5,6 @@ class GroupsController < ApplicationController
   before_action :require_user_logged_in,
                 only: %i[show new create edit update search destroy group_users request_users]
 
-  def index
-    if logged_in?
-      case params[:sort]
-      when 'new'
-        @groups = current_user.join_groups.sort_by { |f| f[:updated_at] }.reverse!
-        @groups = Kaminari.paginate_array(@groups).page(params[:page]).per(12)
-        @inviting_groups = current_user.only_inviting_groups.sort_by { |f| f[:updated_at] }.reverse!
-        @inviting_groups = Kaminari.paginate_array(@inviting_groups).page(params[:page]).per(12)
-        @requested_groups = current_user.only_requested_groups.sort_by { |f| f[:updated_at] }.reverse!
-        @requested_groups = Kaminari.paginate_array(@requested_groups).page(params[:page]).per(12)
-      when 'old'
-        @groups = current_user.join_groups.sort_by { |f| f[:updated_at] }
-        @groups = Kaminari.paginate_array(@groups).page(params[:page]).per(12)
-        @inviting_groups = current_user.only_inviting_groups.sort_by { |f| f[:updated_at] }
-        @inviting_groups = Kaminari.paginate_array(@inviting_groups).page(params[:page]).per(12)
-        @requested_groups = current_user.only_requested_groups.sort_by { |f| f[:updated_at] }
-        @requested_groups = Kaminari.paginate_array(@requested_groups).page(params[:page]).per(12)
-      when 'name'
-        @groups = current_user.join_groups.sort_by { |f| f[:name] }
-        @groups = Kaminari.paginate_array(@groups).page(params[:page]).per(12)
-        @inviting_groups = current_user.only_inviting_groups.sort_by { |f| f[:name] }
-        @inviting_groups = Kaminari.paginate_array(@inviting_groups).page(params[:page]).per(12)
-        @requested_groups = current_user.only_requested_groups.sort_by { |f| f[:name] }
-        @requested_groups = Kaminari.paginate_array(@requested_groups).page(params[:page]).per(12)
-      else
-        @groups = Kaminari.paginate_array(current_user.join_groups).page(params[:page]).per(12)
-        @inviting_groups = Kaminari.paginate_array(current_user.only_inviting_groups).page(params[:page]).per(12)
-        @requested_groups = Kaminari.paginate_array(current_user.only_requested_groups).page(params[:page]).per(12)
-      end
-    end
-  end
-
   def show
     @events = @group.events
     @request_users = @group.request_users

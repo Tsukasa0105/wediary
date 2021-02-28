@@ -2,7 +2,7 @@
   <div class="conrainer group_show mb-5">
       <div class="row">
           <div class="col-6">
-            <%= link_to groups_path(current_user), class: "icons float-left" do %>
+            <%= link_to user_path(current_user), class: "icons float-left" do %>
               <span><i class="fas fa-arrow-left"></i></span>
             <% end %>
           </div>
@@ -83,10 +83,9 @@
         
         <script>
               let map;
-              let marker = []; // マーカーを複数表示させたいので、配列化
-              let infoWindow = []; // 吹き出しを複数表示させたいので、配列化
-              let markerData = gon.sort_group_maps; // コントローラーで定義したインスタンス変数を変数に代入
-            
+              let marker = [];
+              let infoWindow = []; 
+              let markerData = gon.sort_group_maps; 
               function initMap() {
                 geocoder = new google.maps.Geocoder()
             
@@ -122,9 +121,6 @@
                       }
                     <% end %>
                   <% end %>
-                  
-            
-                  // マーカーにクリックイベントを追加
                   markerEvent(i);
                 }
               }
@@ -144,7 +140,7 @@
           
             <% events.each do |event| %>
               <div>
-                <%= link_to event.name, group_event_path(@group, event) %>
+                <span class="calendar-eventname"><%= link_to event.name, group_event_path(@group, event) %></span>
               </div>
             <% end %>
           <% end %>
@@ -193,7 +189,7 @@
   <div class="conrainer group_show mb-5">
       <div class="row">
           <div class="col-6">
-            <%= link_to groups_path(current_user), class: "icons float-left" do %>
+            <%= link_to user_path(current_user), class: "icons float-left" do %>
               <span><i class="fas fa-arrow-left"></i></span>
             <% end %>
           </div>
