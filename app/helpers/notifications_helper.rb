@@ -9,9 +9,9 @@ module NotificationsHelper
     case notification.action
     when 'follow'
       if current_user.following?(@visiter)
-        "#{tag.a(@visiter.name, href: user_path(@visiter), style: 'font-weight: bold;')}があなたの友達申請を承認をしました"
+        tag.a(@visiter.name, href: user_path(@visiter), style: 'font-weight: bold;') + "があなたの友達申請を承認をしました"
       else
-        "#{tag.a(@visiter.name, href: user_path(@visiter), style: 'font-weight: bold;')}があなたに友達申請をしました"
+        tag.a(@visiter.name, href: user_path(@visiter), style: 'font-weight: bold;') + "があなたに友達申請をしました"
       end
     when 'new_event'
       tag.a(@visiter.name, href: user_path(@visiter),
@@ -23,7 +23,7 @@ module NotificationsHelper
                                        style: 'font-weight: bold;') + 'が' + tag.a(@event.name, href: group_event_path(@group, @event),
                                                                                                style: 'font-weight: bold;') + 'を編集しました'
     when 'invitation'
-      "#{tag.a(@group.name, href: group_path(@group), style: 'font-weight: bold;')}に招待されました"
+      tag.a(@group.name, href: group_path(@group), style: 'font-weight: bold;') + "に招待されました"
     end
   end
 
