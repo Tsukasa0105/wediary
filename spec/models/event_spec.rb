@@ -28,4 +28,10 @@ RSpec.describe Event, type: :model do
     event.valid?
     expect(event.errors[:start_time]).to include('を入力してください')
   end
+  
+  it 'is invalid with name more than 20 characters' do
+    event = FactoryBot.build(:longnameevent)
+    event.valid?
+    expect(event.errors[:name]).to include('は20文字以内で入力してください')
+  end
 end

@@ -30,21 +30,18 @@ feature 'Event', type: :feature do
     #   expect(current_path).to eq new_group_event_path(map.group)
     # end
 
-    # scenario 'イベント登録ができるか' do
-    #   visit new_group_event_path(@group)
-    #   fill_in "イベント名", with: "integration_test"
-    #   fill_in "キー", with: "integration_test"
-    #   check(@user.name)
-    #   click_on "登録する"
-    #   expect(page).to have_content("イベントを作成しました")
-    # end
+    scenario 'イベント登録ができるか' do
+      visit new_group_event_path(@group)
+      fill_in "イベント名", with: "integration_test"
+      click_on "保存"
+      expect(page).to have_content("イベントを作成しました")
+    end
 
-    # # binding.pry
-
-    # scenario 'groups/indexに遷移できるか' do
-    #   click_on "Groups", match: :first
-    #   expect(current_path).to eq root_path
-    # end
+    scenario 'groups/showからevents/showに遷移できるか' do
+      visit group_path(@group)
+      first('.portfolio-box').click
+      expect(current_path).to eq group_event_path(@group, @event)
+    end
 
     # scenario 'group_to_userとuser_to_groupが機能していない場合、inviting_groupsからgroups/showに遷移できるか' do
     #   click_on "Groups", match: :first

@@ -6,4 +6,10 @@ FactoryBot.define do
     image { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/image.png')) }
     start_time { DateTime.now }
   end
+  
+  factory :longnameevent, class: Event do
+    name { 'eventeventeventeventeventevent' }
+    image { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/image.png')) }
+    start_time { DateTime.now }
+  end
 end

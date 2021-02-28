@@ -21,10 +21,15 @@ class EventsController < ApplicationController
 
   def create
     @event = Event.new(event_params)
-    if @event.save
-      @event.create_notification_new_event(current_user, @event.group)
-      redirect_to group_event_path(@event.group, @event)
-      flash.now[:success] = 'イベントを作成しました'
+    @group = Group.find(params[:group_id])
+    if @group.joined_user?(current_user)
+      if @event.save
+        @event.create_notification_new_event(current_user, @event.group)
+        redirect_to group_event_path(@event.group, @event)
+        flash[:success] = 'イベントを作成しました'
+      else
+        render :new
+      end
     else
       render :new
     end
@@ -37,9 +42,14 @@ class EventsController < ApplicationController
 
   def update
     @event = Event.find(params[:id])
-    if @event.update(event_params)
-      redirect_to group_event_path(@event.group, @event)
-      flash.now[:success] = 'イベントを編集しました'
+    @group = Group.find(params[:group_id])
+    if @group.joined_user?(current_user)
+      if @event.update(event_params)
+        redirect_to group_event_path(@event.group, @event)
+        flash[:success] = 'イベントを編集しました'
+      else
+        render :edit
+      end
     else
       case params[:order_sort]
       when '1'
@@ -53,9 +63,13 @@ class EventsController < ApplicationController
   def destroy
     @event = Event.find(params[:id])
     @group = Group.find(params[:group_id])
-    @event.destroy
-    flash[:success] = '正常に削除されました'
-    redirect_to group_path(@group)
+    if @group.joined_user?(current_user)
+      @event.destroy
+      flash[:success] = '正常に削除されました'
+      redirect_to group_path(@group)
+    else
+      redirect_to root_path
+    end
   end
 
   def event_params

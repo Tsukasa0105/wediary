@@ -44,21 +44,31 @@ class GroupsController < ApplicationController
   end
 
   def update
-    if @group.update(group_params)
-      flash[:success] = 'グループを更新しました'
-      redirect_to group_path(@group)
+    if @group.joined_user?(current_user)
+      if @group.update(group_params)
+        redirect_to group_path(@group)
+        flash[:success] = 'グループを更新しました'
+      else
+        render :edit
+        flash.now[:danger] = 'グループを更新できませんでした'
+      end
     else
-      flash.now[:danger] = 'グループを更新できませんでした'
       render :edit
+      flash.now[:danger] = 'グループを更新できませんでした'
     end
+      
   end
 
-  def destroy
-    Group.destroy(params[:id])
-
-    flash[:success] = '正常に削除されました'
-    redirect_to root_path
-  end
+# グループは削除機能を付けない
+  # def destroy
+  #   if @group.joined_user?(current_user)
+  #     Group.destroy(params[:id])
+  #     redirect_to root_path
+  #     flash[:success] = '正常に削除されました'
+  #   else
+  #     redirect_to root_path
+  #   end
+  # end
 
   def search
     @groups = if params[:key] && (params[:key] != '')

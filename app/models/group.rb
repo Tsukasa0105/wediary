@@ -19,6 +19,10 @@ class Group < ApplicationRecord
     request_users & invited_users
   end
 
+  def joined_user?(user)
+    joined_users.include?(user)
+  end
+
   def unmember(user)
     user_to_group = user_to_groups.find_by(user_id: user.id)
     user_to_group&.destroy

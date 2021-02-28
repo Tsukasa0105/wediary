@@ -120,13 +120,8 @@ RSpec.describe MemosController, type: :controller do
       # 正常にmemoを削除できるか？
       it 'deletes an memo' do
         expect do
-          delete :destroy, params: { group_id: @group.id, event_id: @event.id, id: @memo.id }
+          delete :destroy, params: { group_id: @group.id, event_id: @event.id, id: @memo.id }, xhr: true
         end.to change(Memo.all, :count).by(-1)
-      end
-      # 記事を削除した後、event/showへリダイレクトしているか？
-      it 'redirects the page to event_path' do
-        delete :destroy, params: { group_id: @group.id, event_id: @event.id, id: @memo.id }
-        expect(response).to redirect_to group_event_path(@group, @event)
       end
     end
     context 'as a guest user' do
