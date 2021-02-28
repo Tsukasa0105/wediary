@@ -1,0 +1,13 @@
+<% users.all.each do |pay_user| %>
+  <div style="display: block;" class="vertical-middle right">
+    <% if pay_user == User.find(pay_record.paied_user_id) %>
+      <div class="follow_button">
+        <button type="button" class="btn btn-info m-1"><%= pay_user.name %></button>
+      </div>
+    <% else %>
+      <div>
+        <%= render 'pay_relationships/paied_button', user: pay_user, pay_record: pay_record %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

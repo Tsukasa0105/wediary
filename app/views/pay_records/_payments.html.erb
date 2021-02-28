@@ -17,21 +17,9 @@
               </p>
           </div>      
           <!--精算、未精算者-->
-          <div class="col-5 to_table">
-            <% pay_record.initial_users.all.each do |pay_user| %>
-              <div class="vertical-middle float-right">
-                <% if pay_user == User.find(pay_record.paied_user_id) %>
-                  <div style="display:inline-block" class="follow_button">
-                    <button type="button" class="btn btn-info m-1"><%= pay_user.name %></button>
-                  </div>
-                <% else %>
-                  <div>
-                    <%= render 'pay_relationships/paied_button', user: pay_user, pay_record: pay_record %>
-                  </div>
-                <% end %>
-              </div>
-            <% end %>
-          </div>  
+          <div id="pay_relationships-<%= pay_record.id %>" class="col-5 to_table">
+            <%= render "pay_records/pay_buttons", users: pay_record.initial_users, pay_record: pay_record %>
+          </div>
           <div class="col-1 to_table">
             <%= link_to group_event_pay_record_path(pay_record.event.group, pay_record.event, pay_record), method: :delete, title: "destroy", class:"icons", remote:true do %>
                 <span><i class="fas fa-times"></i></span>
@@ -43,7 +31,7 @@
 
 <!--スマホサイズの場合-->
 <% pay_records.each do |pay_record| %>
-  <div class ="payments_sc">
+  <div id="pay_records-<%= pay_record.id %>" class ="payments_sc">
       <dix class="row user_row mt-2 mb-2">
           <!--レコード名-->
           <div class="col-5 to_table">

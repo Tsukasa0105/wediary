@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class PayRecordsController < ApplicationController
-  before_action :require_user_logged_in, only: %i[new create]
+  before_action :require_user_logged_in, only: %i[new create destroy pay_users]
 
   def new
     @event = Event.find(params[:event_id])

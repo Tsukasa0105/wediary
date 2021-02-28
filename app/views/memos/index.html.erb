@@ -1,15 +1,17 @@
-<div class="head-wrap">
-    <h2 class="head">
-        Memos<span class="head-point">－メモ－</span>
-        <%= link_to "/groups/#{@group.id}/events/#{@event.id}/memos/new", class:"icons float-right" do %>
-          <span><i class="far fa-plus-square"></i></span>
-        <% end %>
-    </h2>
-</div>
-
-<div>
-  <%= render '/memos/memos', memos: @memos %>
-</div>
-<div class="">
-  <%= paginate @memos %>
-</div>
+<% if @group.request_users.include?(current_user) && @group.invited_users.include?(current_user) %>
+  <div class="head-wrap">
+      <h2 class="head">
+          Memos<span class="head-point">－メモ－</span>
+          <%= link_to "/groups/#{@group.id}/events/#{@event.id}/memos/new", class:"icons float-right" do %>
+            <span><i class="far fa-plus-square"></i></span>
+          <% end %>
+      </h2>
+  </div>
+  
+  <div>
+    <%= render '/memos/memos', memos: @memos %>
+  </div>
+  <div class="">
+    <%= paginate @memos %>
+  </div>
+<% end %>

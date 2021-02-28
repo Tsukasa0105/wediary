@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class GroupToUsersController < ApplicationController
+  before_action :require_user_logged_in
   def create
     group = Group.find(params[:inviting_group_id])
     user = User.find(params[:invited_user_id])

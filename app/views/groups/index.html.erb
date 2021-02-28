@@ -1,4 +1,3 @@
-
 <% if logged_in? %>
     <div class="head-wrap">
       <h2 class="head">
@@ -12,17 +11,11 @@
         
         <script>
             $(function() {
-                // ↓タブをクリックした時の処理↓
                 $('.nav-item').click(function(){
-                    // ↓現在アクティブなタブを切り替え↓
                     $('.active').removeClass('active');
-                    // ↓タブをアクティブにする↓
                     $(this).children('.nav-link').addClass('active');
-                    // ↓現在アクティブなタブの中身を非表示
                     $('.show').removeClass('show');
-                    // ↓クリックしたタブから順番を取得↓
                     const index = $(this).index();
-                    // ↓クリックしたタブと同じ順番のコンテンツを表示↓
                     $('.box').eq(index).addClass('show');
                 });
             });

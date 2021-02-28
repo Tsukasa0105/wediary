@@ -1,4 +1,4 @@
-<div id="pay_relationships-<%= user.id %>" style="display:inline-block" class="follow_button float-right" >
+<div class="follow_button">
   <% if user.need_pay?(pay_record) %>
       <%= form_with(model: user.pay_relationships.find_by(pay_record_id: pay_record.id), remote: true, method: :delete) do |f| %>
         <%= hidden_field_tag :pay_record_id, pay_record.id %>

@@ -101,6 +101,7 @@ class GroupsController < ApplicationController
   end
 
   def group_users
+    @group = Group.find(params[:id])
     @request_users = @group.request_users
     @invited_users = @group.invited_users
     @joined_users = @request_users & @invited_users

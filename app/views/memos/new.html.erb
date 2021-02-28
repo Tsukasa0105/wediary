@@ -1,8 +1,10 @@
-<div>
-  <%= link_to group_event_path(@group, @event), class: "icons float-left" do %>
-    <span><i class="fas fa-arrow-left"></i></span>
-  <% end %>
-</div>
-<%= render '/layouts/top_image', image_url: "/assets/undraw_hang_out_h9ud.png" %>
-
-<%= render '/memos/form', memo: @memo, event: @event, group: @group %>
+<% if @group.request_users.include?(current_user) && @group.invited_users.include?(current_user) %>
+  <div>
+    <%= link_to group_event_path(@group, @event), class: "icons float-left" do %>
+      <span><i class="fas fa-arrow-left"></i></span>
+    <% end %>
+  </div>
+  <%= render '/layouts/top_image', image_url: "/assets/undraw_hang_out_h9ud.png" %>
+  
+  <%= render '/memos/form', memo: @memo, event: @event, group: @group %>
+<% end %>

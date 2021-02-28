@@ -1,1 +1,3 @@
-$('#pay_relationships-<%= @user.id %>').html('<%= escape_javascript(render('pay_relationships/paied_button', user: @user, pay_record: @pay_record)) %>');
+$('#pay_relationships-<%= @pay_record.id %>').html('<%= escape_javascript(render('pay_records/pay_buttons', users: @pay_record.initial_users, pay_record: @pay_record)) %>');$("#modal_pay_button").modal()
+$("#user-modal").modal()
+$("#user-modal").modal("hide")

@@ -2,10 +2,11 @@
 
 class PhotosController < ApplicationController
   before_action :require_user_logged_in,
-                only: %i[show new create]
+                only: %i[index new create destroy]
 
   def index
     @event = Event.find(params[:event_id])
+    @group = @event.group
     @map = Map.find_by(id: @event.map_id)
     @photos = @event.photos.page(params[:page]).per(12)
   end

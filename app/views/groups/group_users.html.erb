@@ -1,7 +1,9 @@
-<div class="head-wrap">
-  <h2 class="head">
-      Members<span class="head-point">－メンバー－</span>
-  </h2>
-</div>
-
-<%= render 'users/users', users: @joined_users %>
+<% if @group.request_users.include?(current_user) && @group.invited_users.include?(current_user) %>
+  <div class="head-wrap">
+    <h2 class="head">
+        Members<span class="head-point">－メンバー－</span>
+    </h2>
+  </div>
+  
+  <%= render 'users/users', users: @joined_users %>
+<% end %>

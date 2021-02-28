@@ -1,117 +1,119 @@
-<div class="head-wrap">
-  <div class="conrainer group_show">
-    <div class="row">
-      <div class="col-6">
-        <%= link_to group_path(@group), class: "icons float-left" do %>
-          <span><i class="fas fa-arrow-left"></i></span>
-        <% end %>
+<% if @group.request_users.include?(current_user) && @group.invited_users.include?(current_user) %>
+  <div class="head-wrap">
+    <div class="conrainer group_show">
+      <div class="row">
+        <div class="col-6">
+          <%= link_to group_path(@group), class: "icons float-left" do %>
+            <span><i class="fas fa-arrow-left"></i></span>
+          <% end %>
+        </div>
+        <div class="col-6">
+          <%= link_to edit_group_event_path(@group), class: "icons float-right" do %>
+            <span class="float-right"><i class="fas fa-cogs"></i></span>
+          <% end %>
+          <%= link_to group_event_path(@group, @event), method: :delete, data: { confirm: "削除してよろしいですか?" }, title: "destroy", class:"icons float-right" do %>
+            <span><i class="fas fa-trash-alt"></i></span>
+          <% end %>
+        </div>
       </div>
-      <div class="col-6">
-        <%= link_to edit_group_event_path(@group), class: "icons float-right" do %>
-          <span class="float-right"><i class="fas fa-cogs"></i></span>
-        <% end %>
-        <%= link_to group_event_path(@group, @event), method: :delete, data: { confirm: "削除してよろしいですか?" }, title: "destroy", class:"icons float-right" do %>
-          <span><i class="fas fa-trash-alt"></i></span>
-        <% end %>
-      </div>
-    </div>
-    <div class="center event-status">
-        <%= default_event_picture(@event, 100) %>
-        <% if @map.present? %>
-            <span class="event-status-name"><strong><%= @event.name %></strong></span><span class="head-point">－<%= @event.start_time.strftime("%Y年%m月%d日") %> @<%= @map.title %>－</span>
-        <% else %>
-          <div>
-            <%= @event.name %>
-          </div>
-          <div>
-            <span class="event-status-name"><strong><%= @event.name %></strong></span><span class="head-point">－<%= @event.start_time.strftime("%Y年%m月%d日") %>－</span>
-          </div>
-        <% end %>
-    </div>
-  </div>
-</div>    
-
-<div class="head-wrap">
-    <h2 class="head">
-        Memos<span class="head-point">－メモ－</span>
-        <%= link_to "/groups/#{@group.id}/events/#{@event.id}/memos/new", class:"icons float-right" do %>
-          <span><i class="far fa-plus-square"></i></span>
-        <% end %>
-    </h2>
-</div>
-<div class="container-fluid p-0" style="margin-bottom: 100px">
-  <% if @memos.present? %>
-    <div id='memos_area'>
-      <%= render '/memos/memos', memos: @memos %>
-    </div>
-  <% else %>
-      <div class="no_image">
-        <h3>メモはありません</h3>
-      </div>
-  <% end %>
-  <div class="mt-3 mb-5">
-      <%= link_to "もっと見る", "/groups/#{@group.id}/events/#{@event.id}/memos", class: "btn btn-muted float-right" %> 
-  </div>
-</div>
-
-
-<div class="head-wrap">
-    <h2 class="head">
-        Images<span class="head-point">－写真－</span>
-        <%= link_to "/groups/#{@group.id}/events/#{@event.id}/photos/new", class:"icons float-right" do %>
-          <span><i class="far fa-plus-square"></i></span>
-        <% end %>
-    </h2>
-</div>
-
-<div class="container-fluid p-0" style="margin-bottom: 100px">
-  <div class="row no-gutters">
-    <% if @photos.present? %>
-      <% @photos.each do |photo| %>
-        <div class="col-3">
-          <div class="m-1">
-            <%= image_tag photo.image.url(:thumb), class: "m-1 img-fluid" %> 
-          </div>
-        </div> 
-      <% end %>
-    <% else %>
-      <div class="no_image">
-        <h3>写真はありません</h3>
-      </div>
-    <% end %>
-  </div>
-
-  <div class="mt-3">
-      <%= link_to "もっと見る", "/groups/#{@group.id}/events/#{@event.id}/photos", class: "btn btn-muted float-right" %> 
-  </div>
-</div>
-
-<div class="head-wrap mt-5">
-    <h2 class="head">
-        Payment<span class="head-point">－精算記録－</span>
-        <%= link_to new_group_event_pay_record_path(@group, @event), class:"icons float-right" do %>
-          <span><i class="far fa-plus-square"></i></span>
-        <% end %>
-    </h2>
-    <div class="right">
-      <div style="display:inline-block" class="follow_button">
-        <button type="button" class="btn btn-info m-1">立替者</button>
-      </div>
-      <div style="display:inline-block" class="follow_button">
-        <button type="button" class="btn btn-secondary m-1">精算済</button>
-      </div>
-      <div style="display:inline-block" class="follow_button">
-        <button type="button" class="btn btn-danger m-1">未精算</button>
+      <div class="center event-status">
+          <%= default_event_picture(@event, 100) %>
+          <% if @map.present? %>
+              <span class="event-status-name"><strong><%= @event.name %></strong></span><span class="head-point">－<%= @event.start_time.strftime("%Y年%m月%d日") %> @<%= @map.title %>－</span>
+          <% else %>
+            <div>
+              <%= @event.name %>
+            </div>
+            <div>
+              <span class="event-status-name"><strong><%= @event.name %></strong></span><span class="head-point">－<%= @event.start_time.strftime("%Y年%m月%d日") %>－</span>
+            </div>
+          <% end %>
       </div>
     </div>
-    <% if @pay_records.present? %>
-      <%= render '/pay_records/payments', pay_records: @pay_records %>
-      <div class="">
-        <%= paginate @pay_records %>
+  </div>    
+  
+  <div class="head-wrap">
+      <h2 class="head">
+          Memos<span class="head-point">－メモ－</span>
+          <%= link_to "/groups/#{@group.id}/events/#{@event.id}/memos/new", class:"icons float-right" do %>
+            <span><i class="far fa-plus-square"></i></span>
+          <% end %>
+      </h2>
+  </div>
+  <div class="container-fluid p-0" style="margin-bottom: 100px">
+    <% if @memos.present? %>
+      <div id='memos_area'>
+        <%= render '/memos/memos', memos: @memos %>
       </div>
     <% else %>
         <div class="no_image">
-          <h3>精算記録はありません</h3>
+          <h3>メモはありません</h3>
         </div>
     <% end %>
-</div>
+    <div class="mt-3 mb-5">
+        <%= link_to "もっと見る", "/groups/#{@group.id}/events/#{@event.id}/memos", class: "btn btn-muted float-right" %> 
+    </div>
+  </div>
+  
+  
+  <div class="head-wrap">
+      <h2 class="head">
+          Images<span class="head-point">－写真－</span>
+          <%= link_to "/groups/#{@group.id}/events/#{@event.id}/photos/new", class:"icons float-right" do %>
+            <span><i class="far fa-plus-square"></i></span>
+          <% end %>
+      </h2>
+  </div>
+  
+  <div class="container-fluid p-0" style="margin-bottom: 100px">
+    <div class="row no-gutters">
+      <% if @photos.present? %>
+        <% @photos.each do |photo| %>
+          <div class="col-3">
+            <div class="m-1">
+              <%= image_tag photo.image.url(:thumb), class: "m-1 img-fluid" %> 
+            </div>
+          </div> 
+        <% end %>
+      <% else %>
+        <div class="no_image">
+          <h3>写真はありません</h3>
+        </div>
+      <% end %>
+    </div>
+  
+    <div class="mt-3">
+        <%= link_to "もっと見る", "/groups/#{@group.id}/events/#{@event.id}/photos", class: "btn btn-muted float-right" %> 
+    </div>
+  </div>
+  
+  <div class="head-wrap mt-5">
+      <h2 class="head">
+          Payment<span class="head-point">－精算記録－</span>
+          <%= link_to new_group_event_pay_record_path(@group, @event), class:"icons float-right" do %>
+            <span><i class="far fa-plus-square"></i></span>
+          <% end %>
+      </h2>
+      <div class="right">
+        <div style="display:inline-block" class="follow_button">
+          <button type="button" class="btn btn-info m-1">立替者</button>
+        </div>
+        <div style="display:inline-block" class="follow_button">
+          <button type="button" class="btn btn-secondary m-1">精算済</button>
+        </div>
+        <div style="display:inline-block" class="follow_button">
+          <button type="button" class="btn btn-danger m-1">未精算</button>
+        </div>
+      </div>
+      <% if @pay_records.present? %>
+        <%= render '/pay_records/payments', pay_records: @pay_records %>
+        <div class="">
+          <%= paginate @pay_records %>
+        </div>
+      <% else %>
+          <div class="no_image">
+            <h3>精算記録はありません</h3>
+          </div>
+      <% end %>
+  </div>
+<% end %>

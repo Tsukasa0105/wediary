@@ -1,31 +1,33 @@
-<div class="container">
-    <div class="row">
-      <div class="col-6">
-        <%= link_to group_path(@group), class: "icons float-left" do %>
-          <span><i class="fas fa-arrow-left"></i></span>
-        <% end %>
-      </div>
+<% if @group.request_users.include?(current_user) && @group.invited_users.include?(current_user) %>
+    <div class="container">
+        <div class="row">
+          <div class="col-6">
+            <%= link_to group_path(@group), class: "icons float-left" do %>
+              <span><i class="fas fa-arrow-left"></i></span>
+            <% end %>
+          </div>
+        </div>
+    </div>    
+    
+    
+    <div class="head-wrap">
+      <h2 class="head">
+          Invite<span class="head-point">－ユーザ招待－</span>
+      </h2>
     </div>
-</div>    
-
-
-<div class="head-wrap">
-  <h2 class="head">
-      Invite<span class="head-point">－ユーザ招待－</span>
-  </h2>
-</div>
-<% @friends.each do |user| %>
-    <div class ="">
-        <dix class="row user_row mt-2 mb-2">
-            <div class="col-1 user-picture">
-                <%= link_to profile_picture(user, 40), user_path(user.id) %>
-            </div>
-            <div class="col-9 user-name">
-                <p><%= link_to user.name, user_path(user.id), class: "text-dark" %></p>
-            </div>
-            <div class="col-2 user-followbtn">
-                <%= render 'group_to_users/permit_button', group: @group, user: user %>
-            </div>
-        </dix>
-    </div>
+    <% @friends.each do |user| %>
+        <div class ="">
+            <dix class="row user_row mt-2 mb-2">
+                <div class="col-1 user-picture">
+                    <%= link_to profile_picture(user, 40), user_path(user.id) %>
+                </div>
+                <div class="col-9 user-name">
+                    <p><%= link_to user.name, user_path(user.id), class: "text-dark" %></p>
+                </div>
+                <div class="col-2 user-followbtn">
+                    <%= render 'group_to_users/permit_button', group: @group, user: user %>
+                </div>
+            </dix>
+        </div>
+    <% end %>
 <% end %>

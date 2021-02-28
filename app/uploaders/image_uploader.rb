@@ -36,8 +36,12 @@ class ImageUploader < CarrierWave::Uploader::Base
   end
 
   version :thumb do
-    # process resize_to_limit: [300, 200]
     process resize_to_fill: [500, 500, "Center"]
+    # process :custom_optimize
+  end
+  
+  version :icon do
+    process resize_to_fill: [300, 300, "Center"]
     # process :custom_optimize
   end
 
