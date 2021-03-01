@@ -1,3 +1,8 @@
 $('#pay_relationships-<%= @pay_record.id %>').html('<%= escape_javascript(render('pay_records/pay_buttons', users: @pay_record.initial_users, pay_record: @pay_record)) %>');
-$("#user-modal").modal()
-$("#user-modal").modal("hide")
+
+if (jQuery(window).width() < 768) {
+    $("#user-modal").modal();
+    $("#user-modal").modal("hide");
+} else {
+//ウィンドウサイズが768pxより大きい場合
+}

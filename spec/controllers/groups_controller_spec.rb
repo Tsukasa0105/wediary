@@ -82,7 +82,8 @@ RSpec.describe GroupsController, type: :controller do
             key: 'another_user'
           }
         }
-        expect(response).to redirect_to '/'
+        group = Group.last
+        expect(response).to redirect_to "/groups/#{group.id}"
       end
     end
     context 'with invalid attributes' do

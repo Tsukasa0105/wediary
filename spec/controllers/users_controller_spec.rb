@@ -95,7 +95,7 @@ RSpec.describe UsersController, type: :controller do
             password_confirmation: 'user1user1'
           }
         }
-        expect(response).to redirect_to '/'
+        expect(response).to redirect_to '/login'
       end
     end
     context 'with invalid attributes' do
