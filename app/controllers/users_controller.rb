@@ -19,7 +19,6 @@ class UsersController < ApplicationController
     @groups.each do |group|
       @events.concat(group.events)
     end
-    # binding.pry
     gon.group_maps = []
     @groups.each do |group|
       gon.group_maps.concat(Map.where(group_id: group.id))
@@ -39,30 +38,30 @@ class UsersController < ApplicationController
     end
     case params[:sort]
     when 'new'
-      @join_groups = current_user.join_groups.sort_by { |f| f[:updated_at] }.reverse!
+      @join_groups = @user.join_groups.sort_by { |f| f[:updated_at] }.reverse!
       @join_groups = Kaminari.paginate_array(@groups).page(params[:page]).per(12)
-      @inviting_groups = current_user.only_inviting_groups.sort_by { |f| f[:updated_at] }.reverse!
+      @inviting_groups = @user.only_inviting_groups.sort_by { |f| f[:updated_at] }.reverse!
       @inviting_groups = Kaminari.paginate_array(@inviting_groups).page(params[:page]).per(12)
-      @requested_groups = current_user.only_requested_groups.sort_by { |f| f[:updated_at] }.reverse!
+      @requested_groups = @user.only_requested_groups.sort_by { |f| f[:updated_at] }.reverse!
       @requested_groups = Kaminari.paginate_array(@requested_groups).page(params[:page]).per(12)
     when 'old'
-      @join_groups = current_user.join_groups.sort_by { |f| f[:updated_at] }
+      @join_groups = @user.join_groups.sort_by { |f| f[:updated_at] }
       @join_groups = Kaminari.paginate_array(@groups).page(params[:page]).per(12)
-      @inviting_groups = current_user.only_inviting_groups.sort_by { |f| f[:updated_at] }
+      @inviting_groups = @user.only_inviting_groups.sort_by { |f| f[:updated_at] }
       @inviting_groups = Kaminari.paginate_array(@inviting_groups).page(params[:page]).per(12)
-      @requested_groups = current_user.only_requested_groups.sort_by { |f| f[:updated_at] }
+      @requested_groups = @user.only_requested_groups.sort_by { |f| f[:updated_at] }
       @requested_groups = Kaminari.paginate_array(@requested_groups).page(params[:page]).per(12)
     when 'name'
-      @join_groups = current_user.join_groups.sort_by { |f| f[:name] }
+      @join_groups = @user.join_groups.sort_by { |f| f[:name] }
       @join_groups = Kaminari.paginate_array(@groups).page(params[:page]).per(12)
-      @inviting_groups = current_user.only_inviting_groups.sort_by { |f| f[:name] }
+      @inviting_groups = @user.only_inviting_groups.sort_by { |f| f[:name] }
       @inviting_groups = Kaminari.paginate_array(@inviting_groups).page(params[:page]).per(12)
-      @requested_groups = current_user.only_requested_groups.sort_by { |f| f[:name] }
+      @requested_groups = @user.only_requested_groups.sort_by { |f| f[:name] }
       @requested_groups = Kaminari.paginate_array(@requested_groups).page(params[:page]).per(12)
     else
-      @join_groups = Kaminari.paginate_array(current_user.join_groups).page(params[:page]).per(12)
-      @inviting_groups = Kaminari.paginate_array(current_user.only_inviting_groups).page(params[:page]).per(12)
-      @requested_groups = Kaminari.paginate_array(current_user.only_requested_groups).page(params[:page]).per(12)
+      @join_groups = Kaminari.paginate_array(@user.join_groups).page(params[:page]).per(12)
+      @inviting_groups = Kaminari.paginate_array(@user.only_inviting_groups).page(params[:page]).per(12)
+      @requested_groups = Kaminari.paginate_array(@user.only_requested_groups).page(params[:page]).per(12)
     end
   end
 
@@ -84,21 +83,26 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    if @user.update(user_params)
-      flash[:success] = 'ユーザー情報を変更しました'
-      redirect_to user_path(@user)
+    if @user == current_user
+      if @user.update(user_params)
+        flash[:success] = 'ユーザー情報を変更しました'
+        redirect_to user_path(@user)
+      else
+        flash.now[:danger] = 'ユーザー情報の変更に失敗しました'
+        render :edit
+      end
     else
-      flash.now[:danger] = 'ユーザー情報の変更に失敗しました'
-      render :edit
+      redirect_to root_path
     end
   end
 
-  def destroy
-    @user.destroy
+  #destroyは実装しない
+  # def destroy
+  #   @user.destroy
 
-    flash[:success] = '正常に削除されました'
-    redirect_to tasks_url
-  end
+  #   flash[:success] = '正常に削除されました'
+  #   redirect_to tasks_url
+  # end
 
   def search
     @users = if params[:id] && (params[:id] != '')
@@ -111,21 +115,19 @@ class UsersController < ApplicationController
   def followings
     @user = User.find(params[:id])
     @followings = @user.followings.page(params[:page])
-    # counts(@user)
   end
 
   def followers
     @user = User.find(params[:id])
     @followers = @user.followers - followings.page(params[:page])
-    # counts(@user)
   end
 
   def friends
-    @friends = current_user.friends
+    @friends = @user.friends
   end
 
   def join_groups
-    @groups = current_user.join_groups
+    @groups = @user.join_groups
   end
 
   private

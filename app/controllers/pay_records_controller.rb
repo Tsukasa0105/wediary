@@ -14,11 +14,16 @@ class PayRecordsController < ApplicationController
     @event = Event.find(params[:event_id])
     @group = @event.group
     @event.create_notification_edit_event(current_user, @group)
-    if @pay_record.save
-      @pay_record.initial_user_ids = @pay_record.user_ids
-      @pay_record.save
-      redirect_to group_event_path(@group, @event)
-      flash[:success] = '精算記録を作成しました'
+    if @group.joined_user?(current_user)
+      if @pay_record.save
+        @pay_record.initial_user_ids = @pay_record.user_ids
+        @pay_record.save
+        redirect_to group_event_path(@group, @event)
+        flash[:success] = '精算記録を作成しました'
+      else
+        render :new
+        flash.now[:danger] = '精算記録を作成できませんでした'
+      end
     else
       render :new
       flash.now[:danger] = '精算記録を作成できませんでした'
@@ -29,7 +34,11 @@ class PayRecordsController < ApplicationController
     @pay_record = PayRecord.find(params[:id])
     @group = Group.find(params[:group_id])
     @event = Event.find(params[:event_id])
-    @pay_record = PayRecord.find(params[:id]).destroy
+    if @group.joined_user?(current_user)
+      @pay_record = PayRecord.find(params[:id]).destroy
+    else
+      redirect_to root_path
+    end
   end
 
   def pay_users

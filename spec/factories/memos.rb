@@ -5,4 +5,15 @@ FactoryBot.define do
     title { 'Test' }
     content { 'TestText' }
   end
+  
+  factory :another_memo, class: Memo do
+    title { 'another' }
+    content { 'another' }
+  end
+  
+  factory :long_title_memo, class: Memo do
+    title { 'longlonglonglong' }
+    content { 'longlonglonglong' }
+  end
+  
 end

@@ -21,6 +21,7 @@
             <%= profile_picture @user, 200 %>
             <h1><%= @user.name %></h1>
             <h4><%= @user.id %></h4>
+            <h5><%= render 'relationships/follow_button', user: @user, class:"profile_follow_button" %></h5>
         </div>
         <div class="col-4">
             <div class="profile_side">
@@ -36,6 +37,7 @@
             <%= profile_picture @user, 200 %>
             <h1><%= @user.name %></h1>
             <h4><%= @user.id %></h4>
+            <h5><%= render 'relationships/follow_button', user: @user, class: "center" %></h5>
         </div>
         <div class="row">
            <div class="col-6">
@@ -58,7 +60,7 @@
     </div>
 </div>
 
-<% if @user = current_user %>
+<% if @user == current_user %>
     <div class="head-wrap">
       <h2 class="head">
           Activities<span class="head-point">－アクティビティ－</span>
@@ -164,20 +166,20 @@
         </script>
 
         <ul class="nav nav-tabs nav-justify_content_center mb-3">
-          <li class="nav-item"><a href="#" class="nav-link active">所属 <span class="badge badge-secondary"><%= current_user.join_groups.count %></span></a></li>
-          <li class="nav-item"><a href="#" class="nav-link">申請中  <span class="badge badge-secondary"><%= current_user.only_requested_groups.count %></span></a></li>
-          <li class="nav-item"><a href="#" class="nav-link">招待中  <span class="badge badge-secondary"><%= current_user.only_inviting_groups.count %></span></a></li>
+          <li class="nav-item"><a href="#" class="nav-link active">所属 <span class="badge badge-secondary"><%= @user.join_groups.count %></span></a></li>
+          <li class="nav-item"><a href="#" class="nav-link">申請中  <span class="badge badge-secondary"><%= @user.only_requested_groups.count %></span></a></li>
+          <li class="nav-item"><a href="#" class="nav-link">招待中  <span class="badge badge-secondary"><%= @user.only_inviting_groups.count %></span></a></li>
         </ul>
      
         <div class="contents">
             <div class="box show">
-                <%= render partial: 'groups/event_images', locals: { groups: @join_groups } %>
+                <%= render partial: 'groups/event_images', locals: { user: @user, groups: @join_groups } %>
             </div>
             <div class="box">
-                <%= render partial: 'groups/event_images', locals: { groups: @requested_groups } %>
+                <%= render partial: 'groups/event_images', locals: { user: @user, groups: @requested_groups } %>
             </div>
             <div class="box">
-                <%= render partial: 'groups/event_images', locals: { groups: @inviting_groups } %>
+                <%= render partial: 'groups/event_images', locals: { user: @user, groups: @inviting_groups } %>
             </div>
         </div>
     </body>

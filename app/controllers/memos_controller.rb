@@ -20,13 +20,18 @@ class MemosController < ApplicationController
     @event = Event.find(params[:event_id])
     @group = @event.group
     @event.create_notification_edit_event(current_user, @group)
-    if @memo.save
-      redirect_to group_event_path(@group, @event)
-      flash[:success] = 'メモを作成しました'
+    if @group.joined_user?(current_user)
+      if @memo.save
+        redirect_to group_event_path(@group, @event)
+        flash[:success] = 'メモを作成しました'
+      else
+        render :new
+        flash.now[:danger] = 'メモを作成できませんでした'
+      end
     else
       render :new
       flash.now[:danger] = 'メモを作成できませんでした'
-    end
+    end  
   end
 
   def destroy
@@ -34,7 +39,11 @@ class MemosController < ApplicationController
     @group = Group.find(params[:group_id])
     @event = Event.find(params[:event_id])
     @memos = @event.memos
-    @memo.destroy
+    if @group.joined_user?(current_user)
+      @memo.destroy
+    else
+      redirect_to root_path
+    end
   end
 
   def memo_params

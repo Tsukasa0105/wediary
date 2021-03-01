@@ -200,40 +200,4 @@ RSpec.describe GroupsController, type: :controller do
       end
     end
   end
-
-  # describe '#destroy' do
-  #   context 'as an authorized user' do
-  #     before do
-  #       session[:user_id] = @user.id
-  #     end
-  #     it 'deletes an article' do
-  #       expect do
-  #         delete :destroy, params: { id: @group.id }
-  #       end.to change(Group.all, :count).by(-1)
-  #     end
-  #     it 'redirects the page to root_path' do
-  #       delete :destroy, params: { id: @group.id }
-  #       expect(response).to redirect_to root_path
-  #     end
-  #   end
-  #   context "as an unauthorized user" do
-  #     before do
-  #       session[:user_id] = @another_user.id
-  #     end
-  #     it "redirects the page to root_path" do
-  #       delete :destroy, params: { id: @group.id }
-  #       expect(response).to redirect_to root_path
-  #     end
-  #   end
-  #   context 'as a guest user' do
-  #     it 'returns a 302 response' do
-  #       delete :destroy, params: { id: @group.id }
-  #       expect(response).to have_http_status '302'
-  #     end
-  #     it 'redirects the page to /login' do
-  #       delete :destroy, params: { id: @group.id }
-  #       expect(response).to redirect_to '/login'
-  #     end
-  #   end
-  # end
 end

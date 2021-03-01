@@ -1,5 +1,5 @@
 <% unless current_user == user %>
-  <div style="display:inline-block" class="follow_button float-right" >
+  <div style="display:inline-block" class="follow_button", style="text-align: right;" >
     <% if current_user.following?(user) %>
       <% if user.following?(current_user) %>
         <%= form_with(model: current_user.relationships.find_by(follow_id: user.id), local: true, method: :delete) do |f| %>
