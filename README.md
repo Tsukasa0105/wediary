@@ -45,3 +45,17 @@
     * 単体テスト（Model）
     * 機能テスト（Request）
     * 統合テスト（Feature）
+
+
+# テストユーザについて
+* 以下の2つのテストユーザを作成してあるので、ご自由にお使いください
+* 【ユーザ1】
+* ユーザ名：taro
+* Email   ：taro@gmail.com
+* password：tarotaro
+* 
+* 【ユーザ2】
+* ユーザ名：hanako
+* Email   ：hanako@gmail.com
+* password：hanakohanako
+
