@@ -23,6 +23,8 @@ Rails.application.routes.draw do
       get :followers
       get :friends
       get :join_groups
+      get :inviting_groups
+      get :requested_groups
     end
   end
 

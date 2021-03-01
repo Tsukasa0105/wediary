@@ -114,16 +114,29 @@ class UsersController < ApplicationController
 
   def followings
     @user = User.find(params[:id])
-    @followings = @user.followings.page(params[:page])
+    if @user.only_followings
+      @followings = Kaminari.paginate_array(@user.only_followings).page(params[:page]).per(10)
+    else
+      @followings =[]
+    end
   end
 
   def followers
     @user = User.find(params[:id])
-    @followers = @user.followers - followings.page(params[:page])
+    if @user.only_followers
+      @followers = Kaminari.paginate_array(@user.only_followers).page(params[:page]).per(10)
+    else
+      @followers =[]
+    end
   end
 
   def friends
-    @friends = @user.friends
+    @user = User.find(params[:id])
+    if @user.friends
+      @friends = Kaminari.paginate_array(@user.friends).page(params[:page]).per(10)
+    else
+      @friends =[]
+    end
   end
 
   def join_groups
