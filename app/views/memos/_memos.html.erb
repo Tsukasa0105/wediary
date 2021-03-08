@@ -11,7 +11,7 @@
                       <p><%= Rinku.auto_link(memo.content, :all, 'target="_blank"').html_safe %></p>
                     </div>
                     <div class="delete_memo_button">
-                        <%= link_to group_event_memo_path(memo.event.group, memo.event, memo), method: :delete, title: "destroy", class:"icons", remote:true do %>
+                        <%= link_to group_event_memo_path(memo.event.group, memo.event, memo), method: :delete, title: "destroy", class:"icons", remote: true do %>
                             <span><i class="fas fa-times"></i></span>
                         <% end %>
                     </div>

@@ -12,11 +12,15 @@ class EventsController < ApplicationController
     @pay_records = @event.pay_records.page(params[:page]).per(5)
     @memos = @event.memos.limit(3).sort { |a, b| b.favorite_users.count <=> a.favorite_users.count }
     gon.current_user = current_user
+    @memo = Memo.new
   end
 
   def new
     @group = Group.find(params[:group_id])
     @event = @group.events.new
+    @map = Map.new
+    @maps = Map.all
+    params[:group_id]
   end
 
   def create

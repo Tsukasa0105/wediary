@@ -40,9 +40,10 @@
   <div class="head-wrap">
       <h2 class="head">
           Memos<span class="head-point">－メモ－</span>
-          <%= link_to "/groups/#{@group.id}/events/#{@event.id}/memos/new", class:"icons float-right" do %>
+          <%= link_to new_group_event_memo_path(@group, @event), class:"icons float-right", remote: true do %>
             <span><i class="far fa-plus-square"></i></span>
           <% end %>
+          <div id="new_memo" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
       </h2>
   </div>
   <div class="container-fluid p-0" style="margin-bottom: 100px">
@@ -95,9 +96,10 @@
   <div class="head-wrap mt-5">
       <h2 class="head">
           Payment<span class="head-point">－精算記録－</span>
-          <%= link_to new_group_event_pay_record_path(@group, @event), class:"icons float-right" do %>
+          <%= link_to new_group_event_pay_record_path(@group, @event), class:"icons float-right", remote: true do %>
             <span><i class="far fa-plus-square"></i></span>
           <% end %>
+          <div id="new_record" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
       </h2>
       <div class="right">
         <div style="display:inline-block" class="follow_button">

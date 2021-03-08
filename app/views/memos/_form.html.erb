@@ -1,5 +1,4 @@
 <div>
-  
   <%= form_with(model:[group, event, memo], local: true) do |f| %>
     <%= render 'layouts/error_messages', model: f.object %>
       <%= f.hidden_field :event_id, {value: event.id} %> 

@@ -1,0 +1,7 @@
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <% if @group.request_users.include?(current_user) && @group.invited_users.include?(current_user) %>
+      <%= render '/pay_records/form', pay_record: @pay_record, event: @event, group: @group %>
+    <% end %>
+  </div>
+</div>

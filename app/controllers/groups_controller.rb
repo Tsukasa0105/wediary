@@ -25,6 +25,10 @@ class GroupsController < ApplicationController
     @sort_events.each do |event|
       gon.sort_group_maps.push(event.map)
     end
+    @event = Event.new
+    @map = Map.new
+    @maps = Map.all
+    params[:group_id]
   end
 
   def new

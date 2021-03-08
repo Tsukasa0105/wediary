@@ -30,6 +30,30 @@ $(function(){
 		});
 	});
 });
+
+$(function(){
+   $('a[href^="#"]').click(function() {
+      var href= $(this).attr("href");
+      var target = $(href == "#" || href == "" ? 'html' : href);
+      var position = target.offset().top;
+      $('body,html').animate({scrollTop:position}, 400, 'swing');
+      return false;
+   });
+});
+
+$(document).ready(function () {
+  $(document).on('show.bs.modal', '.modal', e => {
+    const $currentModal = $(e.currentTarget);
+    var zIndex = 1040 + (10 * $('.modal:visible').length);
+    $currentModal.css('z-index', zIndex);
+    setTimeout(function() {
+      $('.modal-backdrop')
+        .not('.modal-stack')
+        .css('z-index', zIndex - 1)
+        .addClass('modal-stack');
+    }, 0);
+  });
+});
 //= require react
 //= require react_ujs
 //= require components

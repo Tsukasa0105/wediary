@@ -212,3 +212,16 @@ hr{border-bottom:1px solid #eceff8;border-top:0 none;margin:30px 0;padding:0}
 .mt-2 {
     margin-top:10px;
 }
+
+.modal-content {
+  vertical-align: middle;
+}
+
+.modal-dialog {
+  vertical-align: middle;
+}
+
+.modal {
+  vertical-align: middle;
+  margin-top: 100px;
+}

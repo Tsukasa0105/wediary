@@ -62,5 +62,5 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :maps, only: %i[index create]
+  resources :maps, only: %i[index create new]
 end

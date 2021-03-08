@@ -45,7 +45,8 @@
               <div class="group-status vartical-middle">
                   <div class="row mt-4">
                       <div class="col-6 center">
-                          <h5 class="btn btn-success mt-3" style="width: 100%"><%= link_to "イベント作成", "/groups/#{@group.id}/events/new" %> </h5>
+                          <h5 class="btn btn-success mt-3" style="width: 100%"><%= link_to "イベント作成", new_group_event_path(@group) %></h5>
+                          <div id="new_event" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
                       </div>
                       <div class="col-6 center">
                           <h5 class="btn btn-primary mt-3" style="width: 100%"><%= link_to "友達を招待", "/groups/#{@group.id}/invite_user" %> </h5>

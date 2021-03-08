@@ -21,11 +21,11 @@ class MemosController < ApplicationController
     @group = @event.group
     @event.create_notification_edit_event(current_user, @group)
     if @group.joined_user?(current_user)
-      if @memo.save
+      if Memo.create(memo_params)
         redirect_to group_event_path(@group, @event)
         flash[:success] = 'メモを作成しました'
       else
-        render :new
+        # render :new
         flash.now[:danger] = 'メモを作成できませんでした'
       end
     else

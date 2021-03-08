@@ -12,9 +12,9 @@
         <div class="col-4">
             <div class="profile_side">
                 <h3><i class="fas fa-users"></i></h3>
-                <div class="profile-status"><h5>グループ　<%= @user.join_groups.count %></h5></div>
-                <div class="profile-status"><h5>申請中　<%= @user.only_requested_groups.count %></h5></div>
-                <div class="profile-status"><h5>招待　<%= @user.only_inviting_groups.count %></h5></div>
+                <div class="profile-status"><h5>グループ　<a href = "#group_scroll"><%= @user.join_groups.count %></a></h5></div>
+                <div class="profile-status"><h5>申請中　<a href = "#group_scroll"><%= @user.only_requested_groups.count %></a></h5></div>
+                <div class="profile-status"><h5>招待　<a href = "#group_scroll"><%= @user.only_inviting_groups.count %></a></h5></div>
             </div>
         </div>
         <div class="col-4 text-center">
@@ -43,9 +43,9 @@
            <div class="col-6">
                 <div class="profile_side">
                     <h3><i class="fas fa-users"></i></h3>
-                    <div class="profile-status"><h5>グループ　<%= link_to @user.join_groups.count, groups_path %></h5></div>
-                    <div class="profile-status"><h5>申請中　<%= link_to @user.only_requested_groups.count, groups_path %></h5></div>
-                    <div class="profile-status"><h5>招待　<%= link_to @user.only_inviting_groups.count, groups_path %></h5></div>
+                    <div class="profile-status"><h5>グループ　<a href = "#group_scroll"><%= @user.join_groups.count %></a></h5></div>
+                    <div class="profile-status"><h5>申請中　<a href = "#group_scroll"><%= @user.only_requested_groups.count %></a></h5></div>
+                    <div class="profile-status"><h5>招待　<a href = "#group_scroll"><%= @user.only_inviting_groups.count %></a></h5></div>
                 </div>
             </div>
             <div class="col-6">
@@ -145,7 +145,7 @@
   
     <div class="head-wrap">
       <h2 class="head">
-          Groups<span class="head-point">－グループ－</span>
+          Groups<span id = "group_scroll" class="head-point">－グループ－</span>
       </h2>
         <%= link_to "/groups/new", title: "new_group", class:"icons float-right" do %>
           <span><i class="far fa-plus-square"></i></span>
