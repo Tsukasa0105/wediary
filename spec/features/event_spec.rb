@@ -7,9 +7,10 @@ feature 'Event', type: :feature do
     background do
       @user = FactoryBot.create(:integration_user)
       @group = FactoryBot.create(:group, invited_user_ids: [@user.id])
+      @user.user_to_groups.create(group_id: @group.id)
       @map = FactoryBot.create(:map, user: @user, group: @group)
       @event = FactoryBot.create(:event, user: @user, group: @group, map: @map)
-      @user.user_to_groups.create(group_id: @group.id)
+      @another_group = FactoryBot.create(:another_group, invited_user_ids: [@user.id])
       visit login_path
       fill_in 'メールアドレス', with: @user.email
       fill_in 'パスワード', with: @user.password
@@ -43,12 +44,13 @@ feature 'Event', type: :feature do
       expect(current_path).to eq group_event_path(@group, @event)
     end
 
-    scenario 'group_to_userとuser_to_groupが機能していない場合、inviting_groupsからgroups/showに遷移できるか' do
-      visit group_path(@group)
-      click_on "招待中"
-      find(".portfolio-box").click
-      expect(current_path).to eq group_path(@group)
-      expect(page).to have_content("このグループのメンバーではありません")
+    scenario 'イベント編集ができるか' do
+      visit group_event_path(@group, @event)
+      find(".edit_event").click
+      fill_in 'イベント名', with: "edit_test"
+      click_on '保存'
+      expect(current_path).to eq group_event_path(@group, @event)
+      expect(page).to have_content("イベントを編集しました")
     end
 
     # scenario '招待中のグループのメンバーになる' do

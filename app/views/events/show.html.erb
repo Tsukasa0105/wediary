@@ -8,7 +8,7 @@
           <% end %>
         </div>
         <div class="col-6">
-          <%= link_to edit_group_event_path(@group), class: "icons float-right" do %>
+          <%= link_to edit_group_event_path(@group), class: "icons float-right edit_event" do %>
             <span class="float-right"><i class="fas fa-cogs"></i></span>
           <% end %>
           <%= link_to group_event_path(@group, @event), method: :delete, data: { confirm: "削除してよろしいですか?" }, title: "destroy", class:"icons float-right" do %>
