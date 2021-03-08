@@ -43,13 +43,13 @@ feature 'Event', type: :feature do
       expect(current_path).to eq group_event_path(@group, @event)
     end
 
-    # scenario 'group_to_userとuser_to_groupが機能していない場合、inviting_groupsからgroups/showに遷移できるか' do
-    #   click_on "Groups", match: :first
-    #   click_on "招待中"
-    #   find(".portfolio-box").click
-    #   expect(current_path).to eq group_path(@group)
-    #   expect(page).to have_content("このグループのメンバーではありません")
-    # end
+    scenario 'group_to_userとuser_to_groupが機能していない場合、inviting_groupsからgroups/showに遷移できるか' do
+      visit group_path(@group)
+      click_on "招待中"
+      find(".portfolio-box").click
+      expect(current_path).to eq group_path(@group)
+      expect(page).to have_content("このグループのメンバーではありません")
+    end
 
     # scenario '招待中のグループのメンバーになる' do
     #   click_on "Groups", match: :first
